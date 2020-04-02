@@ -35,15 +35,15 @@ bot.on('message', (message) => {
         if (isNaN(message.content)) // Checks if the message is not a number.
         {
             message.delete();
-            message.author.send('> ' + message.guild.channels.get('612392493987921930') + ' chat only accepts numbers, meaning no symbols or sentences.');
+            message.author.send('> ' + ' chat only accepts numbers, meaning no symbols or sentences.');
             numberCheck = false;
         }
 
         if (numberCheck == true) {
-            if (number - 1 != 4456 + counter) // Checks if the number is incorrect or duplicate.
+            if (number - 1 != 4458 + counter) // Checks if the number is incorrect or duplicate.
             {
                 message.delete();
-                message.author.send('>>> You have entered an incorrect or duplicate number, \nPlease re-enter a correct number at ' + message.guild.channels.get('612392493987921930') + '.');
+                message.author.send('>>> You have entered an incorrect number, \nPlease re-enter a correct number thx :)' );
             }
             else {
                 counter++;
