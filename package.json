@@ -1,10 +1,10 @@
 {
-  "name": "CloudSombrero",
+  "name": "cloudsombrero",
   "version": "1.0.0",
   "description": "",
   "main": "bot.js",
   "scripts": {
-    "start" : "node.bot.js"
+    "start" : "node bot.js"
   },
   "repository": {
     "type": "git",
