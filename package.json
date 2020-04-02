@@ -1,0 +1,23 @@
+{
+  "name": "CloudSombrero",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yonatan2004a1/Cloud_Bot_Sombrero.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yonatan2004a1/Cloud_Bot_Sombrero/issues"
+  },
+  "homepage": "https://github.com/yonatan2004a1/Cloud_Bot_Sombrero#readme",
+  "dependencies": {
+    "discord.js": "^12.1.1"
+  }
+}
