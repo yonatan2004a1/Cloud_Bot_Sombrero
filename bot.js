@@ -74,7 +74,7 @@ bot.on('guildMemberAdd', member => {
 
 //================================================================================================================================================================================================
 
-bot.login('Njk0Mjk3NzA4MDM0MzkyMDk1.XoOR4w.RtbhFkDaKzmta4MNmBWBLndhGuE');
+
 
 /*
  * Returns status by status number.
@@ -175,4 +175,5 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
     }
 });
 
+bot.login('Njk0Mjk3NzA4MDM0MzkyMDk1.XoOR4w.RtbhFkDaKzmta4MNmBWBLndhGuE');
 
