@@ -141,7 +141,7 @@ bot.on('raw', event => {
                     var user = bot.users.get(event.d.user_id);// Checks the user who removed the reaction
                     bot.emit('messageReactionRemove', msgReaction, user);
                 })
-                .catch(err => console.log(err))//test
+                .catch(err => console.log(err))
             }
         }
     }
