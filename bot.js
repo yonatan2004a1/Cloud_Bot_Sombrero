@@ -29,7 +29,7 @@ bot.on('message', (message) => {
     }
 
 
-    
+  /*  
     if (message.channel.id === '612392493987921930') // counting to 10k chat.
     {
         var numberCheck = true;
@@ -95,7 +95,7 @@ function getStatus(statusNumber) {
             return "DISCONNECTED";
     }
 }
-/*
+
  
  See https://www.youtube.com/watch?v=98Wi_MJ1wOI
 
