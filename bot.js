@@ -72,8 +72,6 @@ bot.on('guildMemberAdd', member => {
     member.send('>>> Hey ' + member.user.username + ', Welcome to **POCO_LOCO\'s Lounge**:exclamation: \nPlease **mark** the emoji below the first message at the ' + member.guild.channels.get('673873657843548170') + ' channel. \nBelow the first message **mark** the games that you usually play as a gamer, THX :cowboy:');
 });
 
-//================================================================================================================================================================================================
-
 
 
 /*
