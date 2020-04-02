@@ -8,6 +8,7 @@ const prefix = '*' // The symbol before the commands
 
 //================================================================================================================================================================================================
 
+
 bot.on('message', (message) => {
     var sender = message.author; // The user who sent the message.
     var msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
@@ -73,7 +74,7 @@ bot.on('guildMemberAdd', member => {
 });
 
 //================================================================================================================================================================================================
-
+bot.login('Njk0Mjk3NzA4MDM0MzkyMDk1.XoOR4w.RtbhFkDaKzmta4MNmBWBLndhGuE');
 /*
  * Returns status by status number.
  * See https://discord.js.org/#/docs/main/v11/typedef/Status
@@ -172,6 +173,5 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
     }
 });
 
-bot.login('Njk0Mjk3NzA4MDM0MzkyMDk1.XoOR4w.RtbhFkDaKzmta4MNmBWBLndhGuE');
 
 
