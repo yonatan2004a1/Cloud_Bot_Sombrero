@@ -3,7 +3,7 @@ const bot = new Discord.Client();
 
 console.log("[BOT] Starting... (" + getStatus(bot.status) + ")")
 var counter = 0;
-const prefix = '!' // The symbol before the commands
+const prefix = '*' // The symbol before the commands
 //music = require ("./music"); //it will run the music.js
 
 //================================================================================================================================================================================================
