@@ -40,7 +40,7 @@ bot.on('message', (message) => {
         }
 
         if (numberCheck == true) {
-            if (number - 1 != 4454 + counter)// Checks if the number is incorrect or duplicate.
+            if (number - 1 != 4456 + counter)// Checks if the number is incorrect or duplicate.
             {
                 message.delete();
                 message.author.send('>>> You have entered an incorrect or duplicate number, \nPlease re-enter a correct number at ' + message.guild.channels.get('612392493987921930') + '.');
