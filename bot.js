@@ -40,7 +40,7 @@ bot.on('message', (message) => {
         }
 
         if (numberCheck == true) {
-            if (number - 1 != 4456 + counter)// Checks if the number is incorrect or duplicate.
+            if (number - 1 != 4454 + counter)// Checks if the number is incorrect or duplicate.
             {
                 message.delete();
                 message.author.send('>>> You have entered an incorrect or duplicate number, \nPlease re-enter a correct number at ' + message.guild.channels.get('612392493987921930') + '.');
@@ -72,7 +72,9 @@ bot.on('guildMemberAdd', member => {
     member.send('>>> Hey ' + member.user.username + ', Welcome to **POCO_LOCO\'s Lounge**:exclamation: \nPlease **mark** the emoji below the first message at the ' + member.guild.channels.get('673873657843548170') + ' channel. \nBelow the first message **mark** the games that you usually play as a gamer, THX :cowboy:');
 });
 
+//================================================================================================================================================================================================
 
+bot.login('Njk0Mjk3NzA4MDM0MzkyMDk1.XoOR4w.RtbhFkDaKzmta4MNmBWBLndhGuE');
 
 /*
  * Returns status by status number.
@@ -173,5 +175,4 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
     }
 });
 
-bot.login('Njk0Mjk3NzA4MDM0MzkyMDk1.XoOR4w.RtbhFkDaKzmta4MNmBWBLndhGuE');
 
