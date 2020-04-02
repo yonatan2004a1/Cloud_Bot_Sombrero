@@ -96,9 +96,9 @@ function getStatus(statusNumber) {
     }
 }
 /*
-* 
-* See https://www.youtube.com/watch?v=98Wi_MJ1wOI
-*/
+ 
+ See https://www.youtube.com/watch?v=98Wi_MJ1wOI
+
 bot.on('raw', event => {
     const eventName = event.t;
     if (eventName === 'MESSAGE_REACTION_ADD')//Checks the correct event.
@@ -172,6 +172,6 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
         }
     }
 });
-
+*/
 
 
