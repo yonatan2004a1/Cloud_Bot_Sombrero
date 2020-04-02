@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/yonatan2004a1/Cloud_Bot_Sombrero#readme",
   "dependencies": {
-    "discord.js": "^11.6.1"
+    "discord.js": "^11.6.3"
   }
 }
