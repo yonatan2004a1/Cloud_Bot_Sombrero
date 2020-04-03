@@ -4,7 +4,6 @@ const bot = new Discord.Client();
 console.log("[BOT] Starting... (" + getStatus(bot.status) + ")")
 var counter = 0;
 const prefix = '*' // The symbol before the commands
-//music = require ("./music"); //it will run the music.js
 
 //================================================================================================================================================================================================
 
@@ -29,7 +28,7 @@ bot.on('message', (message) => {
     }
 
 
-/*  
+  
     if (message.channel.id === '612392493987921930') // counting to 10k chat.
     {
         var numberCheck = true;
@@ -41,7 +40,7 @@ bot.on('message', (message) => {
         }
 
         if (numberCheck == true) {
-            if (number - 1 != 4458 + counter) // Checks if the number is incorrect or duplicate.
+            if (number - 1 != 4436 + counter) // Checks if the number is incorrect or duplicate.
             {
                 message.delete();
                 message.author.send('>>> You have entered an incorrect number, \nPlease re-enter a correct number thx :)' );
@@ -52,7 +51,7 @@ bot.on('message', (message) => {
 
         }
 
-    }*/
+    }
 })
 
 
