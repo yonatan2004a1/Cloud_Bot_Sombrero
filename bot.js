@@ -27,7 +27,7 @@ bot.on('message', (message) => {
         message.channel.send('FoX1E is my lord.');
     }
 
-
+//================================================================================================================================================================================================
   
     if (message.channel.id === '612392493987921930') // counting to 10k chat.
     {
@@ -40,7 +40,7 @@ bot.on('message', (message) => {
         }
 
         if (numberCheck == true) {
-            if (number - 1 != 4437 + counter) // Checks if the number is incorrect or duplicate.
+            if (number - 1 != 4454 + counter) // Checks if the number is incorrect or duplicate.
             {
                 message.delete();
                 message.author.send('>>> You have entered an incorrect number, \nPlease re-enter a correct number thx :)' );
@@ -54,6 +54,7 @@ bot.on('message', (message) => {
     }
 })
 
+//================================================================================================================================================================================================
 
 bot.on('ready', () => {
     console.log("[BOT] Started - ONLINE (" + getStatus(bot.status) + ")")
@@ -73,7 +74,10 @@ bot.on('guildMemberAdd', member => {
 });
 
 //================================================================================================================================================================================================
+
 bot.login('Njk0Mjk3NzA4MDM0MzkyMDk1.XoOR4w.RtbhFkDaKzmta4MNmBWBLndhGuE');
+
+//================================================================================================================================================================================================
 /*
  * Returns status by status number.
  * See https://discord.js.org/#/docs/main/v11/typedef/Status
@@ -94,6 +98,8 @@ function getStatus(statusNumber) {
             return "DISCONNECTED";
     }
 }
+
+//================================================================================================================================================================================================
 
  //See https://www.youtube.com/watch?v=98Wi_MJ1wOI
 
