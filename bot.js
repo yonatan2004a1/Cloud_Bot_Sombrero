@@ -55,7 +55,7 @@ bot.on('message', (message) => {
     }*/
 })
 
-/*
+
 bot.on('ready', () => {
     console.log("[BOT] Started - ONLINE (" + getStatus(bot.status) + ")")
     console.log("[BOT] Logged in as " + bot.user.tag);
@@ -72,7 +72,7 @@ bot.on('guildMemberAdd', member => {
     // Send welcome message privately.
     member.send('>>> Hey ' + member.user.username + ', Welcome to **POCO_LOCO\'s Lounge**:exclamation: \nPlease **mark** the emoji below the first message at the ' + member.guild.channels.get('673873657843548170') + ' channel. \nBelow the first message **mark** the games that you usually play as a gamer, THX :cowboy:');
 });
-*/
+
 //================================================================================================================================================================================================
 bot.login('Njk0Mjk3NzA4MDM0MzkyMDk1.XoOR4w.RtbhFkDaKzmta4MNmBWBLndhGuE');
 /*
@@ -95,9 +95,8 @@ function getStatus(statusNumber) {
             return "DISCONNECTED";
     }
 }
-/*
- 
- See https://www.youtube.com/watch?v=98Wi_MJ1wOI
+
+ //See https://www.youtube.com/watch?v=98Wi_MJ1wOI
 
 bot.on('raw', event => {
     const eventName = event.t;
@@ -172,6 +171,6 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
         }
     }
 });
-*/
+
 
 
