@@ -100,8 +100,10 @@ function getStatus(statusNumber) {
 }
 
 //================================================================================================================================================================================================
-
- //See https://www.youtube.com/watch?v=98Wi_MJ1wOI
+/*
+ * Adds/Removes roles by reaction/unreacting to a message.
+ * See https://www.youtube.com/watch?v=98Wi_MJ1wOI
+ */
 
 bot.on('raw', event => {
     const eventName = event.t;
