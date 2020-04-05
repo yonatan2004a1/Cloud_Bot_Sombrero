@@ -3,7 +3,7 @@ const bot = new Discord.Client();
 
 console.log("[BOT] Starting... (" + getStatus(bot.status) + ")")
 var counter = 0;
-const prefix = '*' // The symbol before the commands
+const PREFIX = '*' // The symbol before the commands
 
 //================================================================================================================================================================================================
 
@@ -12,7 +12,7 @@ bot.on('message', (message) => {
     var sender = message.author; // The user who sent the message.
     var msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
     var number = message.content; // Numbers that sent at counting to 10k.
-    let args = message.content.substring(prefix.lenght).split(" ")
+    //let args = message.content.substring(prefix.lenght).split(" ")
 
     
     if (msg.includes('LAYLA') || msg.includes('לילה')) {
@@ -180,4 +180,15 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
 });
 
 
-
+//Survival GAME
+bot.on('message',(message)=> {
+    let args = message.content.substring(PREFIX.length).split(" ")
+    var sender = message.author;//the guy who started the game
+    switch(args[0])
+    {
+        case 'survival':
+           require('survival')
+        break;
+    
+    }
+})
