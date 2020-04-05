@@ -107,12 +107,12 @@ function getStatus(statusNumber) {
 
 bot.on('raw', event => {
     const eventName = event.t;
-    if (eventName === 'MESSAGE_REACTION_ADD')//Checks the correct event.
+    if (eventName === 'MESSAGE_REACTION_ADD') //Checks the correct event.
     {
-        if (event.d.message_id === '673910833411260426' || event.d.message_id === '674304357218385939')//Checks the correct channel.
+        if (event.d.message_id === '673910833411260426' || event.d.message_id === '674304357218385939') //Checks the correct channel.
         {
             var reactionChannel = bot.channels.get(event.d.channel_id)
-            if (reactionChannel.messages.has(event.d.message_id))// Checks if he has message 
+            if (reactionChannel.messages.has(event.d.message_id)) // Checks if he has message.
             {
                 return;
             }
@@ -120,8 +120,8 @@ bot.on('raw', event => {
             {
                 reactionChannel.fetchMessage(event.d.message_id)
                 .then(msg => {
-                    var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id);// Checks the correct reaction
-                    var user = bot.users.get(event.d.user_id);// Checks the user who added the reaction
+                    var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id); // Checks the correct reaction.
+                    var user = bot.users.get(event.d.user_id); // Checks the user who added the reaction.
                     bot.emit('messageReactionAdd', msgReaction, user);
                 })
                 .catch(err => console.log(err))
@@ -141,8 +141,8 @@ bot.on('raw', event => {
             {
                 reactionChannel.fetchMessage(event.d.message_id)
                 .then(msg => {
-                    var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id);// Checks the correct reaction
-                    var user = bot.users.get(event.d.user_id);// Checks the user who removed the reaction
+                    var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id); // Checks the correct reaction.
+                    var user = bot.users.get(event.d.user_id); // Checks the user who removed the reaction.
                     bot.emit('messageReactionRemove', msgReaction, user);
                 })
                 .catch(err => console.log(err))
