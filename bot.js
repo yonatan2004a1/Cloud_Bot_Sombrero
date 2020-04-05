@@ -187,7 +187,7 @@ bot.on('message',(message)=> {
     switch(args[0])
     {
         case 'survival':
-           require('survival')
+           require('survival.js')
         break;
     
     }
