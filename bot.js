@@ -275,7 +275,7 @@ bot.on('message', async message =>{
 
                 }
         }
-        else if(reaction.emoji.name === '❌')
+        else if(reaction.emoji.name === '✖️')
         {   
             message.channel.send("SURVIVAL cancelled");
         }
