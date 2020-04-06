@@ -180,6 +180,7 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
 });
 
 //Survival GAME
+
 const userCreatedPolls = new Map();
 
 bot.on('message', async message =>{
