@@ -3,7 +3,7 @@ const bot = new Discord.Client();
 
 console.log("[BOT] Starting... (" + getStatus(bot.status) + ")")
 var counter = 0;
-const prefix = '*' // The symbol before the commands
+const PREFIX = '*' // The symbol before the commands
 
 //================================================================================================================================================================================================
 
@@ -12,8 +12,7 @@ bot.on('message', (message) => {
     var sender = message.author; // The user who sent the message.
     var msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
     var number = message.content; // Numbers that sent at counting to 10k.
-    let args = message.content.substring(prefix.lenght).split(" ")
-
+    //let args = message.content.substring(prefix.lenght).split(" ")
     
     if (msg.includes('LAYLA') || msg.includes('לילה')) {
         message.channel.send('Layli lay.');
@@ -27,7 +26,7 @@ bot.on('message', (message) => {
         message.channel.send('FoX1E is my lord.');
     }
 
-//================================================================================================================================================================================================
+//counter_count chat
   
     if (message.channel.id === '612392493987921930') // counting to 10k chat.
     {
@@ -61,7 +60,7 @@ bot.on('ready', () => {
     console.log("[BOT] Logged in as " + bot.user.tag);
 })
 
-//================================================================================================================================================================================================
+//welcome + add role for the new users
 
 bot.on('guildMemberAdd', member => {
     // Add role for the new member
@@ -104,7 +103,6 @@ function getStatus(statusNumber) {
  * Adds/Removes roles by reaction/unreacting to a message.
  * See https://www.youtube.com/watch?v=98Wi_MJ1wOI
  */
-
 bot.on('raw', event => {
     const eventName = event.t;
     if (eventName === 'MESSAGE_REACTION_ADD') //Checks the correct event.
@@ -152,6 +150,11 @@ bot.on('raw', event => {
 });
 
 bot.on('messageReactionAdd', (messageReaction, user) => {
+    if(messageReaction.emoji.name === '✔️' || messageReaction.emoji.name === '✖️')
+    {
+        return
+    }
+    
     var roleName = messageReaction.emoji.name;
     var role = messageReaction.message.guild.roles.find(role => role.name.toLowerCase() === roleName.toLowerCase());
 
@@ -163,9 +166,15 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
             member.addRole(role.id);
         }
     }
+    
 });
 
 bot.on('messageReactionRemove', (messageReaction, user) => {
+    if(messageReaction.emoji.name === '✔️' && messageReaction.emoji.name === '✖️')
+    {
+        return
+    }
+
     var roleName = messageReaction.emoji.name;
     var role = messageReaction.message.guild.roles.find(role => role.name.toLowerCase() === roleName.toLowerCase());
 
@@ -177,10 +186,13 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
             member.removeRole(role.id);
         }
     }
+
 });
 
-//Survival GAME
 
+
+
+//Survival GAME
 const userCreatedPolls = new Map();
 
 bot.on('message', async message =>{
@@ -190,7 +202,7 @@ bot.on('message', async message =>{
     }
     if(message.content.toLowerCase() === '!survival')
     {
-        if (message.channel.id === '696685007778873397')
+        if (message.channel.id === '696409036790431785')
         {
             if(userCreatedPolls.has(message.author.id))
             {
@@ -325,5 +337,4 @@ function delay(time)
         }, time)
     })
 }
-
 
