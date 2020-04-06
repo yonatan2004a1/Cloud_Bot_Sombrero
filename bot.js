@@ -202,7 +202,7 @@ bot.on('message', async message =>{
     }
     if(message.content.toLowerCase() === '!survival')
     {
-        if (message.channel.id === '696685007778873397')
+        if(message.channel.id === '696784664261689488')
         {
             if(userCreatedPolls.has(message.author.id))
             {
@@ -245,14 +245,14 @@ bot.on('message', async message =>{
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
             {
-                message.channel.send("THE game will begin in 5 seconds so be ready");
-                await delay(5000);
+                message.channel.send("THE game will begin in 1 seconds so be ready");
+                await delay(1000);
                 message.channel.send("VOTE NOW!");
                 let userVotes = new Map();
                 let pollTally = new Discord.Collection(pollOptions.map(o =>[o, 0]))// arry inside arry (double arry)
                 let pollFilter = m => !m.bot;
                 let voteCollector = message.channel.createMessageCollector(pollFilter, {
-                time: 60000//the time for voting
+                time: 40000//the time for voting 40 sec
                 });
                 userCreatedPolls.set(message.author.id, voteCollector)
                 await processPollResults(voteCollector, pollOptions, userVotes, pollTally);
@@ -274,29 +274,32 @@ bot.on('message', async message =>{
                     message.channel.send("We have a draw", embed);
 
                 }
-        }
-        else if(reaction.emoji.name === '❌')
-        {   
+            
+            }
+            else if(reaction.emoji.name === '✖️')
+            {   
             message.channel.send("SURVIVAL cancelled");
-        }
-
-        }
-        else if(message.content.toLowerCase() === '!stopvote')
-        {
-            if(userCreatedPolls.has(message.author.id))
-            {
-                console.log("Trying to stop poll.");
-                userCreatedPolls.get(message.author.id).stop();
-                userCreatedPolls.delete(message.author.id);
-
             }
-            else
-            {
-                message.channel.send("You dont have a 'survival' goin on :(");
-            }
+
+
         }
     }
+    else if(message.content.toLowerCase() === '!stopvote')
+    {
+        console.log("!stopvote")
+        if(userCreatedPolls.has(message.author.id))
+        {
+            console.log("Trying to stop poll.");
+            userCreatedPolls.get(message.author.id).stop();
+            userCreatedPolls.delete(message.author.id);
 
+        }
+        else
+        {
+            message.channel.send("You dont have a 'survival' goin on :(");
+        }
+    }
+      
 });
 
 function processPollResults(voteCollector, pollOptions, userVotes, pollTally)
