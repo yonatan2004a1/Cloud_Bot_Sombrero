@@ -259,7 +259,7 @@ bot.on('message', async message =>{
                 let max = Math.max(...pollTally.array());// the dots is for printing the arry without them []
                 let entries = [...pollTally.entries()];
                 let winners = [];
-                let embed = new Discord.MessageEmbed();
+                let embed = new Discord.RichEmbed();
                 let desc = '';//description
                 entries.forEach(entry => entry[1] === max ? winners.push(entry[0]) : null);
                 entries.forEach(entry => desc += entry[0]+ " received " + entry[1] + " votes\n");
