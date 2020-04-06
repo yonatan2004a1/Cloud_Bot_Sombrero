@@ -234,7 +234,7 @@ bot.on('message', async message =>{
                 message.channel.send("dont play this game alone you cunt!");
                 return;
             }
-            let embed = new Discord.MessageEmbed();
+            let embed = new Discord.RichEmbed();
             embed.setTitle("Your list")
             embed.setDescription(pollOptions.join("\n"));
             let confirm = await message.channel.send(embed);
