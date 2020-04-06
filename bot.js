@@ -189,7 +189,7 @@ bot.on('message', async message =>{
     }
     if(message.content.toLowerCase() === '!survival')
     {
-        if (message.channel.id === '696409036790431785')
+        if (message.channel.id === '696685007778873397')
         {
             if(userCreatedPolls.has(message.author.id))
             {
