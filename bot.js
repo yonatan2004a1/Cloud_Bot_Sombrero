@@ -281,24 +281,25 @@ bot.on('message', async message =>{
             message.channel.send("SURVIVAL cancelled");
             }
 
-        }
-        else if(message.content.toLowerCase() === '!stopvote')
-        {
-            console.log("!stopvote")
-            if(userCreatedPolls.has(message.author.id))
-            {
-                console.log("Trying to stop poll.");
-                userCreatedPolls.get(message.author.id).stop();
-                userCreatedPolls.delete(message.author.id);
 
-            }
-            else
-            {
-                message.channel.send("You dont have a 'survival' goin on :(");
-            }
         }
-    
     }
+    else if(message.content.toLowerCase() === '!stopvote')
+    {
+        console.log("!stopvote")
+        if(userCreatedPolls.has(message.author.id))
+        {
+            console.log("Trying to stop poll.");
+            userCreatedPolls.get(message.author.id).stop();
+            userCreatedPolls.delete(message.author.id);
+
+        }
+        else
+        {
+            message.channel.send("You dont have a 'survival' goin on :(");
+        }
+    }
+      
 });
 
 function processPollResults(voteCollector, pollOptions, userVotes, pollTally)
