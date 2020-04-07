@@ -29,6 +29,10 @@ bot.on('message', async (message) => {
         message.channel.send('FoX1E is my lord.');
     }
 
+    if (msg === PREFIX + "counter") {
+        message.channel.send("Current counter is: " + await db.getCounter())
+    }
+
 //counter_count chat
   
     if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID) // counting to 10k chat.
@@ -45,9 +49,7 @@ bot.on('message', async (message) => {
             const currentCounter = await db.getCounter();
 
             // Checks if the number is incorrect or duplicate.
-            console.log("Number is", number);
-            console.log("Current counter is", currentCounter);
-            if (number - 1 != currentCounter)
+            if (number - 1 !== currentCounter)
             {
                 message.delete();
                 message.author.send('>>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#612392493987921930>.');
