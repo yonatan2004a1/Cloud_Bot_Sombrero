@@ -294,7 +294,7 @@ bot.on('message', async message =>{
 
         }
     }
-    else if(message.content.toLowerCase() === '!stopvote')
+    else if(message.content.toLowerCase() === (PREFIX + 'stopvote').toLowerCase())
     {
         console.log("!stopvote")
         if(userCreatedPolls.has(message.author.id))
