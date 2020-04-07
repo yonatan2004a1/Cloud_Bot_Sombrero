@@ -1,3 +1,5 @@
+require('dotenv').config();
+const db = require('./database.js');
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
@@ -8,7 +10,7 @@ const PREFIX = '*' // The symbol before the commands
 //================================================================================================================================================================================================
 
 
-bot.on('message', (message) => {
+bot.on('message', async (message) => {
     var sender = message.author; // The user who sent the message.
     var msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
     var number = message.content; // Numbers that sent at counting to 10k.
@@ -26,9 +28,14 @@ bot.on('message', (message) => {
         message.channel.send('FoX1E is my lord.');
     }
 
+    if (msg == (PREFIX + "counter").toUpperCase()) {
+        const currentCounter = await db.getCounter();
+        message.channel.send("Current counter is: " + currentCounter);
+    }
+
 //counter_count chat
   
-    if (message.channel.id === '612392493987921930') // counting to 10k chat.
+    if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID) // counting to 10k chat.
     {
         var numberCheck = true;
         if (isNaN(message.content)) // Checks if the message is not a number.
@@ -39,17 +46,19 @@ bot.on('message', (message) => {
         }
 
         if (numberCheck == true) {
-            if (number - 1 != 4501 + counter) // Checks if the number is incorrect or duplicate.
+            const currentCounter = await db.getCounter();
+
+            // Checks if the number is incorrect or duplicate.
+            if (number - 1 !== currentCounter)
             {
                 message.delete();
                 message.author.send('>>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#612392493987921930>.');
             }
-            else {
-                counter++;
+            else
+            {
+                db.incrementCounter(1);
             }
-
         }
-
     }
 })
 
@@ -74,7 +83,8 @@ bot.on('guildMemberAdd', member => {
 
 //================================================================================================================================================================================================
 
-bot.login('Njk0Mjk3NzA4MDM0MzkyMDk1.XoOR4w.RtbhFkDaKzmta4MNmBWBLndhGuE');
+const TOKEN = process.env.DISCORD_LOGIN_TOKEN
+bot.login(TOKEN);
 
 //================================================================================================================================================================================================
 /*
@@ -202,7 +212,7 @@ bot.on('message', async message =>{
     }
     if(message.content.toLowerCase() === '!survival')
     {
-        if(message.channel.id === '696784664261689488')
+        if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)
         {
             if(userCreatedPolls.has(message.author.id))
             {
