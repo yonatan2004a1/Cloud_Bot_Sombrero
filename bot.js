@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 
 console.log("[BOT] Starting... (" + getStatus(bot.status) + ")")
+console.log("[BOT] I WAS ADDED AUTOMATICALLY FROM develop BRANCH!");
 var counter = 0;
 const PREFIX = '*' // The symbol before the commands
 
