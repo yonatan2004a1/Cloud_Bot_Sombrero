@@ -31,7 +31,7 @@ bot.on('message', (message) => {
 
 //counter_count chat
   
-    if (message.channel.id === '612392493987921930') // counting to 10k chat.
+    if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID) // counting to 10k chat.
     {
         var numberCheck = true;
         if (isNaN(message.content)) // Checks if the message is not a number.
