@@ -241,7 +241,7 @@ bot.on('message', async message =>{
             let pollOptions = await getPollOptions(collector);
             if(pollOptions.length < 2)
             {
-                message.channel.send("You can't play this game alone, NERD! 🤓");
+                message.channel.send("You can't play this game alone, NERD! ");
                 return;
             }
             let embed = new Discord.RichEmbed();
@@ -277,7 +277,7 @@ bot.on('message', async message =>{
 
                 if(winners.length === 1)
                 {
-                    message.channel.send("`" + winners[0] + ", you're the one that leaving the lobby! 🌴", embed + "`");
+                    message.channel.send("`" + winners[0] + ", you're the one that leaving the lobby! ", embed + "`");
                 }
                 else
                 {
