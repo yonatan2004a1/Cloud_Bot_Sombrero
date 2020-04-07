@@ -216,10 +216,10 @@ bot.on('message', async message =>{
         {
             if(userCreatedPolls.has(message.author.id))
             {
-                message.channel.send("You already have a survival game going on. pls stop doing that")
+                message.channel.send("You already have a survival game going on, please stop re-tying that.")
                 return;
             }
-            message.channel.send("yo btch pls enter the players pls :)");
+            message.channel.send("Enter the name of the participants :)");
             let filter = m => {
                 if(m.author.id === message.author.id)
                 {
@@ -241,7 +241,7 @@ bot.on('message', async message =>{
             let pollOptions = await getPollOptions(collector);
             if(pollOptions.length < 2)
             {
-                message.channel.send("dont play this game alone you cunt!");
+                message.channel.send("You can't play this game alone, NERD! 🤓");
                 return;
             }
             let embed = new Discord.RichEmbed();
@@ -255,7 +255,7 @@ bot.on('message', async message =>{
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
             {
-                message.channel.send("THE game will begin in 1 seconds so be ready");
+                message.channel.send("The game will begin in 1 second, get ready!");
                 await delay(1000);
                 message.channel.send("VOTE NOW!");
                 let userVotes = new Map();
@@ -272,23 +272,23 @@ bot.on('message', async message =>{
                 let embed = new Discord.RichEmbed();
                 let desc = '';//description
                 entries.forEach(entry => entry[1] === max ? winners.push(entry[0]) : null);
-                entries.forEach(entry => desc += entry[0]+ " received " + entry[1] + " votes\n");
+                entries.forEach(entry => desc += entry[0]+ " has received " + entry[1] + " votes\n");
                 embed.setDescription(desc);
 
                 if(winners.length === 1)
                 {
-                    message.channel.send(winners[0] + " is the ONE that will play alone ", embed);
+                    message.channel.send("`" + winners[0] + ", you're the one that leaving the lobby! 🌴", embed + "`");
                 }
                 else
                 {
-                    message.channel.send("We have a draw", embed);
+                    message.channel.send("`We have a draw!", embed + "`");
 
                 }
             
             }
             else if(reaction.emoji.name === '✖️')
             {   
-            message.channel.send("SURVIVAL cancelled");
+            message.channel.send("Survival game has been cancelled :(");
             }
 
 
@@ -296,17 +296,15 @@ bot.on('message', async message =>{
     }
     else if(message.content.toLowerCase() === (PREFIX + 'stopvote').toLowerCase())
     {
-        console.log("!stopvote")
         if(userCreatedPolls.has(message.author.id))
         {
-            console.log("Trying to stop poll.");
             userCreatedPolls.get(message.author.id).stop();
             userCreatedPolls.delete(message.author.id);
 
         }
         else
         {
-            message.channel.send("You dont have a 'survival' goin on :(");
+            message.channel.send("You don't have a survival game going on :(");
         }
     }
       
