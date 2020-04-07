@@ -29,8 +29,9 @@ bot.on('message', async (message) => {
         message.channel.send('FoX1E is my lord.');
     }
 
-    if (msg === PREFIX + "counter") {
-        message.channel.send("Current counter is: " + await db.getCounter())
+    if (msg == PREFIX + "counter") {
+        message.channel.send("Current counter is: " + await db.getCounter());
+        return;
     }
 
 //counter_count chat
