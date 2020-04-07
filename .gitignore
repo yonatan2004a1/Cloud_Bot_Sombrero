@@ -1,5 +1,5 @@
 node_modules/
 .env
 
-# Ofek's Firebase Admin SDK service account private key
+# Bot's Firebase Admin SDK service account private key
 sombrero-guy-1-firebase-adminsdk-0pvys-4457c2cb7c.json
