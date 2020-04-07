@@ -11,7 +11,7 @@ const PREFIX = '*' // The symbol before the commands
 //================================================================================================================================================================================================
 
 
-bot.on('message', (message) => {
+bot.on('message', async (message) => {
     var sender = message.author; // The user who sent the message.
     var msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
     var number = message.content; // Numbers that sent at counting to 10k.
