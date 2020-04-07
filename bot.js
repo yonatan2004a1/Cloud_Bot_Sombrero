@@ -42,7 +42,7 @@ bot.on('message', (message) => {
         }
 
         if (numberCheck == true) {
-            const currentCounter = db.getCounter();
+            const currentCounter = db.getCounter();// 
 
             // Checks if the number is incorrect or duplicate.
             if (number - 1 != currentCounter)
