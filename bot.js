@@ -13,28 +13,24 @@ const PREFIX = '*' // The symbol before the commands
 
 bot.on('message', async (message) => {
     var sender = message.author; // The user who sent the message.
-    var message = message.content.toUpperCase(); // Take the messsage and make it uppercase.
+    var msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
     var number = message.content; // Numbers that sent at counting to 10k.
     //let args = message.content.substring(prefix.lenght).split(" ")
     
-    if (message.includes('LAYLA') || message.includes('לילה')) {
+    if (msg.includes('LAYLA') || msg.includes('לילה')) {
         message.channel.send('Layli lay.');
     }
     
-    if (message.includes('YAEL') || message.includes('יעל')) {
+    if (msg.includes('YAEL') || msg.includes('יעל')) {
         message.reply('לא מכבד אחי.');
     }
 
-    if (message.includes('FOXIE') || message.includes('פוקסי')) {
+    if (msg.includes('FOXIE') || msg.includes('פוקסי')) {
         message.channel.send('FoX1E is my lord.');
     }
 
-    if (message == (PREFIX + "counter").toUpperCase()) {
+    if (msg == (PREFIX + "counter").toUpperCase()) {
         const currentCounter = await db.getCounter();
-        console.log((PREFIX + "counter").toUpperCase);
-        console.log(await db.getCounter);
-        console.log(message);
-        console.log(message.channel);
         message.channel.send("Current counter is: " + currentCounter);
     }
 
