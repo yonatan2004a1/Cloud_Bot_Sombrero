@@ -1,3 +1,5 @@
+require('dotenv').config();
+const db = require('./database.js');
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
@@ -40,17 +42,19 @@ bot.on('message', (message) => {
         }
 
         if (numberCheck == true) {
-            if (number - 1 != 4501 + counter) // Checks if the number is incorrect or duplicate.
+            const currentCounter = db.getCounter();
+
+            // Checks if the number is incorrect or duplicate.
+            if (number - 1 != currentCounter)
             {
                 message.delete();
                 message.author.send('>>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#612392493987921930>.');
             }
-            else {
-                counter++;
+            else
+            {
+                db.incrementCounter(1);
             }
-
         }
-
     }
 })
 
