@@ -45,6 +45,8 @@ bot.on('message', (message) => {
             const currentCounter = db.getCounter();// 
 
             // Checks if the number is incorrect or duplicate.
+            console.log("Number is", number);
+            console.log("Current counter is", currentCounter);
             if (number - 1 != currentCounter)
             {
                 message.delete();
@@ -208,7 +210,7 @@ bot.on('message', async message =>{
     }
     if(message.content.toLowerCase() === '!survival')
     {
-        if (message.channel.id === '696409036790431785')
+        if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)
         {
             if(userCreatedPolls.has(message.author.id))
             {
