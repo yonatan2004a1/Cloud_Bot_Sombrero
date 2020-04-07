@@ -44,8 +44,8 @@ bot.on('message', async (message) => {
      */
     if (msg.startsWith(PREFIX + 'CLEAR')) 
     {
-        message.delete();
         async function clear() {
+            message.delete();
 
             // Checks if the user has the `Poco Loco's Staff 🤠` role
             if (!message.member.roles.find("name", "Poco Loco's Staff 🤠")) 
