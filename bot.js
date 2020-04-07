@@ -210,9 +210,9 @@ bot.on('message', async message =>{
     {
         return;
     }
-    if(message.content.toLowerCase() === '!survival')
+    if(message.content.toLowerCase() === (PREFIX + 'survival').toLowerCase())
     {
-        if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)
+        if (message.channel.id === process.env.SURVIVAL_ACTIVE_CHAT_ID)
         {
             if(userCreatedPolls.has(message.author.id))
             {
