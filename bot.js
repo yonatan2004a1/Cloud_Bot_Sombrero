@@ -277,11 +277,11 @@ bot.on('message', async message =>{
 
                 if(winners.length === 1)
                 {
-                    message.channel.send("`" + winners[0] + ", you're the one that leaving the lobby! 🌴", embed + "`");
+                    message.channel.send(winners[0] + ", you're the one that leaving the lobby! 🌴", embed);
                 }
                 else
                 {
-                    message.channel.send("`We have a draw!", embed + "`");
+                    message.channel.send("We have a draw!", embed);
 
                 }
             
