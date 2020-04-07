@@ -31,6 +31,10 @@ bot.on('message', async (message) => {
 
     if (message == (PREFIX + "counter").toUpperCase()) {
         const currentCounter = await db.getCounter();
+        console.log((PREFIX + "counter").toUpperCase);
+        console.log(await db.getCounter);
+        console.log(message);
+        console.log(message.channel);
         message.channel.send("Current counter is: " + currentCounter);
     }
 
