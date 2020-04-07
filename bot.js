@@ -41,6 +41,8 @@ bot.on('message', async (message) => {
         if (isNaN(message.content)) // Checks if the message is not a number.
         {
             message.delete();
+            console.log("#1");
+            console.log(message.content);
             message.author.send('> <#612392493987921930> chat only accepts **numbers**, meaning no **symbols** or **sentences**.');
             numberCheck = false;
         }
@@ -52,6 +54,9 @@ bot.on('message', async (message) => {
             if (number - 1 !== currentCounter)
             {
                 message.delete();
+                console.log("#2");
+                console.log(number);
+                console.log(currentCounter);
                 message.author.send('>>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#612392493987921930>.');
             }
             else
@@ -302,6 +307,7 @@ bot.on('message', async message =>{
             console.log("Trying to stop poll.");
             userCreatedPolls.get(message.author.id).stop();
             userCreatedPolls.delete(message.author.id);
+            console.log("#3");
 
         }
         else
