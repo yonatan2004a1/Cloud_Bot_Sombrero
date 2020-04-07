@@ -30,8 +30,8 @@ bot.on('message', async (message) => {
     }
 
     if (msg == PREFIX + "counter") {
-        message.channel.send("Current counter is: " + await db.getCounter());
-        return;
+        const currentCounter = await db.getCounter();
+        message.channel.send("Current counter is: " + currentCounter);
     }
 
 //counter_count chat
