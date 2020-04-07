@@ -14,23 +14,64 @@ bot.on('message', async (message) => {
     var sender = message.author; // The user who sent the message.
     var msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
     var number = message.content; // Numbers that sent at counting to 10k.
-    //let args = message.content.substring(prefix.lenght).split(" ")
+    var cont = message.content.slice(PREFIX.length).split(" ");
+    var args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
     
-    if (msg.includes('LAYLA') || msg.includes('לילה')) {
+    if (msg.includes('LAYLA') || msg.includes('לילה')) 
+    {
         message.channel.send('Layli lay.');
     }
     
-    if (msg.includes('YAEL') || msg.includes('יעל')) {
+    if (msg.includes('YAEL') || msg.includes('יעל')) 
+    {
         message.reply('לא מכבד אחי.');
     }
 
-    if (msg.includes('FOXIE') || msg.includes('פוקסי')) {
+    if (msg.includes('FOXIE') || msg.includes('פוקסי')) 
+    {
         message.channel.send('FoX1E is my lord.');
     }
 
-    if (msg == (PREFIX + "counter").toUpperCase()) {
+    if (msg == (PREFIX + "counter").toUpperCase()) 
+    {
         const currentCounter = await db.getCounter();
         message.channel.send("Current counter is: " + currentCounter);
+    }
+
+    /**
+     * Clear messages command
+     * See https://www.youtube.com/watch?v=Zpxyio10Kj0
+     */
+    if (msg.startsWith(PREFIX + 'CLEAR')) 
+    {
+        message.delete();
+        async function clear() {
+
+            // Checks if the user has the `Poco Loco's Staff 🤠` role
+            if (!message.member.roles.find("name", "Poco Loco's Staff 🤠")) 
+            {
+                message.channel.send('You need to be in the \`Poco Loco\'s Staff 🤠\` to use this command.');
+                return;
+            }
+            else
+            {
+                // Checks if the argument is a number
+                if (isNaN(args[0])) 
+                {
+                    message.channel.send('Please enter the amount of messages that you want to delete.\nUsage: \`' + PREFIX + 'clear <amount>\`'); //\n means new line.
+                    return;
+                }
+            }
+
+            const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
+            console.log(fetched.size + ' messages found, deleting...');
+
+            // Deleting the messages
+            message.channel.bulkDelete(fetched)
+                .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
+
+        }
+        clear(); 
     }
 
 //counter_count chat
@@ -60,7 +101,7 @@ bot.on('message', async (message) => {
             }
         }
     }
-})
+});
 
 //================================================================================================================================================================================================
 
@@ -199,9 +240,6 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
 
 });
 
-
-
-
 //Survival GAME
 const userCreatedPolls = new Map();
 
@@ -328,9 +366,6 @@ function processPollResults(voteCollector, pollOptions, userVotes, pollTally)
         })
     });
 }
-
-
-
 
 function getPollOptions(collector)
 {
