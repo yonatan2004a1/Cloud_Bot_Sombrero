@@ -110,7 +110,7 @@ bot.on('ready', () => {
     console.log("[BOT] Logged in as " + bot.user.tag);
     
     // Activity
-    bot.user.setActivity('Un Poco Loco 🤠', { type: "LISTENING"}).catch(console.error);
+    bot.user.setActivity(`${bot.users.size} POCO LOCERS!`, { type: "WATCHING"}).catch(console.error);
 })
 
 //welcome + add role for the new users
