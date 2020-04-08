@@ -108,7 +108,7 @@ bot.on('message', async (message) => {
 bot.on('ready', () => {
     console.log("[BOT] Started - ONLINE (" + getStatus(bot.status) + ")")
     console.log("[BOT] Logged in as " + bot.user.tag);
-~
+    
     // Activity
     bot.user.setActivity('Un Poco Loco 🤠', { type: "LISTENING"}).catch(console.error);
 })
