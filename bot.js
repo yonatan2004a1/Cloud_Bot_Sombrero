@@ -106,11 +106,11 @@ bot.on('message', async (message) => {
 //================================================================================================================================================================================================
 
 bot.on('ready', () => {
-    console.log("[BOT] Started - ONLINE (" + getStatus(bot.status) + ")")
+    console.log("[BOT] Started - ONLINE (" + getStatus(bot.status) + ")");
     console.log("[BOT] Logged in as " + bot.user.tag);
     
     // Activity
-    bot.user.setActivity(`${bot.users.size - 1} POCO LOCERS!`, { type: "WATCHING"}).catch(console.error);
+    bot.user.setActivity('Un Poco Loco', { type: "LISTENING"}).catch(console.error);
 })
 
 //welcome + add role for the new users
