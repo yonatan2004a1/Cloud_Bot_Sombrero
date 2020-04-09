@@ -65,7 +65,7 @@ bot.on('message', async (message) => {
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
             console.log(fetched.size + ' messages found, deleting...');
-            bot.channels.get('697788002587508816').send(message.author.toString() + ' Delete: ' + fetched.size + ' messages');
+            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + ' Delete: ' + fetched.size + ' messages');// git
 
             // Deleting the messages
             message.channel.bulkDelete(fetched)
