@@ -3,6 +3,7 @@ const db = require('./database.js');
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
+
 console.log("[BOT] Starting... (" + getStatus(bot.status) + ")")
 var counter = 0;
 const PREFIX = '*' // The symbol before the commands
@@ -64,14 +65,15 @@ bot.on('message', async (message) => {
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
             console.log(fetched.size + ' messages found, deleting...');
+            bot.channels.get('697773096488140840').send(message.author.toString() + ' Delete: ' + fetched.size + ' messages');
 
             // Deleting the messages
             message.channel.bulkDelete(fetched)
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
-
         }
         clear(); 
-        Discord.channels.get('697773096488140840').reply(" Delete: " + fetched.size);
+       
+        
 
     }
 
