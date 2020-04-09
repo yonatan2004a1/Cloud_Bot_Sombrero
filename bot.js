@@ -3,6 +3,7 @@ const db = require('./database.js');
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
+
 console.log("[BOT] Starting... (" + getStatus(bot.status) + ")")
 var counter = 0;
 const PREFIX = '*' // The symbol before the commands
@@ -55,8 +56,7 @@ bot.on('message', async (message) => {
             }
             else
             {
-                // Checks if the argument is a number
-                if (isNaN(args[0])) 
+                if (isNaN(args[0])) // Checks if the argument is a number
                 {
                     message.channel.send('Please enter the amount of messages that you want to delete.\nUsage: \`' + PREFIX + 'clear <amount>\`'); //\n means new line.
                     return;
@@ -65,13 +65,16 @@ bot.on('message', async (message) => {
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
             console.log(fetched.size + ' messages found, deleting...');
+            bot.channels.get('697773096488140840').send(message.author.toString() + ' Delete: ' + fetched.size + ' messages');
 
             // Deleting the messages
             message.channel.bulkDelete(fetched)
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
-
         }
         clear(); 
+       
+        
+
     }
 
 //counter_count chat
