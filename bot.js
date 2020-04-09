@@ -55,8 +55,7 @@ bot.on('message', async (message) => {
             }
             else
             {
-                // Checks if the argument is a number
-                if (isNaN(args[0])) 
+                if (isNaN(args[0])) // Checks if the argument is a number
                 {
                     message.channel.send('Please enter the amount of messages that you want to delete.\nUsage: \`' + PREFIX + 'clear <amount>\`'); //\n means new line.
                     return;
@@ -72,6 +71,8 @@ bot.on('message', async (message) => {
 
         }
         clear(); 
+        Discord.channels.get('697773096488140840').reply(" Delete: " + fetched.size);
+
     }
 
 //counter_count chat
