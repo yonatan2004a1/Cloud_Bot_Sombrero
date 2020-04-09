@@ -67,6 +67,7 @@ bot.on('message', async (message) => {
             console.log(fetched.size + ' messages found, deleting...');
             var clearChannel = message.channel.id;
             bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + ' Deleted: ' + fetched.size + ' messages. <#clearChannel>');
+            console.log(clearChannel);
 
             // Deleting the messages
             message.channel.bulkDelete(fetched)
