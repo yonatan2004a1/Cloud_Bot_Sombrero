@@ -58,7 +58,7 @@ bot.on('message', async (message) => {
             {
                 if (isNaN(args[0])) // Checks if the argument is a number
                 {
-                    message.channel.send('Please enter the amount of messages that you want to delete.\nUsage: \`' + PREFIX + 'clear <amount>\`'); //\n means new line.
+                    message.channel.send('Please enter the amount of messages that you want to delete.\nUsage: \`' + PREFIX + 'clear <amount>  <reason>\`'); //\n means new line.
                     return;
                 }
             }
@@ -68,7 +68,7 @@ bot.on('message', async (message) => {
             var reason = args[1];
             if(!reason)
             {
-                message.channel.send('pls enter a reason to clear the messages :) \nUsage: \`' + PREFIX + 'clear' + fetched.size +  '<reason>\`')
+                message.channel.send('pls enter a reason to clear the messages :) \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
             var clearChannel = message.channel.name;
