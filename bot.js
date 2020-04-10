@@ -68,7 +68,7 @@ bot.on('message', async (message) => {
             var reason = args[1];
             if(!reason)
             {
-                message.channel.send('pls enter a reason to clear the messages :) \nUsage: \`' + PREFIX + 'clear <reason>\`')
+                message.channel.send('pls enter a reason to clear the messages :) \nUsage: \`' + PREFIX + 'clear' + fetched.size +  '<reason>\`')
                 return;
             }
             var clearChannel = message.channel.name;
