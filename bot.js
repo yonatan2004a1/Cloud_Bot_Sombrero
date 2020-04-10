@@ -65,8 +65,14 @@ bot.on('message', async (message) => {
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
             console.log(fetched.size + ' messages found, deleting...');
+            var reason = args[1];
+            if(!reason)
+            {
+                message.channel.send('pls enter a reason to clear the messages :) \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
+                return;
+            }
             var clearChannel = message.channel.name;
-            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + ' Deleted: ' + fetched.size + ' messages. From: ' + clearChannel + ' chat');
+            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + ' Deleted: ' + fetched.size + ' messages. From: ' + clearChannel + ' chat. The reason is: ' + reason);
             console.log(clearChannel);
 
             // Deleting the messages
