@@ -14,23 +14,27 @@ bot.on('message', async (message) => {
     var cont = message.content.slice(PREFIX.length).split(" ");
     var args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
     
-    switch (msg) {
-        case msg.includes('LAYLA') || msg.includes('לילה'):
+
+        if (msg.includes('LAYLA') || msg.includes('לילה'))
+        {
             message.channel.send('Layli lay.');
-            break;
-        case msg.includes('YAEL') || msg.includes('יעל'):
+        }
+
+        if (msg.includes('YAEL') || msg.includes('יעל'))
+        {
             message.reply('לא מכבד אחי.');
-            break;
-        case msg.includes('FOXIE') || msg.includes('פוקסי'):
+        }
+
+        if (msg.includes('FOXIE') || msg.includes('פוקסי'))
+        {
             message.channel.send('FoX1E is my lord.');
-            break;
-        case msg == (PREFIX + "counter").toUpperCase():
+        }
+
+        if (msg == (PREFIX + "counter").toUpperCase()) 
+        {
             const currentCounter = await db.getCounter();
             message.channel.send("Current counter is: " + currentCounter);
-            break;
-        default:
-            break;
-    }
+        }
 
     // Clear messages command
     // See https://www.youtube.com/watch?v=Zpxyio10Kj0
