@@ -5,10 +5,7 @@ const db = common.db;
 const bot = common.bot;
 const PREFIX = common.PREFIX;
 
-console.log("[BOT] Starting... (" + getStatus(bot.status) + ")")
-
-//================================================================================================================================================================================================
-
+// ==== Event registeration ================================================
 
 bot.on('message', async (message) => {
     var sender = message.author; // The user who sent the message.
@@ -17,31 +14,26 @@ bot.on('message', async (message) => {
     var cont = message.content.slice(PREFIX.length).split(" ");
     var args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
     
-    if (msg.includes('LAYLA') || msg.includes('לילה')) 
-    {
-        message.channel.send('Layli lay.');
-    }
-    
-    if (msg.includes('YAEL') || msg.includes('יעל')) 
-    {
-        message.reply('לא מכבד אחי.');
-    }
-
-    if (msg.includes('FOXIE') || msg.includes('פוקסי')) 
-    {
-        message.channel.send('FoX1E is my lord.');
-    }
-
-    if (msg == (PREFIX + "counter").toUpperCase()) 
-    {
-        const currentCounter = await db.getCounter();
-        message.channel.send("Current counter is: " + currentCounter);
+    switch (msg) {
+        case msg.includes('LAYLA') || msg.includes('לילה'):
+            message.channel.send('Layli lay.');
+            break;
+        case msg.includes('YAEL') || msg.includes('יעל'):
+            message.reply('לא מכבד אחי.');
+            break;
+        case msg.includes('FOXIE') || msg.includes('פוקסי'):
+            message.channel.send('FoX1E is my lord.');
+            break;
+        case msg == (PREFIX + "counter").toUpperCase():
+            const currentCounter = await db.getCounter();
+            message.channel.send("Current counter is: " + currentCounter);
+            break;
+        default:
+            break;
     }
 
-    /**
-     * Clear messages command
-     * See https://www.youtube.com/watch?v=Zpxyio10Kj0
-     */
+    // Clear messages command
+    // See https://www.youtube.com/watch?v=Zpxyio10Kj0
     if (msg.startsWith(PREFIX + 'CLEAR')) 
     {
         async function clear() {
@@ -130,33 +122,6 @@ bot.on('guildMemberAdd', member => {
     // Send welcome message privately.
     member.send('>>> Hey ' + member.user.username + ', Welcome to **POCO_LOCO\'s Lounge**:exclamation: \nPlease **mark** the emoji below the first message at the ' + member.guild.channels.get('673873657843548170') + ' channel. \nBelow the first message **mark** the games that you usually play as a gamer, THX :cowboy:');
 });
-
-//================================================================================================================================================================================================
-
-const TOKEN = process.env.DISCORD_LOGIN_TOKEN
-bot.login(TOKEN);
-
-//================================================================================================================================================================================================
-/*
- * Returns status by status number.
- * See https://discord.js.org/#/docs/main/v11/typedef/Status
- */
-function getStatus(statusNumber) {
-    switch (statusNumber) {
-        case 0:
-            return "READY";
-        case 1:
-            return "CONNECTING";
-        case 2:
-            return "RECONNECTING";
-        case 3:
-            return "IDLE";
-        case 4:
-            return "NEARLY";
-        case 5:
-            return "DISCONNECTED";
-    }
-}
 
 //================================================================================================================================================================================================
 /*
@@ -248,3 +213,35 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
     }
 
 });
+
+//================================================================================================================================================================================================
+
+console.log("[BOT] Starting... (" + getStatus(bot.status) + ")");
+
+const TOKEN = process.env.DISCORD_LOGIN_TOKEN
+bot.login(TOKEN);
+
+//================================================================================================================================================================================================
+
+/*
+ * Returns Discord bot client status by status number.
+ * See https://discord.js.org/#/docs/main/v11/typedef/Status
+ */
+function getStatus(statusNumber) {
+    switch (statusNumber) {
+        case 0:
+            return "READY";
+        case 1:
+            return "CONNECTING";
+        case 2:
+            return "RECONNECTING";
+        case 3:
+            return "IDLE";
+        case 4:
+            return "NEARLY";
+        case 5:
+            return "DISCONNECTED";
+        default:
+            return "UNKNOWN (status number " + statusNumber + ")";
+    }
+}
