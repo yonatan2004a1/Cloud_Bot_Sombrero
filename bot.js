@@ -112,11 +112,11 @@ bot.on('ready', () => {
     console.log("[BOT] Started - ONLINE (" + getStatus(bot.status) + ")");
     console.log("[BOT] Logged in as " + bot.user.tag);
     
-    // Activity
+    // Bot activity
     bot.user.setActivity('Un Poco Loco', { type: "LISTENING"}).catch(console.error);
 })
 
-//welcome + add role for the new users
+// Welcome message & Role to the new users
 bot.on('guildMemberAdd', member => {
     // Add role for the new member
     let guild = member.guild;
