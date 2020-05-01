@@ -1,5 +1,6 @@
 const common = require('./common.js');
 require('./survival.js');
+require('./lol.js');
 
 const db = common.db;
 const bot = common.bot;
