@@ -21,6 +21,7 @@
     "discord.js": "^11.6.4",
     "dotenv": "^8.2.0",
     "firebase-admin": "^8.10.0",
+    "node-fetch": "^2.6.0",
     "riot-lol-api": "^4.3.2"
   }
 }
