@@ -1,6 +1,6 @@
 const common = require('./common.js');
 require('./survival.js');
-require('./lol.js');
+//require('./lol.js');
 
 const db = common.db;
 const bot = common.bot;
@@ -60,20 +60,27 @@ bot.on('message', async (message) => {
             }
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
-            var reason = args[1];
+            var reason = "";
+            for (let i = 1; i < args.length; i++)
+            {
+                reason += args[i] + " ";
+            }
 
             if (!reason)
             {
                 message.channel.send('Please enter a reason to clear the messages. \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
-
-            var clearChannel = message.channel.name;
-            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages. \n**From:** ' + clearChannel + ' text channel. \n**Reason:** ' + reason + '.');
-
+            
             // Deleting the messages
             message.channel.bulkDelete(fetched)
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
+            
+            if (!error) 
+            {
+                var clearChannel = message.channel.name;
+                bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
+            }
         }
         clear(); 
     }
