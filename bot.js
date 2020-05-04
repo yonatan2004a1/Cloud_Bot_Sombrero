@@ -65,6 +65,7 @@ bot.on('message', async (message) => {
             {
                 reason += args[i] + " ";
             }
+            reason[reason.length-1] = " ";
 
             if (!reason)
             {
