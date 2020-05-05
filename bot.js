@@ -41,7 +41,8 @@ bot.on('message', async (message) => {
     // See https://www.youtube.com/watch?v=Zpxyio10Kj0
     if (msg.startsWith(PREFIX + 'CLEAR')) 
     {
-        async function clear() {
+        async function clear() 
+        {
             message.delete();
 
             // Checks if the user has the `Poco Loco's Staff 🤠` role
@@ -71,16 +72,14 @@ bot.on('message', async (message) => {
                 message.channel.send('Please enter a reason to clear the messages. \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
-            
+            message.delete();
             // Deleting the messages
             message.channel.bulkDelete(fetched)
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
             
-            if (!error) 
-            {
-                var clearChannel = message.channel.name;
-                bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
-            }
+            var clearChannel = message.channel.name;
+            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages. \n**From:** ' + clearChannel + ' text channel. \n**Reason:** ' + reason + '.');
+            
         }
         clear(); 
     }
