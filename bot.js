@@ -1,6 +1,5 @@
 const common = require('./common.js');
 require('./survival.js');
-//require('./lol.js');
 
 const db = common.db;
 const bot = common.bot;
@@ -61,11 +60,7 @@ bot.on('message', async (message) => {
             }
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
-            var reason = "";
-            for (let i = 1; i < args.length; i++)
-            {
-                reason += args[i] + " ";
-            }
+            var reason = args[1];
 
             if (!reason)
             {
