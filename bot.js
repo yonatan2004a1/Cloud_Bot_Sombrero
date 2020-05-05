@@ -60,7 +60,12 @@ bot.on('message', async (message) => {
             }
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
-            var reason = args[1];
+            var reason = "";
+            for(let i = 1; i < args.length; i++)
+            {
+                reason += args[i] + " ";
+            }
+            
 
             if (!reason)
             {
