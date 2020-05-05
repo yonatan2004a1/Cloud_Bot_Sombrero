@@ -50,6 +50,7 @@ bot.on('message', async (message) => {
             let embed = new Discord.RichEmbed();
             embed.setTitle("Your list")
             embed.setDescription(pollOptions.join("\n"));
+            embed.setColor([0,200,0]);
             let confirm = await message.channel.send(embed);
             await confirm.react("✔️");
             await confirm.react("✖️");
