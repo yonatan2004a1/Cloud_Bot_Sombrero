@@ -56,13 +56,12 @@ bot.on('message', async (message) => {
             let confirm = await message.channel.send(embed);
             await confirm.react("✔️");
             await confirm.react("✖️");
-        
             let reactionFilter = (reaction, user) => (user.id === message.author.id) && !user.bot;
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
             {
                 embed.setColor('#09fc00');
-                message.channel.edit(embed);
+                await message.channel.edit(embed);
                 
                 let embedVi = new Discord.RichEmbed();
                 message.channel.send("The game will begin in 1 second, get ready!");
