@@ -49,10 +49,10 @@ bot.on('message', async (message) => {
                 return;
             }
             const embed = new Discord.RichEmbed();
+            embed.setColor('#fcf100');
             embed.setTitle("Survival participants: ")
             embed.setDescription(pollOptions.join("\n"));
-            embed.setColor('#fcf100');
-            embed.setColor('https://upload.wikimedia.org/wikipedia/he/f/fd/%D7%94%D7%99%D7%A9%D7%A8%D7%93%D7%95%D7%AA.png')
+            embed.setImage('https://upload.wikimedia.org/wikipedia/he/f/fd/%D7%94%D7%99%D7%A9%D7%A8%D7%93%D7%95%D7%AA.png')
             let confirm = await message.channel.send(embed);
             await confirm.react("✔️");
             await confirm.react("✖️");
