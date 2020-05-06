@@ -59,8 +59,13 @@ bot.on('message', async (message) => {
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
             {
-                let embedVi = new Discord.RichEmbed();
+                
+                embed.setTitle("Your list")
+                embed.setDescription(pollOptions.join("\n"));
                 embed.setColor('#09fc00');
+                message.edit(embed);
+                
+                let embedVi = new Discord.RichEmbed();
                 message.channel.send("The game will begin in 1 second, get ready!");
                 await delay(1000);
                 message.channel.send("VOTE NOW!");
@@ -82,11 +87,11 @@ bot.on('message', async (message) => {
 
                 if(winners.length === 1)
                 {
-                    message.channel.send(winners[0] + ", you're the one that leaving the lobby! 🌴", embed);
+                    message.channel.send(winners[0] + ", you're the one that leaving the lobby! 🌴", embedVi);
                 }
                 else
                 {
-                    message.channel.send("We have a draw!", embed);
+                    message.channel.send("We have a draw!", embedVi);
 
                 }
             
