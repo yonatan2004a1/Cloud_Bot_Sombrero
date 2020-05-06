@@ -3,8 +3,7 @@ const Discord = require('discord.js');
 const bot = common.bot;
 const db = common.db;
 const PREFIX = common.PREFIX;
-const embedVi = new Discord.RichEmbed();
-const embedX = new Discord.RichEmbed();
+const embed = new Discord.RichEmbed();
 //Survival GAME
 const userCreatedPolls = new Map();
 
@@ -48,10 +47,10 @@ bot.on('message', async (message) => {
                 message.channel.send("You can't play this game alone, NERD! 🤓");
                 return;
             }
-            let embed = new Discord.RichEmbed();
-                embed.setTitle("Your list")
-                embed.setDescription(pollOptions.join("\n"));
-                embed.setColor('#fcf100');
+            
+            embed.setTitle("Your list")
+            embed.setDescription(pollOptions.join("\n"));
+            embed.setColor('#fcf100');
             let confirm = await message.channel.send(embed);
             await confirm.react("✔️");
             await confirm.react("✖️");
@@ -60,8 +59,8 @@ bot.on('message', async (message) => {
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
             {
-                let embed = new Discord.RichEmbed();
-                embedVi.setColor('#09fc00');
+                let embedVi = new Discord.RichEmbed();
+                embed.setColor('#09fc00');
                 message.channel.send("The game will begin in 1 second, get ready!");
                 await delay(1000);
                 message.channel.send("VOTE NOW!");
@@ -79,7 +78,7 @@ bot.on('message', async (message) => {
                 let desc = '';//description
                 entries.forEach(entry => entry[1] === max ? winners.push(entry[0]) : null);
                 entries.forEach(entry => desc += entry[0]+ " has received " + entry[1] + " votes\n");
-                embed.setDescription(desc);
+                embedVi.setDescription(desc);
 
                 if(winners.length === 1)
                 {
@@ -94,7 +93,7 @@ bot.on('message', async (message) => {
             }
             else if(reaction.emoji.name === '✖️')
             {   
-                embedX.setColor('#fc0000');
+                embed.setColor('#fc0000');
                 message.channel.send("Survival game has been cancelled :(");
             }
 
