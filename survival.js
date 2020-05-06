@@ -3,7 +3,8 @@ const Discord = require('discord.js');
 const bot = common.bot;
 const db = common.db;
 const PREFIX = common.PREFIX;
-
+const embedVi = new Discord.RichEmbed();
+const embedX = new Discord.RichEmbed();
 //Survival GAME
 const userCreatedPolls = new Map();
 
@@ -59,7 +60,7 @@ bot.on('message', async (message) => {
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
             {
-                let embedVi = new Discord.RichEmbed();
+                let embed = new Discord.RichEmbed();
                 embedVi.setColor('#09fc00');
                 message.channel.send("The game will begin in 1 second, get ready!");
                 await delay(1000);
@@ -93,7 +94,6 @@ bot.on('message', async (message) => {
             }
             else if(reaction.emoji.name === '✖️')
             {   
-                let embedX = new Discord.RichEmbed();
                 embedX.setColor('#fc0000');
                 message.channel.send("Survival game has been cancelled :(");
             }
