@@ -59,13 +59,7 @@ bot.on('message', async (message) => {
             let reactionFilter = (reaction, user) => (user.id === message.author.id) && !user.bot;
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
-            {
-                const newEmbed = new Discord.RichEmbed
-                newEmbed.setTitle("Your list")
-                newEmbed.setDescription(pollOptions.join("\n"));
-                newEmbed.setColor('#09fc00');
-                message.edit(newEmbed);
-                
+            { 
                 let embedVi = new Discord.RichEmbed();
                 message.channel.send("The game will begin in 1 second, get ready!");
                 await delay(1000);
@@ -99,7 +93,6 @@ bot.on('message', async (message) => {
             }
             else if(reaction.emoji.name === '✖️')
             {   
-                embed.setColor('#fc0000');
                 message.channel.send("Survival game has been cancelled :(");
             }
 
