@@ -61,7 +61,7 @@ bot.on('message', async (message) => {
             if(reaction.emoji.name === '✔️')
             {
                 embed.setColor('#09fc00');
-                message.message.edit(newEmbed);
+                message.edit(newEmbed);
                 
                 let embedVi = new Discord.RichEmbed();
                 message.channel.send("The game will begin in 1 second, get ready!");
