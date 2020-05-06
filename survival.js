@@ -60,7 +60,10 @@ bot.on('message', async (message) => {
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
             {
-                embed.setColor('#09fc00');
+                const newEmbed = new Discord.RichEmbed
+                newEmbed.setTitle("Your list")
+                newEmbed.setDescription(pollOptions.join("\n"));
+                newEmbed.setColor('#09fc00');
                 message.edit(newEmbed);
                 
                 let embedVi = new Discord.RichEmbed();
