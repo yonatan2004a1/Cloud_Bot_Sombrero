@@ -59,7 +59,8 @@ bot.on('message', async (message) => {
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
             {
-                embed.setColor('#09fc00');
+                let embedVi = new Discord.RichEmbed();
+                embedVi.setColor('#09fc00');
                 message.channel.send("The game will begin in 1 second, get ready!");
                 await delay(1000);
                 message.channel.send("VOTE NOW!");
@@ -74,7 +75,6 @@ bot.on('message', async (message) => {
                 let max = Math.max(...pollTally.array());// the dots is for printing the arry without them []
                 let entries = [...pollTally.entries()];
                 let winners = [];
-                let embed = new Discord.RichEmbed();
                 let desc = '';//description
                 entries.forEach(entry => entry[1] === max ? winners.push(entry[0]) : null);
                 entries.forEach(entry => desc += entry[0]+ " has received " + entry[1] + " votes\n");
@@ -93,7 +93,8 @@ bot.on('message', async (message) => {
             }
             else if(reaction.emoji.name === '✖️')
             {   
-                embed.setColor('#fc0000');
+                let embedX = new Discord.RichEmbed();
+                embedX.setColor('#fc0000');
                 message.channel.send("Survival game has been cancelled :(");
             }
 
