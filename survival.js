@@ -3,7 +3,8 @@ const Discord = require('discord.js');
 const bot = common.bot;
 const db = common.db;
 const PREFIX = common.PREFIX;
-const embed = new Discord.RichEmbed();
+const recivedEmbed = message.embeds[0]
+const embed = new Discord.RichEmbed(recivedEmbed);
 //Survival GAME
 const userCreatedPolls = new Map();
 
@@ -59,9 +60,6 @@ bot.on('message', async (message) => {
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
             {
-                
-                embed.setTitle("Your list")
-                embed.setDescription(pollOptions.join("\n"));
                 embed.setColor('#09fc00');
                 message.edit(embed);
                 
