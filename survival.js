@@ -48,9 +48,9 @@ bot.on('message', async (message) => {
                 return;
             }
             let embed = new Discord.RichEmbed();
-            embed.setTitle("Your list")
-            embed.setDescription(pollOptions.join("\n"));
-            embed.setColor([0,200,0]);
+                embed.setTitle("Your list")
+                embed.setDescription(pollOptions.join("\n"));
+                embed.setColor('#fcf100');
             let confirm = await message.channel.send(embed);
             await confirm.react("✔️");
             await confirm.react("✖️");
@@ -59,6 +59,7 @@ bot.on('message', async (message) => {
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
             {
+                embed.setColor('#09fc00');
                 message.channel.send("The game will begin in 1 second, get ready!");
                 await delay(1000);
                 message.channel.send("VOTE NOW!");
@@ -92,7 +93,8 @@ bot.on('message', async (message) => {
             }
             else if(reaction.emoji.name === '✖️')
             {   
-            message.channel.send("Survival game has been cancelled :(");
+                embed.setColor('#fc0000');
+                message.channel.send("Survival game has been cancelled :(");
             }
 
 
