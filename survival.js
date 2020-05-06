@@ -3,12 +3,13 @@ const Discord = require('discord.js');
 const bot = common.bot;
 const db = common.db;
 const PREFIX = common.PREFIX;
-const recivedEmbed = message.embeds[0]
-const embed = new Discord.RichEmbed(recivedEmbed);
+
 //Survival GAME
 const userCreatedPolls = new Map();
 
 bot.on('message', async (message) => {
+    const recivedEmbed = message.embeds[0]
+    const embed = new Discord.RichEmbed();
     if(message.author.bot)
     {
         return;
