@@ -68,19 +68,21 @@ bot.on('message', async (message) => {
                 reason += args[i] + " ";
             }
             
-
             if (!reason)
             {
                 message.channel.send('Please enter a reason to clear the messages. \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
 
+            if(!error)
+            {
+            var clearChannel = message.channel.name;
+            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
+            }
+
             // Deleting the messages
             message.channel.bulkDelete(fetched)
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
-            
-            var clearChannel = message.channel.name;
-            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
         }
         clear();   
     }
