@@ -80,6 +80,7 @@ bot.on('message', async (message) => {
                 entries.forEach(entry => entry[1] === max ? winners.push(entry[0]) : null);
                 entries.forEach(entry => desc += entry[0]+ " has received " + entry[1] + " votes\n");
                 embedVi.setDescription(desc);
+                embedVi.setColor('#e00b0b');
 
                 if(winners.length === 1)
                 {
