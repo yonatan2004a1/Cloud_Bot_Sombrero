@@ -53,6 +53,7 @@ bot.on('message', async (message) => {
                 message.channel.send('You need to be in the \`Poco Loco\'s Staff 🤠\` to use this command.');
                 return;
             }
+            if(message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID){return}// I dont want someone to delete this channel.
             else
             {
                 if (isNaN(args[0])) // Checks if the argument is a number
