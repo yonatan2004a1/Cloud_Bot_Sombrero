@@ -84,12 +84,12 @@ bot.on('message', async (message) => {
 
                 if(winners.length === 1)
                 {
-                    embedVi.addField(winners[0] + ", you're the one that leaving the island! 🌴")
+                    embedVi.addField(winners[0] + ", you're the one that leaving the island! 🌴", ` `)
                     message.channel.send(embedVi);
                 }
                 else
                 {
-                    embedVi.addField("We have a draw!")
+                    embedVi.addField("We have a draw!" , `Try one more game :>`)
                     message.channel.send(embedVi);
 
                 }
