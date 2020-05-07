@@ -85,19 +85,6 @@ async function GetUsernameAndRank(name, region) {
         })
     })
 }
-
-GetID('oldschoolgg', region)
-.then(data => {
-    console.log("username: "+data[1]+" id: "+data[0]);
-    GetRankAndTier(data[0], region)
-    .then(data => {
-        console.log(data);
-    });
-})
-.catch(err => {
-    console.log("error: "+err);
-});
-
 module.exports = {
     GetUsernameAndRank
 }
