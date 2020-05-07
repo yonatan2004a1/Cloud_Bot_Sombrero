@@ -80,15 +80,17 @@ bot.on('message', async (message) => {
                 entries.forEach(entry => entry[1] === max ? winners.push(entry[0]) : null);
                 entries.forEach(entry => desc += entry[0]+ " has received " + entry[1] + " votes\n");
                 embedVi.setDescription(desc);
-                embedVi.setColor('#e00b0b');
+                embedVi.setColor('#5c913b');
 
                 if(winners.length === 1)
                 {
-                    message.channel.send(winners[0] + ", you're the one that leaving the lobby! 🌴", embedVi);
+                    embedVi.addField(winners[0] + ", you're the one that leaving the island! 🌴")
+                    message.channel.send(embedVi);
                 }
                 else
                 {
-                    message.channel.send("We have a draw!", embedVi);
+                    embedVi.addField("We have a draw!")
+                    message.channel.send(embedVi);
 
                 }
             
