@@ -1,12 +1,14 @@
 const common = require('./common.js');
 require('./survival.js');
-//require('./lol.js');
+const Discord = require('discord.js');
 
+const leagueAPI = common.LeagueAPI;
 const db = common.db;
 const bot = common.bot;
 const PREFIX = common.PREFIX;
 
 // ==== Event registeration ================================================
+
 
 bot.on('message', async (message) => {
     var sender = message.author; // The user who sent the message.
@@ -41,9 +43,10 @@ bot.on('message', async (message) => {
     // See https://www.youtube.com/watch?v=Zpxyio10Kj0
     if (msg.startsWith(PREFIX + 'CLEAR')) 
     {
-        async function clear() {
-            message.delete();
-
+        async function clear() 
+        {
+            const embedClear = new Discord.RichEmbed();
+            await message.delete();
             // Checks if the user has the `Poco Loco's Staff 🤠` role
             if (!message.member.roles.find("name", "Poco Loco's Staff 🤠")) 
             {
@@ -61,29 +64,62 @@ bot.on('message', async (message) => {
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
             var reason = "";
-            for (let i = 1; i < args.length; i++)
+            for(let i = 1; i < args.length; i++)
             {
                 reason += args[i] + " ";
             }
-
+            
             if (!reason)
             {
                 message.channel.send('Please enter a reason to clear the messages. \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
-            
+
             // Deleting the messages
             message.channel.bulkDelete(fetched)
+                .then(() => {
+                    var clearChannel = message.channel.name;
+                    embedClear.setTitle("Clear Logs");
+                    embedClear.addField("Who deleted the messages?? " , message.author);
+                    embedClear.addField("Cleared: " , fetched.size) ;
+                    embedClear.addField("From: " , clearChannel);
+                    embedClear.addField("Reason: " , reason);
+                    embedClear.setFooter("You can ban tiran if you want to do so :>");
+                    embedClear.setColor("#fffefe");
+                    embedClear.setImage(message.member.avatarURL);
+                    bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(embedClear);
+                })
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
-            
-            if (!error) 
-            {
-                var clearChannel = message.channel.name;
-                bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
-            }
         }
-        clear(); 
+        clear();   
     }
+    // League API
+    if(msg.startsWith(PREFIX + 'SEARCH'))
+    {
+        if(!args[0] || !args[1])
+        {
+            message.channel.send("The search command allows you to search a league account\nsyntax: \`" + PREFIX + 'search <name> <region>\`');
+        }
+        else
+        {
+            let name = ""
+            for(var i = 0; i < args.length-1; i++)
+            {
+                name += args[i];
+            }
+            let region = args[args.length-1];
+            leagueAPI.GetUsernameAndRank(name, region)
+            .then(data => {
+                message.channel.send(`Summoner name: ${data[0]}, Rank: ${data[1]}`);
+            })
+            .catch(err => {
+                message.channel.send("Error: "+err);
+            })
+        }
+
+    }
+
+
 
 //counter_count chat
   
