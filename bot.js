@@ -45,7 +45,6 @@ bot.on('message', async (message) => {
         async function clear() 
         {
             await message.delete();
-
             // Checks if the user has the `Poco Loco's Staff 🤠` role
             if (!message.member.roles.find("name", "Poco Loco's Staff 🤠")) 
             {
@@ -73,15 +72,13 @@ bot.on('message', async (message) => {
                 message.channel.send('Please enter a reason to clear the messages. \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
-
-            if(!error)
-            {
-            var clearChannel = message.channel.name;
-            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
-            }
-
+            
             // Deleting the messages
             message.channel.bulkDelete(fetched)
+                .then(() => {
+                    var clearChannel = message.channel.name;
+                    bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
+                })
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
         }
         clear();   
