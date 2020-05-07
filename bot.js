@@ -80,10 +80,9 @@ bot.on('message', async (message) => {
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
             
             var clearChannel = message.channel.name;
-            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages. \n**From:** ' + clearChannel + ' text channel. \n**Reason:** ' + reason + '.');
-            
+            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
         }
-      //  clear();   
+        clear();   
     }
     // League API
     if(msg.startsWith(PREFIX + 'SEARCH'))
@@ -92,10 +91,6 @@ bot.on('message', async (message) => {
         {
             message.channel.send("The search command allows you to search a league account\nsyntax: \`" + PREFIX + 'search <name> <region>\`');
         }
-        // else if(args[2])
-        // {
-        //     message.channel.send("Syntax error: too many arguments!\ncorrect syntax: \`" + PREFIX + 'search <name> <region>\`');
-        // }
         else
         {
             let name = ""
