@@ -87,7 +87,7 @@ bot.on('message', async (message) => {
                     embedClear.addField("Reason: " , reason);
                     embedClear.setFooter("You can ban tiran if you want to do so :>");
                     embedClear.setColor("#fffefe");
-                    embedClear.setImage(message.member.avatarURL);
+                    embedClear.setImage(message.user.avatarURL);
                     bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(embedClear);
                 })
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
