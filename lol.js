@@ -1,5 +1,4 @@
 const fetch = require("node-fetch");
-const key = "?api_key=RGAPI-3f2fdd29-ccb2-4b99-b483-ead21450e0c4"; //key is NOT final, also dont share it with anyone else
 const apiDir = ".api.riotgames.com/lol/" //we will always use this url part (there are stuff like /tft/ but we dont work on it)
 
 // ====== PRIVATE FUNCTIONS, WILL NOT BE EXPORTED ======
