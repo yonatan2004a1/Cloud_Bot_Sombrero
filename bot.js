@@ -1,5 +1,6 @@
 const common = require('./common.js');
 require('./survival.js');
+const Discord = require('discord.js');
 
 const leagueAPI = common.LeagueAPI;
 const db = common.db;
