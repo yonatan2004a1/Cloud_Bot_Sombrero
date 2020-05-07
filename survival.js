@@ -84,7 +84,7 @@ bot.on('message', async (message) => {
 
                 if(winners.length === 1)
                 {
-                    embedVi.addField(winners[0] + ", you're the one that leaving the island! 🌴", ` `)
+                    embedVi.addField(winners[0] + ", you're the one that leaving the island! 🌴", ` (askaka pls change it i dont have an idea for it) `)
                     message.channel.send(embedVi);
                 }
                 else
