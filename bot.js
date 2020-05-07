@@ -44,7 +44,7 @@ bot.on('message', async (message) => {
     {
         async function clear() 
         {
-            let embedClear = new Discord.RichEmbed();
+            const embedClear = new Discord.RichEmbed();
             await message.delete();
             // Checks if the user has the `Poco Loco's Staff 🤠` role
             if (!message.member.roles.find("name", "Poco Loco's Staff 🤠")) 
