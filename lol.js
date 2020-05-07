@@ -1,12 +1,11 @@
 const fetch = require("node-fetch");
-const key = "?api_key=RGAPI-3f2fdd29-ccb2-4b99-b483-ead21450e0c4"; //key is NOT final, also dont share it with anyone else
 const apiDir = ".api.riotgames.com/lol/" //we will always use this url part (there are stuff like /tft/ but we dont work on it)
 
 // ====== PRIVATE FUNCTIONS, WILL NOT BE EXPORTED ======
 async function GetID(name, region) 
 {
     let endcodedUri = encodeURI(name);
-    let url = `https://${region + apiDir}summoner/v4/summoners/by-name/${endcodedUri + key}`; //crafts the url for user info by name
+    let url = `https://${region + apiDir}summoner/v4/summoners/by-name/${endcodedUri + process.env.RIOT_GAMES_API_KEY}`; //crafts the url for user info by name
         return await new Promise(async(resolve, reject) => { //makes a new promise with resolve and reject
         await fetch(url)
         .then(res => {
@@ -22,7 +21,7 @@ async function GetID(name, region)
 }
 async function GetRankAndTier(id, region)
 {
-    let url = `https://${region + apiDir}league/v4/entries/by-summoner/${id + key}`; //crafts the url for rank by id
+    let url = `https://${region + apiDir}league/v4/entries/by-summoner/${id + process.env.RIOT_GAMES_API_KEY}`; //crafts the url for rank by id
     return await fetch(url)
     .then(res => res.json())
     .then(data => {

@@ -104,6 +104,7 @@ bot.on('message', async (message) => {
         else
         {
             let name = ""
+            let embed = new Discord.RichEmbed();
             for(var i = 0; i < args.length-1; i++)
             {
                 name += args[i];
@@ -111,7 +112,13 @@ bot.on('message', async (message) => {
             let region = args[args.length-1];
             leagueAPI.GetUsernameAndRank(name, region)
             .then(data => {
-                message.channel.send(`Summoner name: ${data[0]}, Rank: ${data[1]}`);
+                embed.setTitle(data[0] + "'s STATS");
+                embed.addField("Summoner name: " , data[0]);
+                embed.addField("Rank: " , data[1]);
+                embed.setColor("#cf95f8");
+                embed.setFooter("The next baron bot???");
+                //embed.addImage(); - will be the profile icon of the summoner
+                message.channel.send(embed);
             })
             .catch(err => {
                 message.channel.send("Error: "+err);
