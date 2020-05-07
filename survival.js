@@ -8,6 +8,7 @@ const PREFIX = common.PREFIX;
 const userCreatedPolls = new Map();
 
 bot.on('message', async (message) => {
+    
     if(message.author.bot)
     {
         return;
@@ -47,17 +48,20 @@ bot.on('message', async (message) => {
                 message.channel.send("You can't play this game alone, NERD! 🤓");
                 return;
             }
-            let embed = new Discord.RichEmbed();
-            embed.setTitle("Your list")
+            const embed = new Discord.RichEmbed();
+            embed.setColor('#eb5300');
+            embed.setTitle("Survival participants: ");
             embed.setDescription(pollOptions.join("\n"));
+            embed.setImage('https://upload.wikimedia.org/wikipedia/he/thumb/f/fd/%D7%94%D7%99%D7%A9%D7%A8%D7%93%D7%95%D7%AA.png/220px-%D7%94%D7%99%D7%A9%D7%A8%D7%93%D7%95%D7%AA.png');
+            embed.setFooter('Please vote Tiran :>');
             let confirm = await message.channel.send(embed);
             await confirm.react("✔️");
             await confirm.react("✖️");
-        
             let reactionFilter = (reaction, user) => (user.id === message.author.id) && !user.bot;
             let reaction = (await confirm.awaitReactions(reactionFilter, {max :1})).first();
             if(reaction.emoji.name === '✔️')
-            {
+            { 
+                let embedVi = new Discord.RichEmbed();
                 message.channel.send("The game will begin in 1 second, get ready!");
                 await delay(1000);
                 message.channel.send("VOTE NOW!");
@@ -72,26 +76,28 @@ bot.on('message', async (message) => {
                 let max = Math.max(...pollTally.array());// the dots is for printing the arry without them []
                 let entries = [...pollTally.entries()];
                 let winners = [];
-                let embed = new Discord.RichEmbed();
                 let desc = '';//description
                 entries.forEach(entry => entry[1] === max ? winners.push(entry[0]) : null);
                 entries.forEach(entry => desc += entry[0]+ " has received " + entry[1] + " votes\n");
-                embed.setDescription(desc);
+                embedVi.setDescription(desc);
+                embedVi.setColor('#5c913b');
 
                 if(winners.length === 1)
                 {
-                    message.channel.send(winners[0] + ", you're the one that leaving the lobby! 🌴", embed);
+                    embedVi.addField(winners[0] + ", you're the one that leaving the island! 🌴", ` (askaka pls change it i dont have an idea for it) `)
+                    message.channel.send(embedVi);
                 }
                 else
                 {
-                    message.channel.send("We have a draw!", embed);
+                    embedVi.addField("We have a draw!" , `Try one more game :>`)
+                    message.channel.send(embedVi);
 
                 }
             
             }
             else if(reaction.emoji.name === '✖️')
             {   
-            message.channel.send("Survival game has been cancelled :(");
+                message.channel.send("Survival game has been cancelled :(");
             }
 
 

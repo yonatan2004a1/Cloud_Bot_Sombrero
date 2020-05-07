@@ -42,8 +42,9 @@ bot.on('message', async (message) => {
     // See https://www.youtube.com/watch?v=Zpxyio10Kj0
     if (msg.startsWith(PREFIX + 'CLEAR')) 
     {
-        async function clear() {
-            message.delete();
+        async function clear() 
+        {
+            await message.delete();
 
             // Checks if the user has the `Poco Loco's Staff 🤠` role
             if (!message.member.roles.find("name", "Poco Loco's Staff 🤠")) 
@@ -62,26 +63,25 @@ bot.on('message', async (message) => {
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
             var reason = "";
-            for (let i = 1; i < args.length; i++)
+            for(let i = 1; i < args.length; i++)
             {
                 reason += args[i] + " ";
             }
+            
 
             if (!reason)
             {
                 message.channel.send('Please enter a reason to clear the messages. \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
-            
+
             // Deleting the messages
             message.channel.bulkDelete(fetched)
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
             
-            if (!error) 
-            {
-                var clearChannel = message.channel.name;
-                bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
-            }
+            var clearChannel = message.channel.name;
+            bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages. \n**From:** ' + clearChannel + ' text channel. \n**Reason:** ' + reason + '.');
+            
         }
         clear(); 
     // League API
