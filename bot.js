@@ -1,12 +1,13 @@
 const common = require('./common.js');
 require('./survival.js');
-require('./lol.js');
 
+const leagueAPI = common.LeagueAPI;
 const db = common.db;
 const bot = common.bot;
 const PREFIX = common.PREFIX;
 
 // ==== Event registeration ================================================
+
 
 bot.on('message', async (message) => {
     var sender = message.author; // The user who sent the message.
@@ -83,7 +84,30 @@ bot.on('message', async (message) => {
             }
         }
         clear(); 
+    // League API
+    if(msg.startsWith(PREFIX + 'SEARCH'))
+    {
+        if(!args[0] || !args[1])
+        {
+            message.channel.send("The search command allows you to search a league account\nsyntax: \`" + PREFIX + 'search <name> <region>\`');
+        }
+        if(args[2])
+        {
+            message.channel.send("Syntax error: too many arguments!\ncorrect syntax: \`" + PREFIX + 'search <name> <region>\`');
+        }
+        else
+        {
+            leagueAPI.GetUsernameAndRank(args[0], args[1])
+            .then(data => {
+                message.channel.send(`Summoner name: ${data[0]}, Rank: ${data[1]}`);
+            })
+            .catch(err => {
+                message.channel.send("Error: "+err);
+            })
+        }
+
     }
+ }
 
 //counter_count chat
   

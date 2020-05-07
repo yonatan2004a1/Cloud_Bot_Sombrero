@@ -9,7 +9,7 @@
 
 require('dotenv').config();
 const Discord = require('discord.js');
-
+const LeagueAPI = require('./lol.js');
 const db = require('./database.js');
 
 const PREFIX = '*' // The symbol before the commands
@@ -18,5 +18,6 @@ const bot = new Discord.Client();
 module.exports = {
     bot,
     db,
-    PREFIX
+    PREFIX,
+    LeagueAPI
 }
