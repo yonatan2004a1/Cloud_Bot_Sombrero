@@ -1,16 +1,12 @@
 const fetch = require("node-fetch");
-const common = require('./common.js');
-const Discord = require('discord.js');
-const bot = common.bot;
-const db = common.db;
-const PREFIX = common.PREFIX;
 const key = "?api_key=RGAPI-3f2fdd29-ccb2-4b99-b483-ead21450e0c4"; //key is NOT final, also dont share it with anyone else
 const apiDir = ".api.riotgames.com/lol/" //we will always use this url part (there are stuff like /tft/ but we dont work on it)
 
 // ====== PRIVATE FUNCTIONS, WILL NOT BE EXPORTED ======
 async function GetID(name, region) 
 {
-    let url = `https://${region + apiDir}summoner/v4/summoners/by-name/${name + key}`; //crafts the url for user info by name
+    let endcodedUri = encodeURI(name);
+    let url = `https://${region + apiDir}summoner/v4/summoners/by-name/${endcodedUri + key}`; //crafts the url for user info by name
         return await new Promise(async(resolve, reject) => { //makes a new promise with resolve and reject
         await fetch(url)
         .then(res => {
@@ -69,7 +65,7 @@ function GetRegion(region)
  */
 async function GetUsernameAndRank(name, region) {
     return await new Promise((resolve, reject) => {
-        let region = GetRegion(region);
+        region = GetRegion(region);
         if(region == null)
             reject("Region not found");
         GetID(name, region)
@@ -77,7 +73,7 @@ async function GetUsernameAndRank(name, region) {
             let username = data[1];
              GetRankAndTier(data[0], region)
             .then(data => {
-                resolve([data, username]);
+                resolve([username, data]);
             })
         })
         .catch(err => {

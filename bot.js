@@ -83,7 +83,8 @@ bot.on('message', async (message) => {
             bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages. \n**From:** ' + clearChannel + ' text channel. \n**Reason:** ' + reason + '.');
             
         }
-        clear(); 
+      //  clear();   
+    }
     // League API
     if(msg.startsWith(PREFIX + 'SEARCH'))
     {
@@ -91,13 +92,19 @@ bot.on('message', async (message) => {
         {
             message.channel.send("The search command allows you to search a league account\nsyntax: \`" + PREFIX + 'search <name> <region>\`');
         }
-        if(args[2])
-        {
-            message.channel.send("Syntax error: too many arguments!\ncorrect syntax: \`" + PREFIX + 'search <name> <region>\`');
-        }
+        // else if(args[2])
+        // {
+        //     message.channel.send("Syntax error: too many arguments!\ncorrect syntax: \`" + PREFIX + 'search <name> <region>\`');
+        // }
         else
         {
-            leagueAPI.GetUsernameAndRank(args[0], args[1])
+            let name = ""
+            for(var i = 0; i < args.length-1; i++)
+            {
+                name += args[i];
+            }
+            let region = args[args.length-1];
+            leagueAPI.GetUsernameAndRank(name, region)
             .then(data => {
                 message.channel.send(`Summoner name: ${data[0]}, Rank: ${data[1]}`);
             })
@@ -107,7 +114,8 @@ bot.on('message', async (message) => {
         }
 
     }
- }
+
+
 
 //counter_count chat
   
