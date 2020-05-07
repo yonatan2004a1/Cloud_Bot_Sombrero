@@ -79,6 +79,11 @@ bot.on('message', async (message) => {
             // Deleting the messages
             message.channel.bulkDelete(fetched)
                 .then(() => {
+                    let user = message.mentions.users.first();
+                    if(!user)
+                    { 
+                        user = message.author;
+                    }
                     var clearChannel = message.channel.name;
                     embedClear.setTitle("Clear Logs");
                     embedClear.addField("Who deleted the messages?? " , message.author);
@@ -87,7 +92,7 @@ bot.on('message', async (message) => {
                     embedClear.addField("Reason: " , reason);
                     embedClear.setFooter("You can ban tiran if you want to do so :>");
                     embedClear.setColor("#fffefe");
-                    embedClear.setImage(message.user.avatarURL);
+                    embedClear.setImage(user.avatarURL);
                     bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(embedClear);
                 })
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
