@@ -102,7 +102,7 @@ bot.on('message', async (message) => {
     // League API
     if(msg.startsWith(PREFIX + 'STATS'))
     {
-        if(message.channel.id != process.env.LEAGUE_ACTIVE_CHAT_ID)
+        if(message.channel.id != process.env.LEAGUE_ACTIVE_CHAT_ID || message.channel.id != process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
         {
             return;
         }
