@@ -129,7 +129,7 @@ bot.on('message', async (message) => {
                 embed.addField("Flex 5x5" , ranks[1].rank, true); 
                 embed.setColor("#cf95f8");
                 embed.setTimestamp();
-                embed.setFooter(user.avatarURL , "The next baron bot???");
+                embed.setFooter("The next baron bot???" , user.avatarURL);
                 leagueAPI.GetProfileIconURL(data[0], region)
                .then(url => {
                 embed.setThumbnail(url); //- will be the profile icon of the summoner
