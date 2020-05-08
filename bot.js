@@ -118,12 +118,18 @@ bot.on('message', async (message) => {
             leagueAPI.GetUsernameAndRank(name, region)
             .then(data => {
                 let ranks = data[1];
+                let user = message.mentions.users.first();
+                if(!user)
+                { 
+                    user = message.author;
+                }
                 embed.setTitle(data[0] + "'s Stats");
                 embed.addField("Summoner name" , data[0]);
-                embed.addField("Ranked Solo/Duo" , ranks[0].rank, true);
-                embed.addField("Ranked Flex" , ranks[1].rank, true); 
+                embed.addField("Solo/Duo" , ranks[0].rank, true);
+                embed.addField("Flex 5x5" , ranks[1].rank, true); 
                 embed.setColor("#cf95f8");
-                embed.setFooter("The next baron bot???");
+                embed.setTimestamp();
+                embed.setFooter(user.avatarURL , "The next baron bot???");
                 leagueAPI.GetProfileIconURL(data[0], region)
                .then(url => {
                 embed.setThumbnail(url); //- will be the profile icon of the summoner
