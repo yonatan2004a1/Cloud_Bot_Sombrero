@@ -54,7 +54,7 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
         }
         let games = data[0].wins + data[0].losses;
         var winRate = (data[0].wins/games) * 100;
-        winRate.toFixed(0);
+        winRate.toFixed(0);//it makes the var => int
         let ranks = [];
         if(data.length == 1)
         {
