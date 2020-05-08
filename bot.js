@@ -86,10 +86,10 @@ bot.on('message', async (message) => {
                     }
                     var clearChannel = message.channel.name;
                     embedClear.setTitle("Clear Logs");
-                    embedClear.addField("Who deleted the messages?? " , message.author);
-                    embedClear.addField("Cleared: " , fetched.size) ;
-                    embedClear.addField("From: " , clearChannel);
-                    embedClear.addField("Reason: " , reason);
+                    embedClear.addField("Messages cleaner" , message.author);
+                    embedClear.addField("Cleared" , fetched.size) ;
+                    embedClear.addField("From" , clearChannel);
+                    embedClear.addField("Reason" , reason);
                     embedClear.setFooter("You can ban tiran if you want to do so :>");
                     embedClear.setColor("#fffefe");
                     embedClear.setThumbnail(user.avatarURL);
@@ -100,7 +100,7 @@ bot.on('message', async (message) => {
         clear();   
     }
     // League API
-    if(msg.startsWith(PREFIX + 'SEARCH'))
+    if(msg.startsWith(PREFIX + 'STATS'))
     {
         if(!args[0] || !args[1])
         {
@@ -118,8 +118,8 @@ bot.on('message', async (message) => {
             leagueAPI.GetUsernameAndRank(name, region)
             .then(data => {
                 embed.setTitle(data[0] + "'s STATS");
-                embed.addField("Summoner name: " , data[0]);
-                embed.addField("Rank: " , data[1]);
+                embed.addField("Summoner name" , data[0]);
+                embed.addField("Rank" , data[1]);
                 embed.setColor("#cf95f8");
                 embed.setFooter("The next baron bot???");
                 leagueAPI.GetProfileIconURL(data[0], region)
