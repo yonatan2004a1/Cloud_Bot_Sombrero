@@ -92,7 +92,7 @@ bot.on('message', async (message) => {
                     embedClear.addField("Reason" , reason);
                     embedClear.setColor("#fffefe");
                     embedClear.setTimestamp();
-                    embedClear.setFooter(" " , 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Broom_icon.svg/1200px-Broom_icon.svg.png');
+                    embedClear.setFooter("NotUniqueBroom" , 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Broom_icon.svg/1200px-Broom_icon.svg.png');
                     embedClear.setThumbnail(user.avatarURL);
                     bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(embedClear);
                 })
@@ -134,7 +134,7 @@ bot.on('message', async (message) => {
                 embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games, true); 
                 embed.setColor("#cf95f8");
                 embed.setTimestamp();
-                embed.setFooter(user.avatarURL);
+                embed.setFooter("Check out " + data[0] + "'s stats!" , user.avatarURL);
                 leagueAPI.GetProfileIconURL(data[0], region)
                .then(url => {
                 embed.setThumbnail(url); //- will be the profile icon of the summoner
