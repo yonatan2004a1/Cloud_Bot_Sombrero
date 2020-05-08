@@ -1,5 +1,6 @@
 const common = require('./common.js');
 require('./survival.js');
+const Discord = require('discord.js');
 
 const leagueAPI = common.LeagueAPI;
 const db = common.db;
@@ -44,6 +45,7 @@ bot.on('message', async (message) => {
     {
         async function clear() 
         {
+            const embedClear = new Discord.RichEmbed();
             await message.delete();
             // Checks if the user has the `Poco Loco's Staff 🤠` role
             if (!message.member.roles.find("name", "Poco Loco's Staff 🤠")) 
@@ -51,6 +53,7 @@ bot.on('message', async (message) => {
                 message.channel.send('You need to be in the \`Poco Loco\'s Staff 🤠\` to use this command.');
                 return;
             }
+            if(message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID){return}// I dont want someone to delete this channel.
             else
             {
                 if (isNaN(args[0])) // Checks if the argument is a number
@@ -72,12 +75,25 @@ bot.on('message', async (message) => {
                 message.channel.send('Please enter a reason to clear the messages. \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
-            
+
             // Deleting the messages
             message.channel.bulkDelete(fetched)
                 .then(() => {
+                    let user = message.mentions.users.first();
+                    if(!user)
+                    { 
+                        user = message.author;
+                    }
                     var clearChannel = message.channel.name;
-                    bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
+                    embedClear.setTitle("Clear Logs");
+                    embedClear.addField("Who deleted the messages?? " , message.author);
+                    embedClear.addField("Cleared: " , fetched.size) ;
+                    embedClear.addField("From: " , clearChannel);
+                    embedClear.addField("Reason: " , reason);
+                    embedClear.setFooter("You can ban tiran if you want to do so :>");
+                    embedClear.setColor("#fffefe");
+                    embedClear.setImage(user.avatarURL);
+                    bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(embedClear);
                 })
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
         }
@@ -93,6 +109,7 @@ bot.on('message', async (message) => {
         else
         {
             let name = ""
+            let embed = new Discord.RichEmbed();
             for(var i = 0; i < args.length-1; i++)
             {
                 name += args[i];
@@ -100,7 +117,13 @@ bot.on('message', async (message) => {
             let region = args[args.length-1];
             leagueAPI.GetUsernameAndRank(name, region)
             .then(data => {
-                message.channel.send(`Summoner name: ${data[0]}, Rank: ${data[1]}`);
+                embed.setTitle(data[0] + "'s STATS");
+                embed.addField("Summoner name: " , data[0]);
+                embed.addField("Rank: " , data[1]);
+                embed.setColor("#cf95f8");
+                embed.setFooter("The next baron bot???");
+                //embed.addImage(); - will be the profile icon of the summoner
+                message.channel.send(embed);
             })
             .catch(err => {
                 message.channel.send("Error: "+err);
