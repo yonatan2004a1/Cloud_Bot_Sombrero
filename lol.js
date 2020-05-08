@@ -136,8 +136,6 @@ async function GetProfileIconURL(name, region)
     })
 
 }
-GetUsernameAndRank("notuniqueuser", "eune")
-.then(console.log);
 module.exports = {
     GetUsernameAndRank,
     GetProfileIconURL

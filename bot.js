@@ -119,7 +119,8 @@ bot.on('message', async (message) => {
             .then(data => {
                 embed.setTitle(data[0] + "'s Stats");
                 embed.addField("Summoner name" , data[0]);
-                embed.addField("Rank" , data[1]);
+                embed.addField("Ranked SoloDuo" , data[1]);
+                //embed.addField("Ranked Flex 5V5" , , inline true )
                 embed.setColor("#cf95f8");
                 embed.setFooter("The next baron bot???");
                 leagueAPI.GetProfileIconURL(data[0], region)
