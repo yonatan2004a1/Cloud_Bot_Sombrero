@@ -86,13 +86,13 @@ bot.on('message', async (message) => {
                     }
                     var clearChannel = message.channel.name;
                     embedClear.setTitle("Clear Logs");
-                    embedClear.addField("Who deleted the messages?? " , message.author);
-                    embedClear.addField("Cleared: " , fetched.size) ;
-                    embedClear.addField("From: " , clearChannel);
-                    embedClear.addField("Reason: " , reason);
+                    embedClear.addField("Messages cleaner" , message.author);
+                    embedClear.addField("Cleared" , fetched.size) ;
+                    embedClear.addField("From" , clearChannel);
+                    embedClear.addField("Reason" , reason);
                     embedClear.setFooter("You can ban tiran if you want to do so :>");
                     embedClear.setColor("#fffefe");
-                    embedClear.setImage(user.avatarURL);
+                    embedClear.setThumbnail(user.avatarURL);
                     bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(embedClear);
                 })
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
@@ -100,7 +100,7 @@ bot.on('message', async (message) => {
         clear();   
     }
     // League API
-    if(msg.startsWith(PREFIX + 'SEARCH'))
+    if(msg.startsWith(PREFIX + 'STATS'))
     {
         if(!args[0] || !args[1])
         {
@@ -117,13 +117,27 @@ bot.on('message', async (message) => {
             let region = args[args.length-1];
             leagueAPI.GetUsernameAndRank(name, region)
             .then(data => {
-                embed.setTitle(data[0] + "'s STATS");
-                embed.addField("Summoner name: " , data[0]);
-                embed.addField("Rank: " , data[1]);
+                let ranks = data[1];
+                let user = message.mentions.users.first();
+                if(!user)
+                { 
+                    user = message.author;
+                }
+                embed.setTitle(data[0] + "'s Stats");
+                embed.addField("Summoner level" , data[2]);
+                embed.addField("Solo/Duo" , ranks[0].rank +'\n'+ranks[0].games, true);
+                embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games, true); 
                 embed.setColor("#cf95f8");
-                embed.setFooter("The next baron bot???");
-                //embed.addImage(); - will be the profile icon of the summoner
+                embed.setTimestamp();
+                embed.setFooter("The next baron bot???" , user.avatarURL);
+                leagueAPI.GetProfileIconURL(data[0], region)
+               .then(url => {
+                embed.setThumbnail(url); //- will be the profile icon of the summoner
                 message.channel.send(embed);
+            })
+               
+                //embed.addImage(); - will be the profile icon of the summoner
+
             })
             .catch(err => {
                 message.channel.send("Error: "+err);

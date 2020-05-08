@@ -1,7 +1,15 @@
 const fetch = require("node-fetch");
 const apiDir = ".api.riotgames.com/lol/" //we will always use this url part (there are stuff like /tft/ but we dont work on it)
-
 // ====== PRIVATE FUNCTIONS, WILL NOT BE EXPORTED ======
+async function GetLatestDDragonVer()
+{
+    let url = 'https://ddragon.leagueoflegends.com/api/versions.json';
+    return await fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        return data[0];
+    })
+}
 async function GetID(name, region) 
 {
     let endcodedUri = encodeURI(name);
@@ -10,29 +18,75 @@ async function GetID(name, region)
         await fetch(url)
         .then(res => {
             if(!res.ok) {
-                reject("Summoner not found") //rejects when ok is false, meaning when fetch encounters an error
+                reject(res.status) //rejects when ok is false, meaning when fetch encounters an error
             }
             return res.json();
             })
         .then((data) => {
-            resolve([data.id, data.name]); //resovles the data in an array of the id (0) and name (1)
+            resolve([data.id, data.name, data.profileIconId, data.summonerLevel]); //resovles the data in an array of the id (0) and name (1)
         })
     })
 }
-async function GetRankAndTier(id, region)
+async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] AND FLEX AS [1] (UNLIKE RIOT)
 {
     let url = `https://${region + apiDir}league/v4/entries/by-summoner/${id + process.env.RIOT_GAMES_API_KEY}`; //crafts the url for rank by id
     return await fetch(url)
     .then(res => res.json())
     .then(data => {
-        if(data[0] == undefined) //unranked returns an empty array
+        if(data[0] == undefined)
         {
-            return "Unranked"; 
+            let obj = {
+                rank: "Unranked",
+                games: ""
+            };
+            return [obj, obj];
         }
-        let place = 0;
-        if(data[0].queueType != 'RANKED_SOLO_5x5') //sometimes the api returns solo as [0] and sometimes [1], so we make sure its the right array
-            place = 1;
-        return data[place].tier + ' ' + data[place].rank;
+        let ranks = [];
+        if(data.length == 1)
+        {
+            let obj = {
+                rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
+                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
+            };
+            let obj1 = {
+                rank: "Unranked",
+                games: ""
+            };
+            if(data[0].queueType == "RANKED_SOLO_5x5")
+            {
+                ranks.push(obj);
+                ranks.push(obj1);
+            }
+            else
+            {
+                ranks.push(obj1);
+                ranks.push(obj);
+            }
+            return ranks;
+        }
+        else
+        {
+            let obj = {
+                rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
+                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
+            }
+            let obj1 = {
+                rank: data[1].tier + ' ' +data[1].rank + ', ' + data[1].leaguePoints + 'LP',
+                games: 'Wins: '+data[1].wins + ' Losses: ' + data[1].losses
+            }
+            let ranks = [];
+            if(data[0].queueType == "RANKED_SOLO_5x5")
+            {
+                ranks.push(obj);
+                ranks.push(obj1);
+            }
+            else
+            {
+                ranks.push(obj1);
+                ranks.push(obj);
+            }
+            return ranks;
+        }
     })
 } 
 function GetRegion(region) 
@@ -69,10 +123,9 @@ async function GetUsernameAndRank(name, region) {
             reject("Region not found");
         GetID(name, region)
         .then(data => {
-            let username = data[1];
              GetRankAndTier(data[0], region)
-            .then(data => {
-                resolve([username, data]);
+            .then(ranks => {
+                resolve([data[1], ranks, data[3]]);
             })
         })
         .catch(err => {
@@ -80,6 +133,17 @@ async function GetUsernameAndRank(name, region) {
         })
     })
 }
+async function GetProfileIconURL(name, region)
+{
+    region = GetRegion(region);
+    return await GetID(name, region)
+    .then(async(data) => {
+        return await GetLatestDDragonVer()
+        .then(ver => `http://ddragon.leagueoflegends.com/cdn/${ver}/img/profileicon/${data[2]}.png`)
+    })
+
+}
 module.exports = {
-    GetUsernameAndRank
+    GetUsernameAndRank,
+    GetProfileIconURL
 }
