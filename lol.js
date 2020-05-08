@@ -53,8 +53,11 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
             return [obj, obj];
         }
         let games = data[0].wins + data[0].losses;
+        let games1 = data[1].wins + data[1].losses;
         var winRate = (data[0].wins/games) * 100;
-        winRate.toFixed(0);//it makes the var => int
+        var winRate1 = (data[1].wins/games1) * 100;
+        await winRate.toFixed(0);//it makes the var => int
+        await winRate1.toFixed(0);
         let ranks = [];
         if(data.length == 1)
         {
@@ -89,7 +92,7 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
             let obj1 = {
                 rank: data[1].tier + ' ' +data[1].rank + ', ' + data[1].leaguePoints + 'LP',
                 games: 'Wins: '+data[1].wins + ' Losses: ' + data[1].losses,
-                WinRate: 'Win Ratio: ' + winRate + '%'
+                WinRate: 'Win Ratio: ' + winRate1 + '%'
             }
             let ranks = [];
             if(data[0].queueType == "RANKED_SOLO_5x5")
