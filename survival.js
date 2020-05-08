@@ -135,7 +135,6 @@ function processPollResults(voteCollector, pollOptions, userVotes, pollTally)
             }
         });
         voteCollector.on('end', collected => {
-            console.log("Collected" + collected.size + "vote.");
             resolve(collected);
         })
     });
