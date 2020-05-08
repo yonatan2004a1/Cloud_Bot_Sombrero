@@ -109,7 +109,7 @@ bot.on('message', async (message) => {
         }
         if(!args[0] || !args[1])
         {
-            message.channel.send("The search command allows you to search a league account\nsyntax: \`" + PREFIX + 'stats <name> <region>\`');
+            message.channel.send("The stats command allows you to search a league account\nsyntax: \`" + PREFIX + 'stats <name> <region>\`');
         }
         else
         {
