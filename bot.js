@@ -102,6 +102,10 @@ bot.on('message', async (message) => {
     // League API
     if(msg.startsWith(PREFIX + 'STATS'))
     {
+        if(message.channel.id != process.env.LEAGUE_ACTIVE_CHAT_ID && message.channel.id != process.env.BOT_COMMAND_ACTIVE_CHAT_ID)
+        {
+            return;
+        }
         if(!args[0] || !args[1])
         {
             message.channel.send("The search command allows you to search a league account\nsyntax: \`" + PREFIX + 'search <name> <region>\`');
@@ -129,7 +133,7 @@ bot.on('message', async (message) => {
                 embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games, true); 
                 embed.setColor("#cf95f8");
                 embed.setTimestamp();
-                embed.setFooter("The next baron bot???", user.avatarURL);
+                embed.setFooter("The next baron bot???" , user.avatarURL);
                 leagueAPI.GetProfileIconURL(data[0], region)
                .then(url => {
                 embed.setThumbnail(url); //- will be the profile icon of the summoner
