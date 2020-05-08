@@ -86,7 +86,7 @@ bot.on('message', async (message) => {
                 if(winners.length === 1)
                 {
                     embedVi.setTitle(winners[0] + ", you're the one that leaving the island! 🌴");
-                    embedVi.addFooter("Want to play another game of survival? type *survival in chat." , "https://hotemoji.com/images/dl/c/palm-tree-emoji-by-twitter.png");
+                    embedVi.setFooter("Want to play another game of survival? type *survival in chat." , "https://hotemoji.com/images/dl/c/palm-tree-emoji-by-twitter.png");
                     embedVi.setTimestamp();
                     message.channel.send(embedVi);
                 }
