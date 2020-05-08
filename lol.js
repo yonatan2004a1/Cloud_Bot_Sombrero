@@ -35,7 +35,10 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
     .then(data => {
         if(data[0] == undefined)
         {
-            return ["Unranked", "Unranked"]; 
+            let obj = {
+                rank: "Unranked"
+            };
+            return [obj, obj];
         }
         let ranks = [];
         if(data.length == 1)
@@ -44,14 +47,17 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
                 rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
                 games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
             };
+            let obj1 = {
+                rank: "Unranked"
+            };
             if(data[0].queueType == "RANKED_SOLO_5x5")
             {
                 ranks.push(obj);
-                ranks.push("Unranked");
+                ranks.push(obj1);
             }
             else
             {
-                ranks.push("Unranked");
+                ranks.push(obj1);
                 ranks.push(obj);
             }
             return ranks;
