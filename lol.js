@@ -17,8 +17,19 @@ async function GetID(name, region)
         return await new Promise(async(resolve, reject) => { //makes a new promise with resolve and reject
         await fetch(url)
         .then(res => {
-            if(!res.ok) {
-                reject(res.status) //rejects when ok is false, meaning when fetch encounters an error
+            if(!res.ok) { //rejects when ok is false, meaning when fetch encounters an error
+                switch(res.status)
+                {
+                    case 404:
+                        reject("Summoner not found");
+                        break;
+                    case 403:
+                        reject("Key expired msg NotUnique lol");
+                        break;
+                    default:
+                        reject("Unknown");
+                        break;
+                } 
             }
             return res.json();
             })
