@@ -23,7 +23,7 @@ async function GetID(name, region)
             return res.json();
             })
         .then((data) => {
-            resolve([data.id, data.name, data.profileIconId]); //resovles the data in an array of the id (0) and name (1)
+            resolve([data.id, data.name, data.profileIconId, data.summonerLevel]); //resovles the data in an array of the id (0) and name (1)
         })
     })
 }
@@ -36,7 +36,8 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
         if(data[0] == undefined)
         {
             let obj = {
-                rank: "Unranked"
+                rank: "Unranked",
+                games: ""
             };
             return [obj, obj];
         }
@@ -48,7 +49,8 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
                 games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
             };
             let obj1 = {
-                rank: "Unranked"
+                rank: "Unranked",
+                games: ""
             };
             if(data[0].queueType == "RANKED_SOLO_5x5")
             {
@@ -121,10 +123,9 @@ async function GetUsernameAndRank(name, region) {
             reject("Region not found");
         GetID(name, region)
         .then(data => {
-            let username = data[1];
              GetRankAndTier(data[0], region)
-            .then(data => {
-                resolve([username, data]);
+            .then(ranks => {
+                resolve([data[1], ranks, data[3]]);
             })
         })
         .catch(err => {
