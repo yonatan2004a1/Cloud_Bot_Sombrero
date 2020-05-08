@@ -117,7 +117,7 @@ bot.on('message', async (message) => {
             let region = args[args.length-1];
             leagueAPI.GetUsernameAndRank(name, region)
             .then(data => {
-                embed.setTitle(data[0] + "'s STATS");
+                embed.setTitle(data[0] + "'s Stats");
                 embed.addField("Summoner name" , data[0]);
                 embed.addField("Rank" , data[1]);
                 embed.setColor("#cf95f8");
