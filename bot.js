@@ -130,8 +130,8 @@ bot.on('message', async (message) => {
                 }
                 embed.setTitle(data[0] + "'s Stats");
                 embed.addField("Summoner level" , data[2]);
-                embed.addField("Solo/Duo" , ranks[0].rank +'\n'+ranks[0].games, true);
-                embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games, true); 
+                embed.addField("Solo/Duo" , ranks[0].rank +'\n'+ranks[0].games, false);
+                embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games, false); 
                 embed.setColor("#cf95f8");
                 embed.setTimestamp();
                 embed.setFooter("Check out " + data[0] + "'s stats!" , user.avatarURL);
