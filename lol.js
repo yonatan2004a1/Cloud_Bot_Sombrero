@@ -36,11 +36,15 @@ async function GetRankAndTier(id, region)
     .then(data => {
         if(data[0] == undefined) //unranked returns an empty array
         {
-            return "Unranked"; 
+            return ["Unranked", "Unranked"]; 
         }
-        let place = 0;
-        if(data[0].queueType != 'RANKED_SOLO_5x5') //sometimes the api returns solo as [0] and sometimes [1], so we make sure its the right array
-            place = 1;
+        let ranks = []
+        for(var i = 0; i < data.length; i++)
+        {
+            
+        }
+        if(data[0].queueType != 'RANKED_SOLO_5x5') 
+        place = 1;
         return data[place].tier + ' ' + data[place].rank;
     })
 } 
