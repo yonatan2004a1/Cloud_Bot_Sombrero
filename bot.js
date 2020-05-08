@@ -72,7 +72,7 @@ bot.on('message', async (message) => {
             
             if (!reason)
             {
-                message.channel.send('Please enter a reason to clear the messages. \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
+                message.channel.send('Please enter a reason to clear the messages.\nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
 
@@ -109,7 +109,7 @@ bot.on('message', async (message) => {
         }
         if(!args[0] || !args[1])
         {
-            message.channel.send("The search command allows you to search a league account\nsyntax: \`" + PREFIX + 'search <name> <region>\`');
+            message.channel.send("The stats command allows you to search statistics of a League of Legends account.\nUsage: \`" + PREFIX + 'stats <name> <region>\`');
         }
         else
         {
@@ -128,10 +128,10 @@ bot.on('message', async (message) => {
                 { 
                     user = message.author;
                 }
-                embed.setTitle(data[0] + "'s Stats");
-                embed.addField("Summoner level" , data[2]);
-                embed.addField("Solo/Duo" , ranks[0].rank +'\n'+ranks[0].games, true);
-                embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games, true); 
+                embed.setTitle(data[0] + "'s stats");
+                embed.addField("Level" , data[2]);
+                embed.addField("Solo/Duo" , ranks[0].rank +'\n'+ranks[0].games +'\n'+ranks[0].winRate , true);
+                embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games +'\n'+ranks[1].winRate , true); 
                 embed.setColor("#cf95f8");
                 embed.setTimestamp();
                 embed.setFooter("Check out " + data[0] + "'s stats!" , user.avatarURL);

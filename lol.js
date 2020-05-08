@@ -24,7 +24,7 @@ async function GetID(name, region)
                         reject("Summoner not found");
                         break;
                     case 403:
-                        reject("Key expired msg NotUnique lol");
+                        reject("Key expired msg @NotUnique lol");
                         break;
                     default:
                         reject("Unknown");
@@ -48,20 +48,26 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
         {
             let obj = {
                 rank: "Unranked",
-                games: ""
+                games: "",
+                winRate: ""
             };
             return [obj, obj];
         }
+
         let ranks = [];
         if(data.length == 1)
         {
+            let games = data[0].wins + data[0].losses; // total played games
+            let winRate = ((data[0].wins/games) * 100).toFixed(0); // win rate
             let obj = {
                 rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
-                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
+                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses,
+                winRate: `Win Ratio: ${winRate}%`
             };
             let obj1 = {
                 rank: "Unranked",
-                games: ""
+                games: "",
+                winRate: ""
             };
             if(data[0].queueType == "RANKED_SOLO_5x5")
             {
@@ -77,13 +83,19 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
         }
         else
         {
+            let games = data[0].wins + data[0].losses; //solo/duo total played games
+            let games1 = data[1].wins + data[1].losses; //flex 5v5 total played games
+            let winRate = ((data[0].wins/games) * 100).toFixed(0); //solo/duo win rate
+            let winRate1 = ((data[1].wins/games1) * 100).toFixed(0); //flex 5v5 win rate
             let obj = {
                 rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
-                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
+                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses,
+                winRate: `Win Ratio: ${winRate}%`
             }
             let obj1 = {
                 rank: data[1].tier + ' ' +data[1].rank + ', ' + data[1].leaguePoints + 'LP',
-                games: 'Wins: '+data[1].wins + ' Losses: ' + data[1].losses
+                games: 'Wins: '+data[1].wins + ' Losses: ' + data[1].losses,
+                winRate: `Win Ratio: ${winRate1}%`
             }
             let ranks = [];
             if(data[0].queueType == "RANKED_SOLO_5x5")
@@ -100,21 +112,41 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
         }
     })
 } 
-function GetRegion(region) 
+function GetRegion(region, mmr) 
 {
-    switch(region = region.toLowerCase())
+    if(mmr)
     {
-        case "eun1":
-        case "eune":
-            return "EUN1";
-        case "euw":
-        case "euw1":
-            return "EUW1";
-        case "na":
-        case "na1":
-            return "NA1";
-        default:
-            return null; //if the function returns null the inputted region is unsupported (no reason to) or badly inputted
+        switch(region = region.toLowerCase())
+        {
+            case "eun1":
+            case "eune":
+                return "eune";
+            case "euw":
+            case "euw1":
+                return "euw";
+            case "na":
+            case "na1":
+                return "na";
+            default:
+                return null;
+        }
+    }
+    else
+    {
+        switch(region = region.toLowerCase())
+        {
+            case "eun1":
+            case "eune":
+                return "EUN1";
+            case "euw":
+            case "euw1":
+                return "EUW1";
+            case "na":
+            case "na1":
+                return "NA1";
+            default:
+                return null; //if the function returns null the inputted region is unsupported (no reason to) or badly inputted
+        }
     }
 }
 // ====== PUBLIC FUNCTIONS, AVILABLE TO USE ======
@@ -129,7 +161,7 @@ function GetRegion(region)
  */
 async function GetUsernameAndRank(name, region) {
     return await new Promise((resolve, reject) => {
-        region = GetRegion(region);
+        region = GetRegion(region, false);
         if(region == null)
             reject("Region not found");
         GetID(name, region)
@@ -144,6 +176,13 @@ async function GetUsernameAndRank(name, region) {
         })
     })
 }
+/**
+ * Input: user inputted name and region
+ * 
+ * Output: full URL for their icon image
+ * @param {string} name 
+ * @param {string} region 
+ */
 async function GetProfileIconURL(name, region)
 {
     region = GetRegion(region);
