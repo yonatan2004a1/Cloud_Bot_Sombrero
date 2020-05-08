@@ -24,7 +24,7 @@ async function GetID(name, region)
                         reject("Summoner not found");
                         break;
                     case 403:
-                        reject("Key expired msg NotUnique lol");
+                        reject("Key expired msg @NotUnique lol");
                         break;
                     default:
                         reject("Unknown");
@@ -100,21 +100,41 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
         }
     })
 } 
-function GetRegion(region) 
+function GetRegion(region, mmr) 
 {
-    switch(region = region.toLowerCase())
+    if(mmr)
     {
-        case "eun1":
-        case "eune":
-            return "EUN1";
-        case "euw":
-        case "euw1":
-            return "EUW1";
-        case "na":
-        case "na1":
-            return "NA1";
-        default:
-            return null; //if the function returns null the inputted region is unsupported (no reason to) or badly inputted
+        switch(region = region.toLowerCase())
+        {
+            case "eun1":
+            case "eune":
+                return "eune";
+            case "euw":
+            case "euw1":
+                return "euw";
+            case "na":
+            case "na1":
+                return "na";
+            default:
+                return null;
+        }
+    }
+    else
+    {
+        switch(region = region.toLowerCase())
+        {
+            case "eun1":
+            case "eune":
+                return "EUN1";
+            case "euw":
+            case "euw1":
+                return "EUW1";
+            case "na":
+            case "na1":
+                return "NA1";
+            default:
+                return null; //if the function returns null the inputted region is unsupported (no reason to) or badly inputted
+        }
     }
 }
 // ====== PUBLIC FUNCTIONS, AVILABLE TO USE ======
@@ -129,7 +149,7 @@ function GetRegion(region)
  */
 async function GetUsernameAndRank(name, region) {
     return await new Promise((resolve, reject) => {
-        region = GetRegion(region);
+        region = GetRegion(region, false);
         if(region == null)
             reject("Region not found");
         GetID(name, region)
@@ -144,6 +164,13 @@ async function GetUsernameAndRank(name, region) {
         })
     })
 }
+/**
+ * Input: user inputted name and region
+ * 
+ * Output: full URL for their icon image
+ * @param {string} name 
+ * @param {string} region 
+ */
 async function GetProfileIconURL(name, region)
 {
     region = GetRegion(region);
