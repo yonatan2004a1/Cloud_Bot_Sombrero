@@ -52,13 +52,12 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
             };
             return [obj, obj];
         }
-        let games = data[0].wins + data[0].losses; //solo/duo total played games
-        let games1 = data[1].wins + data[1].losses; //flex 5v5 total played games
-        var winRate = ((data[0].wins/games) * 100).toFixed(0); //solo/duo win rate
-        var winRate1 = ((data[1].wins/games1) * 100).toFixed(0); //flex 5v5 win rate
+
         let ranks = [];
         if(data.length == 1)
         {
+            let games = data[0].wins + data[0].losses; // total played games
+            let winRate = ((data[0].wins/games) * 100).toFixed(0); // win rate
             let obj = {
                 rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
                 games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses,
@@ -82,6 +81,10 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
         }
         else
         {
+            let games = data[0].wins + data[0].losses; //solo/duo total played games
+            let games1 = data[1].wins + data[1].losses; //flex 5v5 total played games
+            let winRate = ((data[0].wins/games) * 100).toFixed(0); //solo/duo win rate
+            let winRate1 = ((data[1].wins/games1) * 100).toFixed(0); //flex 5v5 win rate
             let obj = {
                 rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
                 games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses,
