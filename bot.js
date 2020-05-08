@@ -91,7 +91,7 @@ bot.on('message', async (message) => {
                     embedClear.addField("From" , clearChannel);
                     embedClear.addField("Reason" , reason);
                     embedClear.setTimestamp();
-                    embedClear.setFooter('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Broom_icon.svg/1200px-Broom_icon.svg.png');
+                    embedClear.setFooter("" , 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Broom_icon.svg/1200px-Broom_icon.svg.png');
                     embedClear.setColor("#fffefe");
                     embedClear.setThumbnail(user.avatarURL);
                     bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(embedClear);
