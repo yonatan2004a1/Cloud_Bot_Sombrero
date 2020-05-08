@@ -11,7 +11,7 @@ async function GetID(name, region)
         await fetch(url)
         .then(res => {
             if(!res.ok) {
-                reject("Summoner not found") //rejects when ok is false, meaning when fetch encounters an error
+                reject(res.status) //rejects when ok is false, meaning when fetch encounters an error
             }
             return res.json();
             })
