@@ -33,7 +33,7 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
     return await fetch(url)
     .then(res => res.json())
     .then(data => {
-        if(data[0] == undefined) //unranked returns an empty array
+        if(data[0] == undefined)
         {
             return ["Unranked", "Unranked"]; 
         }
