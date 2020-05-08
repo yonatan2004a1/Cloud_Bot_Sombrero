@@ -124,7 +124,7 @@ bot.on('message', async (message) => {
                 embed.setFooter("The next baron bot???");
                 leagueAPI.GetProfileIconURL(data[0], region)
                .then(url => {
-                embed.setImage(url); //- will be the profile icon of the summoner
+                embed.setThumbnail(url); //- will be the profile icon of the summoner
                 message.channel.send(embed);
             })
                
