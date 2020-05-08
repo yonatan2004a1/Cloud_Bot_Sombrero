@@ -116,7 +116,6 @@ bot.on('message', async (message) => {
             }
             let region = args[args.length-1];
             leagueAPI.GetUsernameAndRank(name, region)
-
             .then(data => {
                 embed.setTitle(data[0] + "'s STATS");
                 embed.addField("Summoner name: " , data[0]);
@@ -124,10 +123,13 @@ bot.on('message', async (message) => {
                 embed.setColor("#cf95f8");
                 embed.setFooter("The next baron bot???");
                 leagueAPI.GetProfileIconURL(data[0], region)
-                .then(url => {
-                    embed.setImage(url); //- will be the profile icon of the summoner
-                    message.channel.send(embed);
-                })
+               .then(url => {
+                embed.setImage(url); //- will be the profile icon of the summoner
+                message.channel.send(embed);
+            })
+               
+                //embed.addImage(); - will be the profile icon of the summoner
+
             })
             .catch(err => {
                 message.channel.send("Error: "+err);
