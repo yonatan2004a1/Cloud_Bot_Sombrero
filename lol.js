@@ -114,7 +114,7 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
 } 
 function GetRegion(region, mmr) 
 {
-    if(mmr)
+    if(mmr) //mmr regions use different url
     {
         switch(region = region.toLowerCase())
         {
