@@ -52,12 +52,15 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
             };
             return [obj, obj];
         }
+        let games = data[0].wins + data[0].losses;
+        var winRate = (data[0].wins/games) * 100;
         let ranks = [];
         if(data.length == 1)
         {
             let obj = {
                 rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
-                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
+                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses,
+                WinRate: 'Win Ratio: ' + winRate + '%'
             };
             let obj1 = {
                 rank: "Unranked",
@@ -79,11 +82,13 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
         {
             let obj = {
                 rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
-                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
+                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses,
+                WinRate: 'Win Ratio: ' + winRate + '%'
             }
             let obj1 = {
                 rank: data[1].tier + ' ' +data[1].rank + ', ' + data[1].leaguePoints + 'LP',
-                games: 'Wins: '+data[1].wins + ' Losses: ' + data[1].losses
+                games: 'Wins: '+data[1].wins + ' Losses: ' + data[1].losses,
+                WinRate: 'Win Ratio: ' + winRate + '%'
             }
             let ranks = [];
             if(data[0].queueType == "RANKED_SOLO_5x5")
