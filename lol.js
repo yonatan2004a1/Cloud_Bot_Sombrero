@@ -17,8 +17,19 @@ async function GetID(name, region)
         return await new Promise(async(resolve, reject) => { //makes a new promise with resolve and reject
         await fetch(url)
         .then(res => {
-            if(!res.ok) {
-                reject(res.status) //rejects when ok is false, meaning when fetch encounters an error
+            if(!res.ok) { //rejects when ok is false, meaning when fetch encounters an error
+                switch(res.status)
+                {
+                    case 404:
+                        reject("Summoner not found");
+                        break;
+                    case 403:
+                        reject("Key expired msg NotUnique lol");
+                        break;
+                    default:
+                        reject("Unknown");
+                        break;
+                } 
             }
             return res.json();
             })
@@ -41,12 +52,19 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
             };
             return [obj, obj];
         }
+        let games = data[0].wins + data[0].losses; //soloQ WR
+        let games1 = data[1].wins + data[1].losses; //flex WR
+        var winRate = (data[0].wins/games) * 100; //soloQ WR
+        var winRate1 = (data[1].wins/games1) * 100; //flex WR
+        FixedWinRate = winRate.toFixed(0);//it makes the var => int
+        FixedWinRate1 = winRate1.toFixed(0);
         let ranks = [];
         if(data.length == 1)
         {
             let obj = {
                 rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
-                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
+                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses,
+                WinRate: `Win Ratio: ${FixedWinRate}%`
             };
             let obj1 = {
                 rank: "Unranked",
@@ -68,11 +86,13 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
         {
             let obj = {
                 rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
-                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
+                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses,
+                WinRate: `Win Ratio: ${FixedWinRate}%`
             }
             let obj1 = {
                 rank: data[1].tier + ' ' +data[1].rank + ', ' + data[1].leaguePoints + 'LP',
-                games: 'Wins: '+data[1].wins + ' Losses: ' + data[1].losses
+                games: 'Wins: '+data[1].wins + ' Losses: ' + data[1].losses,
+                WinRate: `Win Ratio: ${FixedWinRate1}%`
             }
             let ranks = [];
             if(data[0].queueType == "RANKED_SOLO_5x5")
