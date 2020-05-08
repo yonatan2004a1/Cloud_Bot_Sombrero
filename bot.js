@@ -102,6 +102,10 @@ bot.on('message', async (message) => {
     // League API
     if(msg.startsWith(PREFIX + 'STATS'))
     {
+        if(message.channel.id != process.env.LEAGUE_ACTIVE_CHAT_ID)
+        {
+            return;
+        }
         if(!args[0] || !args[1])
         {
             message.channel.send("The search command allows you to search a league account\nsyntax: \`" + PREFIX + 'search <name> <region>\`');
