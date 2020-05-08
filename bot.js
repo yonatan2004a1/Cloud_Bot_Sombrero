@@ -72,7 +72,7 @@ bot.on('message', async (message) => {
             
             if (!reason)
             {
-                message.channel.send('Please enter a reason to clear the messages. \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
+                message.channel.send('Please enter a reason to clear the messages.\nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
 
@@ -90,8 +90,9 @@ bot.on('message', async (message) => {
                     embedClear.addField("Cleared" , fetched.size) ;
                     embedClear.addField("From" , clearChannel);
                     embedClear.addField("Reason" , reason);
-                    embedClear.setFooter("You can ban tiran if you want to do so :>");
                     embedClear.setColor("#fffefe");
+                    embedClear.setTimestamp();
+                    embedClear.setFooter("NotUniqueBroom" , 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Broom_icon.svg/1200px-Broom_icon.svg.png');
                     embedClear.setThumbnail(user.avatarURL);
                     bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(embedClear);
                 })
@@ -102,13 +103,13 @@ bot.on('message', async (message) => {
     // League API
     if(msg.startsWith(PREFIX + 'STATS'))
     {
-        if(message.channel.id != process.env.LEAGUE_ACTIVE_CHAT_ID && message.channel.id != process.env.BOT_COMMAND_ACTIVE_CHAT_ID)
+        if(message.channel.id != process.env.LEAGUE_ACTIVE_CHAT_ID && message.channel.id != process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
         {
             return;
         }
         if(!args[0] || !args[1])
         {
-            message.channel.send("The search command allows you to search a league account\nsyntax: \`" + PREFIX + 'search <name> <region>\`');
+            message.channel.send("The stats command allows you to search statistics of a League of Legends account.\nUsage: \`" + PREFIX + 'stats <name> <region>\`');
         }
         else
         {
@@ -129,11 +130,11 @@ bot.on('message', async (message) => {
                 }
                 embed.setTitle(data[0] + "'s Stats");
                 embed.addField("Summoner level" , data[2]);
-                embed.addField("Solo/Duo" , ranks[0].rank +'\n'+ranks[0].games, true);
-                embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games, true); 
+                embed.addField("Solo/Duo" , ranks[0].rank +'\n'+ranks[0].games +'\n'+ranks[0].WinRate , false);
+                embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games +'\n'+ranks[1].WinRate , false); 
                 embed.setColor("#cf95f8");
                 embed.setTimestamp();
-                embed.setFooter("The next baron bot???" , user.avatarURL);
+                embed.setFooter("Check out " + data[0] + "'s stats!" , user.avatarURL);
                 leagueAPI.GetProfileIconURL(data[0], region)
                .then(url => {
                 embed.setThumbnail(url); //- will be the profile icon of the summoner
