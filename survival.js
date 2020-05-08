@@ -53,7 +53,8 @@ bot.on('message', async (message) => {
             embed.setTitle("Survival participants: ");
             embed.setDescription(pollOptions.join("\n"));
             embed.setImage('https://upload.wikimedia.org/wikipedia/he/thumb/f/fd/%D7%94%D7%99%D7%A9%D7%A8%D7%93%D7%95%D7%AA.png/220px-%D7%94%D7%99%D7%A9%D7%A8%D7%93%D7%95%D7%AA.png');
-            embed.setFooter('Please vote Tiran :>');
+            embed.setFooter("Please vote Tiran :>");
+            embed.setTimestamp();
             let confirm = await message.channel.send(embed);
             await confirm.react("✔️");
             await confirm.react("✖️");
@@ -84,12 +85,14 @@ bot.on('message', async (message) => {
 
                 if(winners.length === 1)
                 {
-                    embedVi.addField(winners[0] + ", you're the one that leaving the island! 🌴", ` (askaka pls change it i dont have an idea for it) `)
+                    embedVi.setTitle(winners[0] + ", you're the one that leaving the island!");
+                    embedVi.setFooter("Want to play another game of survival? type *survival in chat." , "https://hotemoji.com/images/dl/c/palm-tree-emoji-by-twitter.png");
+                    embedVi.setTimestamp();
                     message.channel.send(embedVi);
                 }
                 else
                 {
-                    embedVi.addField("We have a draw!" , `Try one more game :>`)
+                    embedVi.addField("We have a draw!" , "Try one more game :>");
                     message.channel.send(embedVi);
 
                 }
@@ -132,7 +135,6 @@ function processPollResults(voteCollector, pollOptions, userVotes, pollTally)
             }
         });
         voteCollector.on('end', collected => {
-            console.log("Collected" + collected.size + "vote.");
             resolve(collected);
         })
     });
