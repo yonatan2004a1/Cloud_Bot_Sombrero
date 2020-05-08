@@ -27,7 +27,7 @@ async function GetID(name, region)
         })
     })
 }
-async function GetRankAndTier(id, region)
+async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] AND FLEX AS [1] (UNLIKE RIOT)
 {
     let url = `https://${region + apiDir}league/v4/entries/by-summoner/${id + process.env.RIOT_GAMES_API_KEY}`; //crafts the url for rank by id
     return await fetch(url)
@@ -37,14 +37,48 @@ async function GetRankAndTier(id, region)
         {
             return ["Unranked", "Unranked"]; 
         }
-        let ranks = []
-        for(var i = 0; i < data.length; i++)
+        let ranks = [];
+        if(data.length == 1)
         {
-            
+            let obj = {
+                rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
+                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
+            };
+            if(data[0].queueType == "RANKED_SOLO_5x5")
+            {
+                ranks.push(obj);
+                ranks.push("Unranked");
+            }
+            else
+            {
+                ranks.push("Unranked");
+                ranks.push(obj);
+            }
+            return ranks;
         }
-        if(data[0].queueType != 'RANKED_SOLO_5x5') 
-        place = 1;
-        return data[place].tier + ' ' + data[place].rank;
+        else
+        {
+            let obj = {
+                rank: data[0].tier + ' ' +data[0].rank + ', ' + data[0].leaguePoints + 'LP',
+                games: 'Wins: '+data[0].wins + ' Losses: ' + data[0].losses
+            }
+            let obj1 = {
+                rank: data[1].tier + ' ' +data[1].rank + ', ' + data[1].leaguePoints + 'LP',
+                games: 'Wins: '+data[1].wins + ' Losses: ' + data[1].losses
+            }
+            let ranks = [];
+            if(data[0].queueType == "RANKED_SOLO_5x5")
+            {
+                ranks.push(obj);
+                ranks.push(obj1);
+            }
+            else
+            {
+                ranks.push(obj1);
+                ranks.push(obj);
+            }
+            return ranks;
+        }
     })
 } 
 function GetRegion(region) 
@@ -102,6 +136,8 @@ async function GetProfileIconURL(name, region)
     })
 
 }
+GetUsernameAndRank("notuniqueuser", "eune")
+.then(console.log);
 module.exports = {
     GetUsernameAndRank,
     GetProfileIconURL
