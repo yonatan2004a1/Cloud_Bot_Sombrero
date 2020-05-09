@@ -1,12 +1,14 @@
 const common = require('./common.js');
 require('./survival.js');
-require('./lol.js');
+const Discord = require('discord.js');
 
+const leagueAPI = common.LeagueAPI;
 const db = common.db;
 const bot = common.bot;
 const PREFIX = common.PREFIX;
 
 // ==== Event registeration ================================================
+
 
 bot.on('message', async (message) => {
     var sender = message.author; // The user who sent the message.
@@ -41,15 +43,17 @@ bot.on('message', async (message) => {
     // See https://www.youtube.com/watch?v=Zpxyio10Kj0
     if (msg.startsWith(PREFIX + 'CLEAR')) 
     {
-        async function clear() {
-            message.delete();
-
+        async function clear() 
+        {
+            const embedClear = new Discord.RichEmbed();
+            await message.delete();
             // Checks if the user has the `Poco Loco's Staff 🤠` role
             if (!message.member.roles.find("name", "Poco Loco's Staff 🤠")) 
             {
                 message.channel.send('You need to be in the \`Poco Loco\'s Staff 🤠\` to use this command.');
                 return;
             }
+            if(message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID){return}// I dont want someone to delete this channel.
             else
             {
                 if (isNaN(args[0])) // Checks if the argument is a number
@@ -61,29 +65,93 @@ bot.on('message', async (message) => {
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
             var reason = "";
-            for (let i = 1; i < args.length; i++)
+            for(let i = 1; i < args.length; i++)
             {
                 reason += args[i] + " ";
             }
-
+            
             if (!reason)
             {
-                message.channel.send('Please enter a reason to clear the messages. \nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
+                message.channel.send('Please enter a reason to clear the messages.\nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
                 return;
             }
-            
+
             // Deleting the messages
             message.channel.bulkDelete(fetched)
+                .then(() => {
+                    let user = message.mentions.users.first();
+                    if(!user)
+                    { 
+                        user = message.author;
+                    }
+                    var clearChannel = message.channel.name;
+                    embedClear.setTitle("Clear Logs");
+                    embedClear.addField("Messages cleaner" , message.author);
+                    embedClear.addField("Cleared" , fetched.size) ;
+                    embedClear.addField("From" , clearChannel);
+                    embedClear.addField("Reason" , reason);
+                    embedClear.setColor("#fffefe");
+                    embedClear.setTimestamp();
+                    embedClear.setFooter("NotUniqueBroom" , 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Broom_icon.svg/1200px-Broom_icon.svg.png');
+                    embedClear.setThumbnail(user.avatarURL);
+                    bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(embedClear);
+                })
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
-            
-            if (!error) 
-            {
-                var clearChannel = message.channel.name;
-                bot.channels.get(process.env.CLEARLOG_ACTIVE_CHAT_ID).send(message.author.toString() + '\n**Deleted:** ' + fetched.size + ' messages \n**From:** ' + clearChannel + ' text channel \n**Reason:** ' + reason);
-            }
         }
-        clear(); 
+        clear();   
     }
+    // League API
+    if(msg.startsWith(PREFIX + 'STATS'))
+    {
+        if(message.channel.id != process.env.LEAGUE_ACTIVE_CHAT_ID && message.channel.id != process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
+        {
+            return;
+        }
+        if(!args[0] || !args[1])
+        {
+            message.channel.send("The stats command allows you to search statistics of a League of Legends account.\nUsage: \`" + PREFIX + 'stats <name> <region>\`');
+        }
+        else
+        {
+            let name = ""
+            let embed = new Discord.RichEmbed();
+            for(var i = 0; i < args.length-1; i++)
+            {
+                name += args[i];
+            }
+            let region = args[args.length-1];
+            leagueAPI.GetUsernameAndRank(name, region)
+            .then(data => {
+                let ranks = data[1];
+                let user = message.mentions.users.first();
+                if(!user)
+                { 
+                    user = message.author;
+                }
+                embed.setTitle(data[0] + "'s stats");
+                embed.addField("Level" , data[2]);
+                embed.addField("Solo/Duo" , ranks[0].rank +'\n'+ranks[0].games +'\n'+ranks[0].winRate , true);
+                embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games +'\n'+ranks[1].winRate , true); 
+                embed.setColor("#cf95f8");
+                embed.setTimestamp();
+                embed.setFooter("Check out " + data[0] + "'s stats!" , user.avatarURL);
+                leagueAPI.GetProfileIconURL(data[0], region)
+               .then(url => {
+                embed.setThumbnail(url); //- will be the profile icon of the summoner
+                message.channel.send(embed);
+            })
+               
+                //embed.addImage(); - will be the profile icon of the summoner
+
+            })
+            .catch(err => {
+                message.channel.send("Error: "+err);
+            })
+        }
+
+    }
+
+
 
 //counter_count chat
   
