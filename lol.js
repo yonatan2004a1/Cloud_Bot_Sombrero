@@ -9,6 +9,7 @@ async function GetMMR(name, region) //only supports na, eu(both). insert the OFF
     License: Creative Commons Attribution 2.0 Generic
     https://dev.whatismymmr.com/
     */
+    name = endcodedUri(name);
     name = name.replace(' ', '+');
     region = GetRegion(region, true);
     let url = `https://${region}.whatismymmr.com/api/v1/summoner?name=${name}`;
