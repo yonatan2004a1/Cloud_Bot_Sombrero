@@ -11,6 +11,8 @@ async function GetMMR(name, region) //only supports na, eu(both). insert the OFF
     */
     name = encodeURI(name);
     name = name.replace('%20', '+');
+    if(name[name.length-1] = '+')
+        name = name.substring(0, name.length-1);
     region = GetRegion(region, true);
     let url = `https://${region}.whatismymmr.com/api/v1/summoner?name=${name}`;
     console.log(url);
