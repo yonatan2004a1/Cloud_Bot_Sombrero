@@ -1,6 +1,41 @@
 const fetch = require("node-fetch");
 const apiDir = ".api.riotgames.com/lol/" //we will always use this url part (there are stuff like /tft/ but we dont work on it)
+global.Headers = fetch.Headers;
 // ====== PRIVATE FUNCTIONS, WILL NOT BE EXPORTED ======
+async function GetMMR(name, region) //only supports na, eu(both). insert the OFFICIAL username
+{
+    /*
+    MMR calculation by WhatIsMyMMR.com
+    License: Creative Commons Attribution 2.0 Generic
+    https://dev.whatismymmr.com/
+    */
+    name = name.replace(' ', '+');
+    region = GetRegion(region, true);
+    let url = `https://${region}.whatismymmr.com/api/v1/summoner?name=${name}`;
+    let headers = new Headers({
+        "User-Agent" : "DiscordBot:Sombrero Guy:v1.0"
+    });
+    return await new Promise((resolve, reject) => {
+        fetch(url, {
+            method: 'GET',
+            headers: headers
+        })
+        .then(res => {
+            if(!res.ok)
+                throw "API error msg NotUnique ty";
+            return res.json();
+        })
+        .then(data => {
+            if(data.error)
+                resolve("Unavilable");
+            let mmr = data.ranked.avg || "Unavailable"; 
+            resolve(mmr); //if mmr is null returns "unavailable"
+        })
+        .catch(err => {
+            reject(err);
+        });
+    })
+}
 async function GetLatestDDragonVer()
 {
     let url = 'https://ddragon.leagueoflegends.com/api/versions.json';
@@ -114,7 +149,7 @@ async function GetRankAndTier(id, region) //WILL ALWAYS RETURN SOLO DUO AS [0] A
 } 
 function GetRegion(region, mmr) 
 {
-    if(mmr)
+    if(mmr) //mmr regions use different url
     {
         switch(region = region.toLowerCase())
         {
@@ -153,13 +188,13 @@ function GetRegion(region, mmr)
 /**
  * Input: user input of name and region.
  * 
- * Output: in-game official name (how the name really looks) and rank. Data is string[name, rank]
+ * Output: in-game official name (how the name really looks) arr rank (0 is soloduo, 1 is flex), level, mmr(ranked mmr)
  * 
  * Exception: bad region or name input (goes to catch)
  * @param {string} name 
  * @param {string} region 
  */
-async function GetUsernameAndRank(name, region) {
+async function GetSummonerStats(name, region) {
     return await new Promise((resolve, reject) => {
         region = GetRegion(region, false);
         if(region == null)
@@ -168,7 +203,13 @@ async function GetUsernameAndRank(name, region) {
         .then(data => {
              GetRankAndTier(data[0], region)
             .then(ranks => {
-                resolve([data[1], ranks, data[3]]);
+                GetMMR(data[1], region)
+                .then(mmr => {
+                    resolve([data[1], ranks, data[3], mmr]);
+                })
+                .catch(err => {
+                    resolve([data[1], ranks, data[3], "Unavailable"]);
+                })
             })
         })
         .catch(err => {
@@ -191,9 +232,8 @@ async function GetProfileIconURL(name, region)
         return await GetLatestDDragonVer()
         .then(ver => `http://ddragon.leagueoflegends.com/cdn/${ver}/img/profileicon/${data[2]}.png`)
     })
-
 }
 module.exports = {
-    GetUsernameAndRank,
+    GetSummonerStats,
     GetProfileIconURL
 }
