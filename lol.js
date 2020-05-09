@@ -28,9 +28,8 @@ async function GetMMR(name, region) //only supports na, eu(both). insert the OFF
             return res.json();
         })
         .then(data => {
-            resolve((data) => {
-                return data.ranked.avg || "Unavailable"; //if mmr is null returns "unavailable"
-            }); 
+            let mmr = data.ranked.avg || "Unavailable"; 
+            resolve(mmr); //if mmr is null returns "unavailable"
         })
         .catch(err => {
             reject(err);
