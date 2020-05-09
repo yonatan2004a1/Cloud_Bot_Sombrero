@@ -10,13 +10,11 @@ async function GetMMR(name, region) //only supports na, eu(both). insert the OFF
     https://dev.whatismymmr.com/
     */
     name = name.replace(' ', '+');
-    console.log(name);
     region = GetRegion(region, true);
     let url = `https://${region}.whatismymmr.com/api/v1/summoner?name=${name}`;
     let headers = new Headers({
         "User-Agent" : "DiscordBot:Sombrero Guy:v1.0"
     });
-    console.log(url);
     return await new Promise((resolve, reject) => {
         fetch(url, {
             method: 'GET',
