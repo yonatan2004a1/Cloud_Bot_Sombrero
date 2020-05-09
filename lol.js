@@ -11,9 +11,9 @@ async function GetMMR(name, region) //only supports na, eu(both). insert the OFF
     */
     name = encodeURI(name);
     name = name.replace(' ', '+');
-    console.log(name);
     region = GetRegion(region, true);
     let url = `https://${region}.whatismymmr.com/api/v1/summoner?name=${name}`;
+    console.log(url);
     let headers = new Headers({
         "User-Agent" : "DiscordBot:Sombrero Guy:v1.0"
     });
@@ -24,12 +24,10 @@ async function GetMMR(name, region) //only supports na, eu(both). insert the OFF
         })
         .then(res => {
             if(!res.ok)
-                throw "Error "+res.statusText;
+                throw "Unavailable";
             return res.json();
         })
         .then(data => {
-            if(data.error)
-                resolve("Unavilable");
             let mmr = data.ranked.avg || "Unavailable"; 
             resolve(mmr); //if mmr is null returns "unavailable"
         })
