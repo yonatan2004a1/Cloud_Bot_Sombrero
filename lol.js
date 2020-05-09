@@ -1,6 +1,11 @@
 const fetch = require("node-fetch");
 const apiDir = ".api.riotgames.com/lol/" //we will always use this url part (there are stuff like /tft/ but we dont work on it)
 // ====== PRIVATE FUNCTIONS, WILL NOT BE EXPORTED ======
+async function GetMMR(name, region) //only supports na, eu(both). insert the OFFICIAL username
+{
+    region = GetRegion(region, true);
+    
+}
 async function GetLatestDDragonVer()
 {
     let url = 'https://ddragon.leagueoflegends.com/api/versions.json';
@@ -159,7 +164,7 @@ function GetRegion(region, mmr)
  * @param {string} name 
  * @param {string} region 
  */
-async function GetUsernameAndRank(name, region) {
+async function GetSummonerStats(name, region) {
     return await new Promise((resolve, reject) => {
         region = GetRegion(region, false);
         if(region == null)
@@ -194,6 +199,6 @@ async function GetProfileIconURL(name, region)
 
 }
 module.exports = {
-    GetUsernameAndRank,
+    GetSummonerStats,
     GetProfileIconURL
 }

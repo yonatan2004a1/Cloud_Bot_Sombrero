@@ -120,7 +120,7 @@ bot.on('message', async (message) => {
                 name += args[i];
             }
             let region = args[args.length-1];
-            leagueAPI.GetUsernameAndRank(name, region)
+            leagueAPI.GetSummonerStats(name, region)
             .then(data => {
                 let ranks = data[1];
                 let user = message.mentions.users.first();
@@ -140,9 +140,6 @@ bot.on('message', async (message) => {
                 embed.setThumbnail(url); //- will be the profile icon of the summoner
                 message.channel.send(embed);
             })
-               
-                //embed.addImage(); - will be the profile icon of the summoner
-
             })
             .catch(err => {
                 message.channel.send("Error: "+err);
