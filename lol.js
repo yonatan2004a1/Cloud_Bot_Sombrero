@@ -211,7 +211,7 @@ async function GetSummonerStats(name, region) {
                     resolve([data[1], ranks, data[3], mmr]);
                 })
                 .catch(err => {
-                    resolve([data[1], ranks, data[3], "Unavailable"]);
+                    resolve([data[1], ranks, data[3], err]);
                 })
             })
         })
