@@ -129,10 +129,10 @@ bot.on('message', async (message) => {
                     user = message.author;
                 }
                 embed.setTitle(data[0] + "'s stats");
-                embed.addField("Level" , data[2]);
+                embed.addField("Level" , data[2], true);
+                embed.addField("MMR", data[3], true); 
                 embed.addField("Solo/Duo" , ranks[0].rank +'\n'+ranks[0].games +'\n'+ranks[0].winRate , true);
                 embed.addField("Flex 5v5" , ranks[1].rank +'\n'+ranks[1].games +'\n'+ranks[1].winRate , true);
-                embed.addField("MMR", data[3], false); 
                 embed.setColor("#cf95f8");
                 embed.setTimestamp();
                 embed.setFooter("Check out " + data[0] + "'s stats!" , user.avatarURL);
