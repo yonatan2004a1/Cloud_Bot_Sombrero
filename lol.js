@@ -10,7 +10,9 @@ async function GetMMR(name, region) //only supports na, eu(both). insert the OFF
     https://dev.whatismymmr.com/
     */
     name = endcodedUri(name);
+    console.log("encoded name: "+name);
     name = name.replace(' ', '+');
+    console.log("final name: "+name)
     region = GetRegion(region, true);
     let url = `https://${region}.whatismymmr.com/api/v1/summoner?name=${name}`;
     let headers = new Headers({
