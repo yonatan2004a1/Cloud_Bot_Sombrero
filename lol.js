@@ -61,7 +61,7 @@ async function GetID(name, region)
                         reject("Summoner not found");
                         break;
                     case 403:
-                        reject("Key expired, message @NotUniqueUser#7728");
+                        reject("Key expired, message <@137173697894154241>");
                         break;
                     default:
                         reject("Unknown");
