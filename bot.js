@@ -155,11 +155,7 @@ bot.on('message', async (message) => {
     }
 
     // Command list command
-    if (message.channel.id != process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
-    {
-            return;
-    }
-    else (msg.startsWith(PREFIX + 'COMMANDS'))
+    if (msg.startsWith(PREFIX + 'COMMANDS') && message.channel.id != process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
     {
         let embedCommandList = new Discord.RichEmbed();
 
