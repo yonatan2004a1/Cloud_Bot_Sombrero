@@ -174,7 +174,7 @@ bot.on('message', async (message) => {
         if (isNaN(message.content)) // Checks if the message is not a number.
         {
             message.delete();
-            message.author.send("> <#" + process.env.COUNTING_ACTIVE_CHAT_ID + " > text channel only accepts **numbers**, meaning no **symbols** or **sentences**");
+            message.author.send("> <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel only accepts **numbers**, meaning no **symbols** or **sentences**");
             numberCheck = false;
         }
 
