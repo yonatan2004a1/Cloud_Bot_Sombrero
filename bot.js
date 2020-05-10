@@ -75,7 +75,7 @@ bot.on('message', async (message) => {
             
             if (!reason)
             {
-                message.channel.send('Please enter a reason to clear the messages.\nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
+                message.channel.send('Please enter a reason to clear the messages.\nUsage: \`' + PREFIX + 'clear ' + fetched.size + ' <reason>\`')
                 return;
             }
 
@@ -174,7 +174,7 @@ bot.on('message', async (message) => {
         if (isNaN(message.content)) // Checks if the message is not a number.
         {
             message.delete();
-            message.author.send('> <#612392493987921930> chat only accepts **numbers**, meaning no **symbols** or **sentences**.');
+            message.author.send("> <#" + process.env.COUNTING_ACTIVE_CHAT_ID + " > text channel only accepts **numbers**, meaning no **symbols** or **sentences**");
             numberCheck = false;
         }
 
@@ -185,7 +185,7 @@ bot.on('message', async (message) => {
             if (number - 1 !== currentCounter)
             {
                 message.delete();
-                message.author.send('>>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#612392493987921930>.');
+                message.author.send(">>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel");
             }
             else
             {
