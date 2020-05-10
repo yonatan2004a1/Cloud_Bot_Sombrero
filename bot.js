@@ -157,19 +157,15 @@ bot.on('message', async (message) => {
     // Command list command
     if (msg.startsWith(PREFIX + 'COMMANDS'))
     {
-        let embedCL = new Discord.RichEmbed();
+        let embedCommandList = new Discord.RichEmbed();
 
-        embedCL.setTitle("Sombrero Guy's Command List");
-        embedCL.addField("Clear" , "`*clear <amount> <reason>`" , true)
-        embedCL.addField("Stats" , "`*stats <name> <region>`" , true)
-        embedCL.addField("Survival" , "`*survival`" , true)
-        embedCL.setColor("#7289da");
-
-        console.log("#1");
-    }
-    else
-    {
-        console.log("#2")
+        embedCommandList.setTitle("Sombrero Guy's Command List");
+        embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`" , true);
+        embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`" , true);
+        embedCommandList.addField("🌴 Survival" , "`*survival`" , true);
+        embedCommandList.setColor("#7289da");
+        
+        message.channel.send(embedCommandList);
     }
 
     //counter_count chat
