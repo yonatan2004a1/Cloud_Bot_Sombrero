@@ -149,10 +149,7 @@ bot.on('message', async (message) => {
 
     }
 
-
-
-//counter_count chat
-  
+    //counter_count chat
     if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID) // counting to 10k chat.
     {
         var numberCheck = true;
