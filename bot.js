@@ -155,18 +155,15 @@ bot.on('message', async (message) => {
     }
 
     // Command list command
-    if (msg.startsWith(PREFIX + 'COMMANDS'))
+    if (msg.startsWith(PREFIX + 'COMMANDS' || PREFIX + 'COMMAND'))
     {
         let embedCmd = new Discord.RichEmbed();
 
         embedCmd.setTitle("Sombrero Guy's Command List");
-        embedCmd.addFields(
-            { name: "🧹 Clear", value: "`*clear <amount> <reason>`", inline: true},
-            { name: "📊 Stats", value: "`*stats <name> <region>`", inline: true},
-            { name: '🌴 Survival', value: "`*survival`", inline: true},
-        )
+        embedCmd.addField("🧹 Clear" , "`*clear <amount> <reason>`" , true)
+        embedCmd.addField("📊 Stats" , "`*stats <name> <region>`" , true)
+        embedCmd.addField("🌴 Survival" , "`*survival`" , true)
         embedCmd.setColor("#7289da");
-        embedCmd.setTimestamp();
     }
 
     //counter_count chat
