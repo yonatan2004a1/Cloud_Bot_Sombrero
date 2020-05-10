@@ -155,7 +155,7 @@ bot.on('message', async (message) => {
     }
 
     // Command list command
-    if (msg.startsWith(PREFIX + 'COMMANDS' || PREFIX + 'COMMAND'))
+    if (msg.startsWith(PREFIX + 'COMMANDS'))
     {
         let embedCmd = new Discord.RichEmbed();
 
