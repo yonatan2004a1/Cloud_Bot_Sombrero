@@ -160,9 +160,9 @@ bot.on('message', async (message) => {
         let embedCommandList = new Discord.RichEmbed();
 
         embedCommandList.setTitle("Sombrero Guy's Command List");
-        embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n(Only usable by the staff)");
-        embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n(Only usable in <#694548662919102534> & <#673956291219292179> text channel)");
-        embedCommandList.addField("🌴 Survival" , "`*survival`\n(Only usable in <#696784664261689488> text channel)");
+        embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Only usable by the staff**");
+        embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Only usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels.**");
+        embedCommandList.addField("🌴 Survival" , "`*survival`\n**Only usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.setColor("#7289da");
         message.channel.send(embedCommandList);
     }
