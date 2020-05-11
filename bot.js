@@ -1,7 +1,7 @@
 const common = require('./common.js');
 require('./survival.js');
 const Discord = require('discord.js');
-
+const corona = common.corona;
 const leagueAPI = common.LeagueAPI;
 const db = common.db;
 const bot = common.bot;
@@ -99,6 +99,16 @@ bot.on('message', async (message) => {
                 .catch(error => message.channel.send(`Error: ${error}`)); // If it finds an error, it posts it into the channel.
         }
         clear();   
+    }
+    if(msg.startsWith(PREFIX + 'CORONA'))
+    {
+        corona.GetCoronaStats()
+        .then(data => {
+            message.channel.send(`Israel Coronavirus stats:\nConfirmed cases: ${data[0]}, Recovered: ${data[1]}, Deaths: ${data[2]}`);
+        })
+        .catch(err => {
+            message.channel.send(err);
+        })
     }
     // League API
     if(msg.startsWith(PREFIX + 'STATS'))
