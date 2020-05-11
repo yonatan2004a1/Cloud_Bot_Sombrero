@@ -163,7 +163,7 @@ bot.on('message', async (message) => {
         embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
         embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
-        embedCommandList.addField("🔢 Counting" , "`*counter`\n**Usable in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**")
+        embedCommandList.addField("🔢 Counting" , "`*counter`\n**Show the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**")
         embedCommandList.setColor("#7289da");
         message.channel.send(embedCommandList);
     }
