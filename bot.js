@@ -53,7 +53,10 @@ bot.on('message', async (message) => {
                 message.channel.send('You need to be in the \`Poco Loco\'s Staff 🤠\` to use this command.');
                 return;
             }
-            if(message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID){return}// I dont want someone to delete this channel.
+            if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)
+            {
+                return; // I dont want someone to delete this channel.
+            }
             else
             {
                 if (isNaN(args[0])) // Checks if the argument is a number
@@ -65,14 +68,14 @@ bot.on('message', async (message) => {
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
             var reason = "";
-            for(let i = 1; i < args.length; i++)
+            for (let i = 1; i < args.length; i++)
             {
                 reason += args[i] + " ";
             }
             
             if (!reason)
             {
-                message.channel.send('Please enter a reason to clear the messages.\nUsage: \`' + PREFIX + 'clear ' + fetched.size +  ' <reason>\`')
+                message.channel.send('Please enter a reason to clear the messages.\nUsage: \`' + PREFIX + 'clear ' + fetched.size + ' <reason>\`')
                 return;
             }
 
@@ -80,7 +83,7 @@ bot.on('message', async (message) => {
             message.channel.bulkDelete(fetched)
                 .then(() => {
                     let user = message.mentions.users.first();
-                    if(!user)
+                    if (!user)
                     { 
                         user = message.author;
                     }
@@ -111,13 +114,13 @@ bot.on('message', async (message) => {
         })
     }
     // League API
-    if(msg.startsWith(PREFIX + 'STATS'))
+    if (msg.startsWith(PREFIX + 'STATS'))
     {
-        if(message.channel.id != process.env.LEAGUE_ACTIVE_CHAT_ID && message.channel.id != process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
+        if (message.channel.id != process.env.LEAGUE_ACTIVE_CHAT_ID && message.channel.id != process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
         {
             return;
         }
-        if(!args[0] || !args[1])
+        if (!args[0] || !args[1])
         {
             message.channel.send("The stats command allows you to search statistics of a League of Legends account.\nUsage: \`" + PREFIX + 'stats <name> <region>\`');
         }
@@ -125,19 +128,21 @@ bot.on('message', async (message) => {
         {
             let name = ""
             let embed = new Discord.RichEmbed();
-            for(var i = 0; i < args.length-1; i++)
+            for (var i = 0; i < args.length-1; i++)
             {
                 name += args[i];
             }
+            
             let region = args[args.length-1];
             leagueAPI.GetSummonerStats(name, region)
             .then(data => {
                 let ranks = data[1];
                 let user = message.mentions.users.first();
-                if(!user)
+                if (!user)
                 { 
                     user = message.author;
                 }
+
                 embed.setTitle(data[0] + "'s stats");
                 embed.addField("Level" , data[2], true);
                 embed.addField("MMR", data[3], true); 
@@ -159,17 +164,28 @@ bot.on('message', async (message) => {
 
     }
 
+    // Command list command
+    if (msg.startsWith(PREFIX + 'COMMANDS') && message.channel.id == process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
+    {
+        let embedCommandList = new Discord.RichEmbed();
 
+        embedCommandList.setTitle("Sombrero Guy's Command List");
+        embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
+        embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
+        embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**")
+        embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
+        embedCommandList.setColor("#7289da");
+        message.channel.send(embedCommandList);
+    }
 
-//counter_count chat
-  
+    //counter_count chat
     if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID) // counting to 10k chat.
     {
         var numberCheck = true;
         if (isNaN(message.content)) // Checks if the message is not a number.
         {
             message.delete();
-            message.author.send('> <#612392493987921930> chat only accepts **numbers**, meaning no **symbols** or **sentences**.');
+            message.author.send("> <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel only accepts **numbers**, meaning no **symbols** or **sentences**");
             numberCheck = false;
         }
 
@@ -180,7 +196,7 @@ bot.on('message', async (message) => {
             if (number - 1 !== currentCounter)
             {
                 message.delete();
-                message.author.send('>>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#612392493987921930>.');
+                message.author.send(">>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel");
             }
             else
             {
@@ -263,7 +279,7 @@ bot.on('raw', event => {
 });
 
 bot.on('messageReactionAdd', (messageReaction, user) => {
-    if(messageReaction.emoji.name === '✔️' || messageReaction.emoji.name === '✖️')
+    if (messageReaction.emoji.name === '✔️' || messageReaction.emoji.name === '✖️')
     {
         return
     }
@@ -283,7 +299,7 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
 });
 
 bot.on('messageReactionRemove', (messageReaction, user) => {
-    if(messageReaction.emoji.name === '✔️' && messageReaction.emoji.name === '✖️')
+    if (messageReaction.emoji.name === '✔️' && messageReaction.emoji.name === '✖️')
     {
         return
     }

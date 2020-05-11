@@ -15,7 +15,6 @@ async function GetMMR(name, region) //only supports na, eu(both). insert the OFF
         name = name.substring(0, name.length-1);
     region = GetRegion(region, true);
     let url = `https://${region}.whatismymmr.com/api/v1/summoner?name=${name}`;
-    console.log(url);
     let headers = new Headers({
         "User-Agent" : "DiscordBot:Sombrero Guy:v1.0"
     });
@@ -61,7 +60,7 @@ async function GetID(name, region)
                         reject("Summoner not found");
                         break;
                     case 403:
-                        reject("Key expired msg @NotUnique lol");
+                        reject("Key expired, message <@137173697894154241>");
                         break;
                     default:
                         reject("Unknown");
