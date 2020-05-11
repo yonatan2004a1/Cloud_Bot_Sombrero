@@ -155,15 +155,14 @@ bot.on('message', async (message) => {
     }
 
     // Command list command
-    if (msg.startsWith(PREFIX + 'COMMANDS') && message.channel.id == process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
+    if (msg.startsWith(PREFIX + 'COMMANDS'))
     {
         let embedCommandList = new Discord.RichEmbed();
 
         embedCommandList.setTitle("Sombrero Guy's Command List");
         embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
-        embedCommandList.addField("🔢 Counter" , "`*counter");
-        embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
+        embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**")
         embedCommandList.setColor("#7289da");
         message.channel.send(embedCommandList);
     }
@@ -203,7 +202,7 @@ bot.on('ready', () => {
     console.log("[BOT] Logged in as " + bot.user.tag);
     
     // Bot activity
-    bot.user.setActivity('Un Poco Loco', { type: "LISTENING"}).catch(console.error);
+    bot.user.setActivity('*commands - for help', { type: "PLAYING"}).catch(console.error);
 })
 
 // Welcome message & Role to the new users
