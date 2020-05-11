@@ -103,15 +103,29 @@ bot.on('message', async (message) => {
         }
         clear();   
     }
+    // Corona API
     if(msg.startsWith(PREFIX + 'CORONA'))
     {
-        corona.GetCoronaStats()
+        if(!args[0])
+        {
+            message.channel.send("The corona command allows you to search statistics of a country on the Coronavirus .\nUsage: \`" + PREFIX + 'corona <country>\`');
+        }
+        else
+        {
+        var country = "";
+        for(let i=0; i<args.length-1; i++)
+        {
+            country+=(args[i]+" ");
+        }
+        country+=args[args.length-1];
+        corona.GetCoronaStats(country)
         .then(data => {
-            message.channel.send(`Israel Coronavirus stats:\nConfirmed cases: ${data[0]}, Recovered: ${data[1]}, Deaths: ${data[2]}`);
+            message.channel.send(`Coronavirus stats in ${data[3]}:\nConfirmed cases: ${data[0]}, Recovered: ${data[1]}, Deaths: ${data[2]}`);
         })
         .catch(err => {
             message.channel.send(err);
         })
+        }
     }
     // League API
     if (msg.startsWith(PREFIX + 'STATS'))

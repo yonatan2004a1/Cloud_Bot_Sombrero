@@ -1,8 +1,10 @@
 const fetch = require('node-fetch');
-async function GetCoronaStats()
+async function GetCoronaStats(state)
 {
     return await new Promise((resolve, reject) => {
-    fetch("https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total?country=Israel", {
+    state = state.slice(0,1).toUpperCase()+state.slice(1,state.length).toLowerCase();
+    state = encodeURI(state);
+    fetch(`https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total?country=${state}`, {
     	"method": "GET",
     	"headers": {
     		"x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
@@ -15,8 +17,10 @@ async function GetCoronaStats()
         return res.json();
     })
     .then(data => {
+        if(data.message.includes('Country not found'))
+            throw "Error: Country not found";
         let corona = data.data;
-        resolve([corona.confirmed ,corona.recovered, corona.deaths]);
+        resolve([corona.confirmed ,corona.recovered, corona.deaths, corona.location]);
     })
     .catch(err => {
 	    reject(err);
