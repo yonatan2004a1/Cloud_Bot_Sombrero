@@ -26,13 +26,14 @@ async function GetWeather(location)
         })
         .then(data => {
             let weather = data.main;
-            resolve([(weather.temp-273.15).toFixed(2) , weather.humidity , (weather.feels_like-273.15).toFixed(2) , (weather.temp_min-273.15).toFixed(2) , (weather.temp_max-273.15).toFixed(2), (data.wind.speed*3.6).toFixed(2), data.weather.description]);
+            resolve([(weather.temp-273.15).toFixed(2) , weather.humidity , (weather.feels_like-273.15).toFixed(2) , (weather.temp_min-273.15).toFixed(2) , (weather.temp_max-273.15).toFixed(2), (data.wind.speed*3.6).toFixed(2), data.weather[0].description]);
         })
         .catch(err => {
             reject (err);
         });
     })
 }
+GetWeather('petah tikva').then(console.log);
 module.exports = {
     GetWeather
 }
