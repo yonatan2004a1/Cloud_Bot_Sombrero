@@ -33,8 +33,6 @@ async function GetWeather(location)// *waether tel aviv, israel
         });
     })
 }
-GetWeather(location)
-.then(console.log)
 module.exports = {
     GetWeather
 }
