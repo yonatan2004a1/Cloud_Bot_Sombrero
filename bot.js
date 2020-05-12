@@ -195,7 +195,6 @@ bot.on('message', async (message) => {
             location +=args[args.length - 1];
             weather.GetWeather(location)
             .then(data => {
-                message.channel.send("the temp is: " + data[0]);
                 embed.setTitle(location + ":");
                 embed.addField("Temperature: " + data[0]);
                 embed.addField("Humidity: " + data[1] + "%"); 
@@ -206,7 +205,7 @@ bot.on('message', async (message) => {
                 embed.setColor("#cf95f8");
                 embed.setTimestamp();
                 embed.setFooter("Is he the next Dani Rop?", "https://cdn.discordapp.com/attachments/420122298805125120/694620531504185394/Sombrero_Guy_Logo.png");
-                
+                message.channel.send(embed);
             })
             .catch(err => {
                 message.channel.send("Error: "+err);
