@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-async function GetWeather(location)// *waether tel aviv, israel
+async function GetWeather(location)
 {
     location = encodeURI(location);
     return await new Promise((resolve, reject) => {
@@ -15,7 +15,7 @@ async function GetWeather(location)// *waether tel aviv, israel
                         reject("Location is not found");
                         break;
                     case 401:
-                        reject("Key expired, message <@137173697894154241>");
+                        reject("Key expired, message <@417385706307059712>");
                         break;
                     default:
                         reject("Unknown");
