@@ -120,12 +120,12 @@ bot.on('message', async (message) => {
         country += args[args.length - 1];
         corona.GetCoronaStats(country)
         .then(data => {
-            message.channel.send(`Coronavirus stats in ${data[3]}:\nConfirmed cases: ${data[0]}, Recovered: ${data[1]}, Deaths: ${data[2]}`);
             let embedCorona = new Discord.RichEmbed();
             embedCorona.setTitle("Coronavirus status in" + data[3]);
             embedCorona.addField("Confirmed cases" , data[0]);
             embedCorona.addField("Recovered" , data[1]);
             embedCorona.addField("Deaths" , data[2]);
+            message.channel.send(embedCorona);
 
         })
         .catch(err => {
