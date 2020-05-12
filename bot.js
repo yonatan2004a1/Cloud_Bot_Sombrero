@@ -121,10 +121,13 @@ bot.on('message', async (message) => {
         corona.GetCoronaStats(country)
         .then(data => {
             let embedCorona = new Discord.RichEmbed();
-            embedCorona.setTitle("Coronavirus status in" + data[3]);
-            embedCorona.addField("Confirmed cases" , data[0]);
-            embedCorona.addField("Recovered" , data[1]);
-            embedCorona.addField("Deaths" , data[2]);
+            embedCorona.setTitle("Coronavirus status in " + data[3]);
+            embedCorona.addField("Confirmed cases" , data[0] , true);
+            embedCorona.addField("Recovered" , data[1] , true);
+            embedCorona.addField("Deaths" , data[2] , true);
+            embedCorona.setColor("#a7df89");
+            embedCorona.setTimestamp();
+            embedCorona.setFooter("Checkout the Coronavirus status in " + data[3] + "!" , "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/microbe_1f9a0.png");
             message.channel.send(embedCorona);
 
         })
@@ -201,7 +204,7 @@ bot.on('message', async (message) => {
             location +=args[args.length - 1];
             weather.GetWeather(location)
             .then(data => {
-                embed.setTitle(location.toUpperCase() + "Weather");
+                embed.setTitle(location.toUpperCase());
                 embed.addField("Temperature" , data[0] + "°");
                 embed.addField("Humidity" , data[1] + "%"); 
                 embed.addField("Temperature Feels like" ,data[2] + "°");
@@ -224,9 +227,9 @@ bot.on('message', async (message) => {
     {
         let embedCommandList = new Discord.RichEmbed();
         embedCommandList.setTitle("Sombrero Guy's Command List");
-        embedCommandList.addField("🌦️ Weather" , "`*weather <city>\n**Shows the current weather in a city**");
+        embedCommandList.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
         embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
-        embedCommandList.addField("🦠 Corona" , "`corona <country>\n**Shows the current Coronavirus status in a country**" )
+        embedCommandList.addField("🦠 Corona" , "`corona <country>`\n**Shows the current Coronavirus status in a country**" )
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
