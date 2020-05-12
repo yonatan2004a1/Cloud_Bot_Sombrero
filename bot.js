@@ -1,12 +1,12 @@
 const common = require('./common.js');
 require('./survival.js');
 const Discord = require('discord.js');
-
+const corona = common.corona;
 const leagueAPI = common.LeagueAPI;
 const db = common.db;
 const bot = common.bot;
 const PREFIX = common.PREFIX;
-
+const weather = common.weather;
 // ==== Event registeration ================================================
 
 
@@ -103,6 +103,30 @@ bot.on('message', async (message) => {
         }
         clear();   
     }
+    // Corona API
+    if(msg.startsWith(PREFIX + 'CORONA'))
+    {
+        if(!args[0])
+        {
+            message.channel.send("The corona command allows you to search statistics of a country on the Coronavirus .\nUsage: \`" + PREFIX + 'corona <country>\`');
+        }
+        else
+        {
+        var country = "";
+        for(let i=0; i<args.length-1; i++)
+        {
+            country+=(args[i]+" ");
+        }
+        country+=args[args.length-1];
+        corona.GetCoronaStats(country)
+        .then(data => {
+            message.channel.send(`Coronavirus stats in ${data[3]}:\nConfirmed cases: ${data[0]}, Recovered: ${data[1]}, Deaths: ${data[2]}`);
+        })
+        .catch(err => {
+            message.channel.send(err);
+        })
+        }
+    }
     // League API
     if (msg.startsWith(PREFIX + 'STATS'))
     {
@@ -153,17 +177,54 @@ bot.on('message', async (message) => {
         }
 
     }
+    //weather api
+    if(msg.startsWith(PREFIX + 'WEATHER'))
+    {
+        if(!args[0])
+        {
+            message.channel.send("Enter the location, lacotion is not found")
+        }
+        else
+        {
+            let embed = new Discord.RichEmbed();
+            let location = ""
+            for (var i = 0; i < args.length-1; i++)
+            {
+                location += args[i] + " ";
+            }
+            location +=args[args.length - 1];
+            weather.GetWeather(location)
+            .then(data => {
+                embed.setTitle(location + ":");
+                embed.addField("Temperature: " , data[0] + "°");
+                embed.addField("Humidity: " , data[1] + "%"); 
+                embed.addField("Temperature Feels like: " ,data[2] + "°");
+                embed.addField("Minimum temperature: " , data[3] + "°");
+                embed.addField("Maximum temperature: " , data[4] + "°");
+                embed.addField("Wind speed: " , data[5] + " km/hour");
+                embed.setColor("#30bfee");
+                embed.setTimestamp();
+                embed.setFooter("Is he the next Dani Rop? 🌡️", "https://cdn.discordapp.com/attachments/420122298805125120/694620531504185394/Sombrero_Guy_Logo.png");
+                message.channel.send(embed);
+            })
+            .catch(err => {
+                message.channel.send("Error: "+err);
+            })
+        }
+
+
+    }
 
     // Command list command
-    if (msg.startsWith(PREFIX + 'COMMANDS'))
+    if (msg.startsWith(PREFIX + 'COMMANDS') && message.channel.id == process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
     {
         let embedCommandList = new Discord.RichEmbed();
 
         embedCommandList.setTitle("Sombrero Guy's Command List");
         embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
-        embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**")
+        embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
         embedCommandList.setColor("#7289da");
         message.channel.send(embedCommandList);
     }
@@ -203,7 +264,7 @@ bot.on('ready', () => {
     console.log("[BOT] Logged in as " + bot.user.tag);
     
     // Bot activity
-    bot.user.setActivity('*commands - for help', { type: "PLAYING"}).catch(console.error);
+    bot.user.setActivity('Un Poco Loco', { type: "LISTENING"}).catch(console.error);
 })
 
 // Welcome message & Role to the new users
