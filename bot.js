@@ -197,7 +197,7 @@ bot.on('message', async (message) => {
                 message.channel.send("the temp is: " + data[0]);
             })
             .catch(err => {
-                message.channel.send(err);
+                message.channel.send("Error: "+err);
             })
         }
 
