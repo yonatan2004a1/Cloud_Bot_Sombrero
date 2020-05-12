@@ -6,7 +6,7 @@ const leagueAPI = common.LeagueAPI;
 const db = common.db;
 const bot = common.bot;
 const PREFIX = common.PREFIX;
-
+const weather = common.weather;
 // ==== Event registeration ================================================
 
 
@@ -175,6 +175,32 @@ bot.on('message', async (message) => {
                 message.channel.send("Error: "+err);
             })
         }
+
+    }
+    //weather api
+    if(msg.startsWith(PREFIX + "weather"))
+    {
+        if(!args[0])
+        {
+            message.channel.send("Enter the location, lacotion is not found")
+        }
+        else
+        {
+            let location = ""
+            for (var i = 0; i < args.length-1; i++)
+            {
+                location += args[i] + " ";
+            }
+            location +=args[args.length - 1];
+            weather.GetWeather(location)
+            .then(data => {
+                message.channel.send("the temp is: " + data[0]);
+            })
+            .catch(err => {
+                message.channel.send(err);
+            })
+        }
+
 
     }
 
