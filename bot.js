@@ -108,19 +108,25 @@ bot.on('message', async (message) => {
     {
         if(!args[0])
         {
-            message.channel.send("The corona command allows you to search statistics of a country on the Coronavirus .\nUsage: \`" + PREFIX + 'corona <country>\`');
+            message.channel.send("The corona command allows you to search statistics of a country on the Coronavirus.\nUsage: \`" + PREFIX + 'corona <country>\`');
         }
         else
         {
         var country = "";
-        for(let i=0; i<args.length-1; i++)
+        for(let i = 0; i < args.length - 1; i++)
         {
-            country+=(args[i]+" ");
+            country += (args[i]+" ");
         }
-        country+=args[args.length-1];
+        country += args[args.length - 1];
         corona.GetCoronaStats(country)
         .then(data => {
             message.channel.send(`Coronavirus stats in ${data[3]}:\nConfirmed cases: ${data[0]}, Recovered: ${data[1]}, Deaths: ${data[2]}`);
+            let embedCorona = new Discord.RichEmbed();
+            embedCorona.setTitle("Coronavirus status in" + data[3]);
+            embedCorona.addField("Confirmed cases" , data[0]);
+            embedCorona.addField("Recovered" , data[1]);
+            embedCorona.addField("Deaths" , data[2]);
+
         })
         .catch(err => {
             message.channel.send(err);
@@ -177,12 +183,12 @@ bot.on('message', async (message) => {
         }
 
     }
-    //weather api
+    // Weather API
     if(msg.startsWith(PREFIX + 'WEATHER'))
     {
         if(!args[0])
         {
-            message.channel.send("Enter the location, lacotion is not found")
+            message.channel.send("The weather command allows you to search statistics of weather in a specific city.\nUsage: \`" + PREFIX + 'weather <city>\`');
         }
         else
         {
@@ -195,35 +201,34 @@ bot.on('message', async (message) => {
             location +=args[args.length - 1];
             weather.GetWeather(location)
             .then(data => {
-                embed.setTitle(location + ":");
-                embed.addField("Temperature: " , data[0] + "°");
-                embed.addField("Humidity: " , data[1] + "%"); 
-                embed.addField("Temperature Feels like: " ,data[2] + "°");
-                embed.addField("Minimum temperature: " , data[3] + "°");
-                embed.addField("Maximum temperature: " , data[4] + "°");
-                embed.addField("Wind speed: " , data[5] + " km/hour");
+                embed.setTitle(location.toUpperCase() + "Weather");
+                embed.addField("Temperature" , data[0] + "°");
+                embed.addField("Humidity" , data[1] + "%"); 
+                embed.addField("Temperature Feels like" ,data[2] + "°");
+                embed.addField("Minimum temperature" , data[3] + "°");
+                embed.addField("Maximum temperature" , data[4] + "°");
+                embed.addField("Wind speed" , data[5] + " km/h");
                 embed.setColor("#30bfee");
                 embed.setTimestamp();
-                embed.setFooter("Is he the next Dani Rop? 🌡️", "https://cdn.discordapp.com/attachments/420122298805125120/694620531504185394/Sombrero_Guy_Logo.png");
+                embed.setFooter("Am I the next Danny Rup? 🌡️", "https://cdn.discordapp.com/attachments/420122298805125120/694620531504185394/Sombrero_Guy_Logo.png");
                 message.channel.send(embed);
             })
             .catch(err => {
                 message.channel.send("Error: "+err);
             })
         }
-
-
     }
 
     // Command list command
-    if (msg.startsWith(PREFIX + 'COMMANDS') && message.channel.id == process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
+    if (msg.startsWith(PREFIX + 'COMMANDS'))
     {
         let embedCommandList = new Discord.RichEmbed();
-
         embedCommandList.setTitle("Sombrero Guy's Command List");
+        embedCommandList.addField("🌦️ Weather" , "`*weather <city>\n**Shows the current weather in a city**");
         embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
+        embedCommandList.addField("🦠 Corona" , "`corona <country>\n**Shows the current Coronavirus status in a country**" )
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
-        embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**")
+        embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
         embedCommandList.setColor("#7289da");
         message.channel.send(embedCommandList);
