@@ -26,7 +26,7 @@ async function GetWeather(location)// *waether tel aviv, israel
         })
         .then(data => {
             let weather = data.main;
-            resolve([(weather.temp-273.15).toFixed(2) , weather.humidity , (weather.feels_like-273.15).toFixed(2) , (weather.temp_min-273.15).toFixed(2) , (weather.temp_max-273.15).toFixed(2), data.wind.speed.toFixed(2)]);
+            resolve([(weather.temp-273.15).toFixed(2) , weather.humidity , (weather.feels_like-273.15).toFixed(2) , (weather.temp_min-273.15).toFixed(2) , (weather.temp_max-273.15).toFixed(2), (data.wind.speed*3.6).toFixed(2)]);
         })
         .catch(err => {
             reject (err);

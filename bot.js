@@ -196,13 +196,13 @@ bot.on('message', async (message) => {
             weather.GetWeather(location)
             .then(data => {
                 embed.setTitle(location + ":");
-                embed.addField("Temperature: " , data[0]);
+                embed.addField("Temperature: " , data[0] + "°");
                 embed.addField("Humidity: " , data[1] + "%"); 
-                embed.addField("Temperature Feels like: " ,data[2]);
-                embed.addField("Minimum temperature: " , data[3]);
-                embed.addField("Maximum temperature: " , data[4]);
-                embed.addField("Wind speed: " , data[5]);
-                embed.setColor("#cf95f8");
+                embed.addField("Temperature Feels like: " ,data[2] + "°");
+                embed.addField("Minimum temperature: " , data[3] + "°");
+                embed.addField("Maximum temperature: " , data[4] + "°");
+                embed.addField("Wind speed: " , data[5] + "km/hour");
+                embed.setColor("#30bfee");
                 embed.setTimestamp();
                 embed.setFooter("Is he the next Dani Rop?", "https://cdn.discordapp.com/attachments/420122298805125120/694620531504185394/Sombrero_Guy_Logo.png");
                 message.channel.send(embed);
