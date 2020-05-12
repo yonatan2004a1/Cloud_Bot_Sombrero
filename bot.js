@@ -178,7 +178,7 @@ bot.on('message', async (message) => {
 
     }
     //weather api
-    if(msg.startsWith(PREFIX + "weather"))
+    if(msg.startsWith(PREFIX + 'WEATHER'))
     {
         if(!args[0])
         {
