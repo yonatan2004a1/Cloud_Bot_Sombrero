@@ -9,7 +9,7 @@ async function GetWeather(location)// *waether tel aviv, israel
         .then(response => {
             if(!response.ok)
             {
-                switch(res.status)
+                switch(response.status)
                 {
                     case 404:
                         reject("Location is not found");
