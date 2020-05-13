@@ -41,7 +41,7 @@ bot.on('message', async (message) => {
 
     if(msg.startsWith(PREFIX + 'NAYNAY'))
     {
-        message.channel.send("NARKO?" , {files: ["https://i.imgur.com/iYpW0HP.mp4"]});
+        message.channel.send("NARKO?" , {files: ["https://i.imgur.com/iYpW0HP.gif"]});
 
     }
     // Clear messages command
