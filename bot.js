@@ -39,7 +39,7 @@ bot.on('message', async (message) => {
             message.channel.send("Current counter is: " + currentCounter);
         }
 
-    if(msg.startsWith(PREFIX + 'NAYNAY'))
+    if(msg.startsWith(PREFIX + 'NAENAE'))
     {
         message.channel.send("" , {files: ["https://i.imgur.com/iYpW0HP.gif"]});
 
