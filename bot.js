@@ -39,6 +39,11 @@ bot.on('message', async (message) => {
             message.channel.send("Current counter is: " + currentCounter);
         }
 
+    if(msg.startsWith(PREFIX + 'NAENAE'))
+    {
+        message.channel.send("" , {files: ["https://i.imgur.com/iYpW0HP.gif"]});
+
+    }
     // Clear messages command
     // See https://www.youtube.com/watch?v=Zpxyio10Kj0
     if (msg.startsWith(PREFIX + 'CLEAR')) 
@@ -206,7 +211,7 @@ bot.on('message', async (message) => {
             .then(data => {
                 embed.setTitle(location.toUpperCase());
                 embed.addField("Precipitation: " , data[6]);
-                embed.addField("Temperature" , `${data[0]}°C from ${data[3]} to ${data[4]}°C`);
+                embed.addField("Temperature" , `${data[0]}°C`);
                 embed.addField("Humidity" , data[1] + "%"); 
                 embed.addField("Temperature Feels like" ,data[2] + "°");
                 // embed.addField("Minimum temperature" , data[3] + "°");
