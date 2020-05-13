@@ -41,10 +41,7 @@ bot.on('message', async (message) => {
 
     if(msg.startsWith(PREFIX + 'NAYNAY'))
     {
-        let embedNAYNAY = new Discord.RichEmbed();
-        embedNAYNAY.setColor("#fffefe");
-        embedNAYNAY.setImage("https://i.imgur.com/iYpW0HP.mp4")
-        message.channel.send(embedNAYNAY);
+        message.channel.send("NARKO?" , {files: ["https://i.imgur.com/iYpW0HP.mp4"]});
 
     }
     // Clear messages command
