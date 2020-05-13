@@ -39,6 +39,12 @@ bot.on('message', async (message) => {
             message.channel.send("Current counter is: " + currentCounter);
         }
 
+    if(msg.startsWith(PREFIX + 'NAYNAY'))
+    {
+        let embedNAYNAY = new Discord.RichEmbed();
+        embedNAYNAY.setColor("#fffefe");
+        embedNAYNAY.setImage("file:///C:/Users/User/Desktop/WhatsApp%20Video%202020-05-13%20at%2017.15.23.mp4")
+    }
     // Clear messages command
     // See https://www.youtube.com/watch?v=Zpxyio10Kj0
     if (msg.startsWith(PREFIX + 'CLEAR')) 
