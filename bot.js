@@ -43,7 +43,7 @@ bot.on('message', async (message) => {
     {
         let embedNAYNAY = new Discord.RichEmbed();
         embedNAYNAY.setColor("#fffefe");
-        embedNAYNAY.setImage("https://i.imgur.com/8t3NEuq.mp4")
+        embedNAYNAY.setImage("https://i.imgur.com/iYpW0HP.mp4")
         message.channel.send(embedNAYNAY);
 
     }
@@ -214,7 +214,7 @@ bot.on('message', async (message) => {
             .then(data => {
                 embed.setTitle(location.toUpperCase());
                 embed.addField("Precipitation: " , data[6]);
-                embed.addField("Temperature" , `${data[0]}°C from ${data[3]} to ${data[4]}°C`);
+                embed.addField("Temperature" , `${data[0]}°C`);
                 embed.addField("Humidity" , data[1] + "%"); 
                 embed.addField("Temperature Feels like" ,data[2] + "°");
                 // embed.addField("Minimum temperature" , data[3] + "°");
