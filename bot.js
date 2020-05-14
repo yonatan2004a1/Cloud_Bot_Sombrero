@@ -44,6 +44,7 @@ bot.on('message', async (message) => {
         message.channel.send("" , {files: ["https://i.imgur.com/iYpW0HP.gif"]});
 
     }
+
     // Clear messages command
     // See https://www.youtube.com/watch?v=Zpxyio10Kj0
     if (msg.startsWith(PREFIX + 'CLEAR')) 
@@ -235,7 +236,7 @@ bot.on('message', async (message) => {
         embedCommandList.setTitle("Sombrero Guy's Command List");
         embedCommandList.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
         embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
-        embedCommandList.addField("🦠 Corona" , "`corona <country>`\n**Shows the current Coronavirus status in a country**" )
+        embedCommandList.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" )
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
