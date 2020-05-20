@@ -3,13 +3,16 @@ async function GetCoronaStats(state)
 {
     return await new Promise((resolve, reject) => {
     let args = state.split(" ");
+    console.log("arr:");
+    console.log(args);
     var formattedState = "";
     for(let i=0;i<args.length;i++)
     {
         formattedState+=args[i].substr(0,1).toUpperCase()+state.substr(1).toLowerCase();
     }
+    console.log("decoded: "+formattedState);
     formattedState = encodeURI(formattedState);
-    console.log(formattedState);
+    console.log("encoded:"+formattedState);
     fetch(`https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total?country=${formattedState}`, {
     	"method": "GET",
     	"headers": {
