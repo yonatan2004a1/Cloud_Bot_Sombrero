@@ -33,7 +33,6 @@ async function GetWeather(location)
         });
     })
 }
-GetWeather('petah tikva').then(console.log);
 module.exports = {
     GetWeather
 }
