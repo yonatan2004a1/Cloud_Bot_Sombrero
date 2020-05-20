@@ -6,10 +6,11 @@ async function GetCoronaStats(state)
     console.log("arr:");
     console.log(args);
     var formattedState = "";
-    for(let i=0;i<args.length;i++)
+    for(let i=0;i<args.length-1;i++)
     {
-        formattedState+=args[i].slice(0,1).toUpperCase()+args[i].slice(1).toLowerCase();
+        formattedState+=args[i].slice(0,1).toUpperCase()+args[i].slice(1).toLowerCase()+" ";
     }
+    formattedState+=args[args.length-1].slice(0,1).toUpperCase()+args[args.length-1].slice(1).toLowerCase()
     console.log("decoded: "+formattedState);
     formattedState = encodeURI(formattedState);
     console.log("encoded:"+formattedState);
