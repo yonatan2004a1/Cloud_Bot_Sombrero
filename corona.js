@@ -8,7 +8,7 @@ async function GetCoronaStats(state)
     var formattedState = "";
     for(let i=0;i<args.length;i++)
     {
-        formattedState+=args[i].slice(0,1).toUpperCase()+state.slice(1).toLowerCase();
+        formattedState+=args[i].slice(0,1).toUpperCase()+args[i].slice(1).toLowerCase();
     }
     console.log("decoded: "+formattedState);
     formattedState = encodeURI(formattedState);
