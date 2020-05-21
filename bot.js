@@ -44,6 +44,7 @@ bot.on('message', async (message) => {
         message.channel.send("" , {files: ["https://i.imgur.com/iYpW0HP.gif"]});
 
     }
+
     // Clear messages command
     // See https://www.youtube.com/watch?v=Zpxyio10Kj0
     if (msg.startsWith(PREFIX + 'CLEAR')) 
@@ -130,7 +131,7 @@ bot.on('message', async (message) => {
             embedCorona.addField("Confirmed cases" , data[0] , true);
             embedCorona.addField("Recovered" , data[1] , true);
             embedCorona.addField("Deaths" , data[2] , true);
-            embedCorona.setColor("#a7df89");
+            embedCorona.setColor("#3f711e");
             embedCorona.setTimestamp();
             embedCorona.setFooter("Checkout the Coronavirus status in " + data[3] + "!" , "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/microbe_1f9a0.png");
             message.channel.send(embedCorona);
@@ -210,17 +211,23 @@ bot.on('message', async (message) => {
             weather.GetWeather(location)
             .then(data => {
                 embed.setTitle(location.toUpperCase());
-                embed.addField("Precipitation: " , data[6]);
+                embed.addField("Precipitation" , data[6]);
                 embed.addField("Temperature" , `${data[0]}°C`);
                 embed.addField("Humidity" , data[1] + "%"); 
                 embed.addField("Temperature Feels like" ,data[2] + "°");
                 // embed.addField("Minimum temperature" , data[3] + "°");
                 // embed.addField("Maximum temperature" , data[4] + "°");
                 embed.addField("Wind speed" , data[5] + " km/h");
-                embed.setColor("#30bfee");
-                
+                if(data[0] > 39)
+                {
+                    embed.setColor("#ffae30");
+                }
+                else
+                {
+                    embed.setColor("#30bfee");
+                }
                 embed.setTimestamp();
-                embed.setFooter("Am I the next Danny Rup? 🌡️", "https://cdn.discordapp.com/attachments/420122298805125120/694620531504185394/Sombrero_Guy_Logo.png");
+                embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
                 message.channel.send(embed);
             })
             .catch(err => {
@@ -236,7 +243,7 @@ bot.on('message', async (message) => {
         embedCommandList.setTitle("Sombrero Guy's Command List");
         embedCommandList.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
         embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
-        embedCommandList.addField("🦠 Corona" , "`corona <country>`\n**Shows the current Coronavirus status in a country**" )
+        embedCommandList.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" )
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
