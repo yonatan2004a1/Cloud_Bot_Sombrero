@@ -131,7 +131,7 @@ bot.on('message', async (message) => {
             embedCorona.addField("Confirmed cases" , data[0] , true);
             embedCorona.addField("Recovered" , data[1] , true);
             embedCorona.addField("Deaths" , data[2] , true);
-            embedCorona.setColor("#a7df89");
+            embedCorona.setColor("#3f711e");
             embedCorona.setTimestamp();
             embedCorona.setFooter("Checkout the Coronavirus status in " + data[3] + "!" , "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/microbe_1f9a0.png");
             message.channel.send(embedCorona);
@@ -218,9 +218,9 @@ bot.on('message', async (message) => {
                 // embed.addField("Minimum temperature" , data[3] + "°");
                 // embed.addField("Maximum temperature" , data[4] + "°");
                 embed.addField("Wind speed" , data[5] + " km/h");
-                embed.setColor("#30bfee");
+                embed.setColor("#ffae30");
                 embed.setTimestamp();
-                embed.setFooter("Am I the next Danny Rup? 🌡️", "https://cdn.discordapp.com/attachments/420122298805125120/694620531504185394/Sombrero_Guy_Logo.png");
+                embed.setFooter("Check out " + location + "'s weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
                 message.channel.send(embed);
             })
             .catch(err => {
