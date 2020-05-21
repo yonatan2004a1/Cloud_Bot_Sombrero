@@ -211,7 +211,7 @@ bot.on('message', async (message) => {
             weather.GetWeather(location)
             .then(data => {
                 embed.setTitle(location.toUpperCase());
-                embed.addField("Precipitation: " , data[6]);
+                embed.addField("Precipitation" , data[6]);
                 embed.addField("Temperature" , `${data[0]}°C`);
                 embed.addField("Humidity" , data[1] + "%"); 
                 embed.addField("Temperature Feels like" ,data[2] + "°");
