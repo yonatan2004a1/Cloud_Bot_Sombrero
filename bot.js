@@ -218,13 +218,16 @@ bot.on('message', async (message) => {
                 // embed.addField("Minimum temperature" , data[3] + "°");
                 // embed.addField("Maximum temperature" , data[4] + "°");
                 embed.addField("Wind speed" , data[5] + " km/h");
-                if(data[0] > 30)
+                switch (data[0])
                 {
-                    embed.setColor("#ffae30");
-                }
-                else
-                {
-                    embed.setColor("#5caae6");
+                    case data[0] > 40:
+                        embed.setColor("#df233a");
+                        embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/thermometer_1f321.png");
+                    case data[0] > 30:
+                        embed.setColor("#ffae30");
+                    case data[0] < 30:
+                        embed.setColor("#5caae6");
+
                 }
                 embed.setTimestamp();
                 embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
