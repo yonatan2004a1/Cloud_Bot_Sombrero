@@ -220,7 +220,7 @@ bot.on('message', async (message) => {
                 embed.addField("Wind speed" , data[5] + " km/h");
                 embed.setColor("#ffae30");
                 embed.setTimestamp();
-                embed.setFooter("Check out " + location.toUpperCase + "'s weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
+                embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
                 message.channel.send(embed);
             })
             .catch(err => {
