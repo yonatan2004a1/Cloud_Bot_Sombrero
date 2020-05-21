@@ -218,6 +218,7 @@ bot.on('message', async (message) => {
                 // embed.addField("Maximum temperature" , data[4] + "°");
                 embed.addField("Wind speed" , data[5] + " km/h");
                 embed.setColor("#30bfee");
+                
                 embed.setTimestamp();
                 embed.setFooter("Am I the next Danny Rup? 🌡️", "https://cdn.discordapp.com/attachments/420122298805125120/694620531504185394/Sombrero_Guy_Logo.png");
                 message.channel.send(embed);

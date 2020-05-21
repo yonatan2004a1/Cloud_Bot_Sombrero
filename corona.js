@@ -4,7 +4,7 @@ async function GetCoronaStats(state)
     return await new Promise((resolve, reject) => {
     state = state.slice(0,1).toUpperCase()+state.slice(1,state.length).toLowerCase();
     state = encodeURI(state);
-    fetch(`https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total?country=${state}`, {
+    fetch(`${state}`, {
     	"method": "GET",
     	"headers": {
     		"x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
