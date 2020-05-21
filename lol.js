@@ -2,13 +2,16 @@ const fetch = require("node-fetch");
 const apiDir = ".api.riotgames.com/lol/" //we will always use this url part (there are stuff like /tft/ but we dont work on it)
 global.Headers = fetch.Headers;
 // ====== PRIVATE FUNCTIONS, WILL NOT BE EXPORTED ======
+/**
+ * MMR calculation by WhatIsMyMMR.com
+ * 
+ * License: Creative Commons Attribution 2.0 Generic
+ * https://dev.whatismymmr.com/
+ * @param {string} name 
+ * @param {string} region 
+ */
 async function GetMMR(name, region) //only supports na, eu(both). insert the OFFICIAL username
 {
-    /*
-    MMR calculation by WhatIsMyMMR.com
-    License: Creative Commons Attribution 2.0 Generic
-    https://dev.whatismymmr.com/
-    */
     name = encodeURI(name);
     name = name.replace('%20', '+');
     if(name[name.length-1] == '+')
