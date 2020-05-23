@@ -197,13 +197,17 @@ bot.on('message', async (message) => {
     // Nasa API
     if(msg.startsWith(PREFIX + 'NASA'))
     {
-        if(args[0].toLowerCase() == 'pic'||'picture')
+        if(!args[0])
+        {
+            message.channel.send("Choose a valid NASA command");
+        }
+        else if(args[0].toLowerCase() == 'pic'||'picture')
         {
             nasa.GetDailyPic(args[1])
             .then(data => {
                 let embed = new Discord.RichEmbed();
                 embed.setTitle(data[0]);
-                embed.addField("Description", data[1]);
+                embed.setDescription(data[1]);
                 embed.setImage(data[2]);
                 embed.setFooter("Daily image date: "+data[3]);
                 embed.setColor("#131e85");
@@ -212,10 +216,6 @@ bot.on('message', async (message) => {
             .catch(err => {
                 message.channel.send("Error: "+err);
             })
-        }
-        if(!args[0])
-        {
-            message.channel.send("Choose a valid NASA command");
         }
     }
     // Love API (no, its not what you think it is for. its 3:30am and i have insomnia or something so im keeping myself from losing it)
@@ -306,6 +306,7 @@ bot.on('message', async (message) => {
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
+        embedCommandList.addField("🚀 Nasa", "`*nasa pic(ture) <date(yyyy-mm-dd)>`\n**Shows a daily astronomy picture (not putting a date will give the latest picture)**");
         embedCommandList.addField("❤️ Love", "`*love <your name> <2nd name>` \n**Shows a love percentage and gives a status**");
         embedCommandList.setColor("#7289da");
         message.channel.send(embedCommandList);
