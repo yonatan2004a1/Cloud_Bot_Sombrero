@@ -286,7 +286,6 @@ bot.on('message', async (message) => {
                     embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
                 }
                 embed.setTimestamp();
-                embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
                 message.channel.send(embed);
             })
             .catch(err => {
