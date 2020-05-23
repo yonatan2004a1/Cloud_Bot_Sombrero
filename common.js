@@ -15,11 +15,13 @@ const corona = require('./corona.js');
 const PREFIX = '*' // The symbol before the commands
 const bot = new Discord.Client();
 const weather = require("./weather.js");
+const love = require("./love.js");
 module.exports = {
     bot,
     db,
     PREFIX,
     LeagueAPI,
     corona,
-    weather
+    weather,
+    love
 }
