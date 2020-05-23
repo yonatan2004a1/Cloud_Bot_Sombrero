@@ -209,8 +209,8 @@ bot.on('message', async (message) => {
                 embed.setTitle(data[0]);
                 embed.setDescription(data[1]);
                 embed.setImage(data[2]);
-                embed.setFooter("Daily image date: "+data[3] , "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/milky-way_1f30c.png");
-                embed.setColor("#744eaa");
+                embed.setFooter("Daily image date: "+data[3] , "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/rocket_1f680.png");
+                embed.setColor("#55acee");
                 message.channel.send(embed);
             })
             .catch(err => {
