@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 /**
- * Input: first name, second name (family)
+ * Input: your name, second name
  * 
  * Output: array - [precent, result]
  * @param {string} name 

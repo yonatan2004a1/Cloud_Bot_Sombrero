@@ -209,7 +209,7 @@ bot.on('message', async (message) => {
         else
         {
             // I dont know what to write here just say its wrong and write first and family name
-            message.channel.send("Enter first and family name dum dum")
+            message.channel.send("enter your name and a 2nd name dum dum");
         }
 
     }
