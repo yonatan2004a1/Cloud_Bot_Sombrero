@@ -16,6 +16,7 @@ const PREFIX = '*' // The symbol before the commands
 const bot = new Discord.Client();
 const weather = require("./weather.js");
 const love = require("./love.js");
+const nasa = require("./nasa.js");
 module.exports = {
     bot,
     db,
@@ -23,5 +24,6 @@ module.exports = {
     LeagueAPI,
     corona,
     weather,
-    love
+    love,
+    nasa
 }
