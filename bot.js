@@ -7,6 +7,7 @@ const db = common.db;
 const bot = common.bot;
 const PREFIX = common.PREFIX;
 const weather = common.weather;
+const love = common.love;
 // ==== Event registeration ================================================
 
 
@@ -189,6 +190,26 @@ bot.on('message', async (message) => {
             .catch(err => {
                 message.channel.send("Error: "+err);
             })
+        }
+
+    }
+    // Love API (no, its not what you think it is for. its 3:30am and i have insomnia or something so im keeping myself from losing it)
+    if(msg.startsWith(PREFIX + 'LOVE'))
+    {
+        if(args.length == 2)
+        {
+            love.GetLove(args[0], args[1])
+            .then(data => {
+                message.channel.send("Percentage: "+data[0]+"\nResult: "+data[1]);
+            })
+            .catch(err => {
+                message.channel.send("Error:"+err);
+            })
+        }
+        else
+        {
+            // I dont know what to write here just say its wrong and write first and family name
+            message.channel.send("Enter first and family name dum dum")
         }
 
     }
