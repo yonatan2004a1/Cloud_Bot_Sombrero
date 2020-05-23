@@ -201,14 +201,14 @@ bot.on('message', async (message) => {
             love.GetLove(args[0], args[1])
             .then(data => {
                 let embed = new Discord.RichEmbed();
-                embed.setTitle(args[0] + " & " + arg[1]);
+                embed.setTitle(args[0] + " & " + args[1]);
                 embed.addField("Percentage", data[0]);
                 embed.addField("Status", data[1]);
                 embed.setColor("#fc2db4");
                 message.channel.send(embed);
             })
             .catch(err => {
-                message.channel.send("Error:"+err);
+                message.channel.send(err);
             })
         }
         else
