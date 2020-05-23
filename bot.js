@@ -194,13 +194,18 @@ bot.on('message', async (message) => {
 
     }
     // Love API (no, its not what you think it is for. its 3:30am and i have insomnia or something so im keeping myself from losing it)
-    if(msg.startsWith(PREFIX + 'LOVE'))
+    if(msg.startsWith(PREFIX + 'LOVE') && message.channel.id == process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
     {
         if(args.length == 2)
         {
             love.GetLove(args[0], args[1])
             .then(data => {
-                message.channel.send("Percentage: "+data[0]+"\nResult: "+data[1]);
+                let embed = new Discord.RichEmbed();
+                embed.setTitle(args[0] + " & " + arg[1]);
+                embed.addField("Percentage", data[0]);
+                embed.addField("Status", data[1]);
+                embed.setColor("#fc2db4");
+                message.channel.send(embed);
             })
             .catch(err => {
                 message.channel.send("Error:"+err);
@@ -264,10 +269,11 @@ bot.on('message', async (message) => {
         embedCommandList.setTitle("Sombrero Guy's Command List");
         embedCommandList.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
         embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
-        embedCommandList.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" )
+        embedCommandList.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" );
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
+        embedCommandList.addField("❤️ Love", "`*love <your name> <2nd name>` \n**Shows a love percent and gives a status**");
         embedCommandList.setColor("#7289da");
         message.channel.send(embedCommandList);
     }
