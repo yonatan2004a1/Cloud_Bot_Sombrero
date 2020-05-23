@@ -244,13 +244,21 @@ bot.on('message', async (message) => {
                 // embed.addField("Minimum temperature" , data[3] + "°");
                 // embed.addField("Maximum temperature" , data[4] + "°");
                 embed.addField("Wind speed" , data[5] + " km/h");
-                if(data[0] > 30)
+                if (data[0] >= 40)
+                {
+                    embed.setColor("#df233a");
+                    embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/thermometer_1f321.png");
+                }
+                        
+                else if (data[0] > 30 && data[0] < 40)
                 {
                     embed.setColor("#ffae30");
+                    embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
                 }
                 else
                 {
                     embed.setColor("#5caae6");
+                    embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
                 }
                 embed.setTimestamp();
                 embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
