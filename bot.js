@@ -194,7 +194,7 @@ bot.on('message', async (message) => {
 
     }
     // Love API (no, its not what you think it is for. its 3:30am and i have insomnia or something so im keeping myself from losing it)
-    if(msg.startsWith(PREFIX + 'LOVE') && message.channel.id == process.env.BOT_COMMANDS_ACTIVE_CHAT_ID)
+    if(msg.startsWith(PREFIX + 'LOVE'))
     {
         if(args.length == 2)
         {
