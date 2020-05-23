@@ -271,19 +271,24 @@ bot.on('message', async (message) => {
                 embed.addField("Wind speed" , data[5] + " km/h");
                 if (data[0] >= 40)
                 {
-                    embed.setColor("#df233a");
-                    embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/thermometer_1f321.png");
+                    embed.setColor("#eb586e");
+                    embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/hot-face_1f975.png");
                 }
                         
                 else if (data[0] > 30 && data[0] < 40)
                 {
-                    embed.setColor("#ffae30");
-                    embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
+                    embed.setColor("#ffcc4d");
+                    embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-with-face_1f31e.png");
+                }
+                else if (data[0] < 30 && data[0] > 10)
+                {
+                    embed.setColor("#5dadec");
+                    embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/droplet_1f4a7.png");
                 }
                 else
                 {
-                    embed.setColor("#5caae6");
-                    embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/sun-behind-rain-cloud_1f326.png");
+                    embed.setColor("#bcdef5");
+                    embed.setFooter("Check out the current weather!", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/cold-face_1f976.png");
                 }
                 embed.setTimestamp();
                 message.channel.send(embed);
