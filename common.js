@@ -17,6 +17,7 @@ const bot = new Discord.Client();
 const weather = require("./weather.js");
 const love = require("./love.js");
 const nasa = require("./nasa.js");
+const fivem = require("./fivem");
 module.exports = {
     bot,
     db,
@@ -25,5 +26,6 @@ module.exports = {
     corona,
     weather,
     love,
-    nasa
+    nasa,
+    fivem
 }

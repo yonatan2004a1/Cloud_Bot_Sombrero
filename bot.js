@@ -243,6 +243,25 @@ bot.on('message', async (message) => {
         }
 
     }
+    //fiveM API
+    if(msg.startsWith(PREFIX + 'FIVEM'))
+    {
+        if(!args[0])
+        {
+            message.channel.send("what? cunt send me the server's IP");
+        }
+        else
+        {
+            serverIP = args[0]
+            fivem.GetServer(serverIP)
+            .then(data => {
+                message.channel.send(`This server has ${data[0]} players.`)
+            })
+            .catch(err => {
+                message.channel.send("Error: "+err);
+            })
+        }
+    }
     // Weather API
     if(msg.startsWith(PREFIX + 'WEATHER'))
     {
@@ -298,7 +317,7 @@ bot.on('message', async (message) => {
             })
         }
     }
-
+    
     // Command list command
     if (msg.startsWith(PREFIX + 'COMMANDS'))
     {
