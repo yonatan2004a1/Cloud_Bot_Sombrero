@@ -256,7 +256,7 @@ bot.on('message', async (message) => {
             serverIP = args[0]
             fivem.GetServer(serverIP)
             .then(data => {
-                message.channel.send(`This server has ${data[0]} players.`)
+                message.channel.send(`This server has ${data} players.`)
             })
             .catch(err => {
                 message.channel.send("Error: "+err);
