@@ -9,6 +9,7 @@ const PREFIX = common.PREFIX;
 const weather = common.weather;
 const love = common.love;
 const nasa = common.nasa;
+const fivem = common.fivem;
 // ==== Event registeration ================================================
 
 
