@@ -63,7 +63,7 @@ async function GetID(name, region)
                         reject("Summoner not found");
                         break;
                     case 403:
-                        reject("Key expired," + process.env.BOT_PROGRAMMER_ROLE_ID + "will fix it!");
+                        reject("Key expired, <#" + process.env.BOT_PROGRAMMER_ROLE_ID + "> will fix it!");
                         break;
                     default:
                         reject("Unknown");
