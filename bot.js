@@ -185,6 +185,7 @@ bot.on('message', async (message) => {
                 embed.setFooter("Check out " + data[0] + "'s stats!" , user.avatarURL);
                 leagueAPI.GetProfileIconURL(data[0], region)
                .then(url => {
+                console.log(url);
                 embed.setThumbnail(url); //- will be the profile icon of the summoner
                 message.channel.send(embed);
             })

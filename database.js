@@ -56,7 +56,6 @@ async function initializeState() {
         console.log("[DATABASE] Initialized state:", defaultState);
     }
 }
-
 const defaultState = {
     counter: 0
 }
