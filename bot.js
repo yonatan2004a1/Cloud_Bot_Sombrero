@@ -367,7 +367,7 @@ bot.on('message', async (message) => {
     
     if(msg.startsWith(PREFIX + 'SERVER'))
     {
-        let statsGuild = bot.guild.get('566917751709499392');
+        let statsGuild = bot.guilds.get('566917751709499392');
         let memberCount = statsGuild.memberCount;
         let embedStats = new Discord.RichEmbed();
         embedStats.setAuthor("POCO_LOCO's Lounge 🤠" , 'https://cdn.discordapp.com/attachments/694702052831395890/721309287200063538/pocoloco.jpg');
