@@ -367,9 +367,11 @@ bot.on('message', async (message) => {
     
     if(msg.startsWith(PREFIX + 'SERVER'))
     {
+        let guild = bot.guilds.get('566917751709499392');
+        let countMember = guild.members.filter(member => !member.user.bot).size;
         let embedStats = new Discord.RichEmbed();
         embedStats.setAuthor("POCO_LOCO's Lounge 🤠" , 'https://cdn.discordapp.com/attachments/694702052831395890/721309287200063538/pocoloco.jpg');
-        embedStats.addField(`👥 Members ` , `${countMember} Members. `)
+        embedStats.addField(`👥 Members ` , memberCount + " Members. ")
         message.channel.send(embedStats);
     }
 });
@@ -380,8 +382,7 @@ bot.on('message', async (message) => {
 bot.on('ready', () => {
     console.log("[BOT] Started - ONLINE (" + getStatus(bot.status) + ")");
     console.log("[BOT] Logged in as " + bot.user.tag);
-    var guild = bot.guilds.get('566917751709499392');
-    var countMember = guild.memberCount;
+    
     // Bot activity
     bot.user.setActivity('Un Poco Loco', { type: "LISTENING"}).catch(console.error);
 })
