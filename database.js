@@ -27,7 +27,6 @@ async function getState() {
  */
 async function getCounter() {
     const state = await getState();
-
     return state.counter;
 }
 
@@ -35,22 +34,12 @@ async function getCounter() {
  * Increment state counter by value.
  * @param {number} value to increment
  */
-async function incrementCounter(value) {
+async function incrementCounter(value) 
+{
     var currentCounter = await getCounter();
     var newCounter = currentCounter + value;
 
     stateRef.update({ counter: newCounter });
-}
-async function getMember() {
-    const state = await getState();
-    return state.members;
-}
-
-async function incrementMember(value) {
-    var currentMember = await getMember();
-    var newMember = currentMember + value;
-
-    stateRef.update({ members: newMember });
 }
 
 /**
