@@ -363,7 +363,16 @@ bot.on('message', async (message) => {
             }
         }
     }
+    // Server Stats Command
+    const currentMember = await db.getMember();
+    if(msg.startsWith(PREFIX + 'SERVER'))
+    {
+        let embedStats = new Discord.RichEmbed();
+        embedStats.setAuthor("POCO_LOCO's Lounge 🤠" ,'https://cdn.discordapp.com/attachments/694702052831395890/721309287200063538/pocoloco.jpg');
+        embedStats.addField(`👥 Members `, currentMember)
+    }
 });
+
 
 //================================================================================================================================================================================================
 
@@ -377,6 +386,7 @@ bot.on('ready', () => {
 
 // Welcome message & Role to the new users
 bot.on('guildMemberAdd', member => {
+    db.incrementMember(1)
     // Add role for the new member
     let guild = member.guild;
     var role = member.guild.roles.find('name', 'DJ');
