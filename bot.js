@@ -368,10 +368,10 @@ bot.on('message', async (message) => {
     if(msg.startsWith(PREFIX + 'SERVER'))
     {
         let guild = bot.guilds.get('697109578868981840');
-        let memberCount = guild.memberCount;
+        var memberCount = guild.members.filter(member => !member.user.bot).size;  
         let embedStats = new Discord.RichEmbed();
         embedStats.setAuthor("POCO_LOCO's Lounge 🤠" , 'https://cdn.discordapp.com/attachments/694702052831395890/721309287200063538/pocoloco.jpg');
-        embedStats.addField(`👥 Members ` , memberCount + " Members. ")
+        embedStats.addField(`👥 Members ${memberCount}` , " Members. ")
         message.channel.send(embedStats);
     }
 });
