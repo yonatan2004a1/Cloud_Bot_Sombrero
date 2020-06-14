@@ -371,7 +371,7 @@ bot.on('message', async (message) => {
         let owner = message.guild.member(guild.owner) ? guild.owner.toString() : guild.owner.user.tag;
         let members = guild.members.filter(member => !member.user.bot).size; 
         let onlineMembers = guild.members.filter(m => m.presence.status === 'online').size;
-        let bots = guild.members.filter(member => !member.user.bot).size;
+        let bots = guild.members.filter(member => member.user.bot).size;
         
         let embedStats = new Discord.RichEmbed();
         embedStats.setAuthor("POCO_LOCO's Lounge 🤠" , 'https://cdn.discordapp.com/attachments/694702052831395890/721309287200063538/pocoloco.jpg');
