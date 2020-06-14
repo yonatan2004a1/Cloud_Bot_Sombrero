@@ -376,7 +376,7 @@ bot.on('message', async (message) => {
         let embedStats = new Discord.RichEmbed();
         embedStats.setAuthor("POCO_LOCO's Lounge 🤠" , 'https://cdn.discordapp.com/attachments/694702052831395890/721309287200063538/pocoloco.jpg');
         embedStats.addField('👑 Owner', owner)
-        embedStats.addField(`👥 Members (${members})` , `**Online Members:** ${onlineMembers}\n**Bots:** ${bots}`)
+        embedStats.addField(`👥 Members (${members})` , `**Bots:** ${bots}\n**Online:** ${onlineMembers}`)
         message.channel.send(embedStats);
     }
 });
