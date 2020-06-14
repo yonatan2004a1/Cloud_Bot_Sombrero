@@ -367,14 +367,16 @@ bot.on('message', async (message) => {
     // Server Information Command
     if(msg.startsWith(PREFIX + 'SERVERINFO'))
     {
-        let guild = bot.guilds.get('697109578868981840');
+        let guild = bot.guilds.get(process.env.SERVER_ID);
+        let serverName = message.guild.name;
+        let serverIcon = message.guild.iconURL;
         let owner = message.guild.member(guild.owner) ? guild.owner.toString() : guild.owner.user.tag;
         let members = guild.members.filter(member => !member.user.bot).size; 
         let onlineMembers = guild.members.filter(m => m.presence.status === 'online').size;
         let bots = guild.members.filter(member => member.user.bot).size;
         
         let embedStats = new Discord.RichEmbed();
-        embedStats.setAuthor("POCO_LOCO's Lounge 🤠" , 'https://cdn.discordapp.com/attachments/694702052831395890/721309287200063538/pocoloco.jpg');
+        embedStats.setAuthor(serverName , serverIcon);
         embedStats.addField('👑 Owner', owner)
         embedStats.addField(`👥 Members (${members})` , `**Bots:** ${bots}\n**Online:** ${onlineMembers}`)
         message.channel.send(embedStats);
