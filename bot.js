@@ -377,7 +377,7 @@ bot.on('message', async (message) => {
         let bots = guild.members.filter(member => member.user.bot).size;
         
         let roleSize = guild.roles.size;
-        let roleAdmin = message.guild.roles.get(process.env.STAFF_ROLE_ID) ? guild.roleAdmin.toString() : guild.roleAdmin.role.tag;
+        let roleAdmin = message.guild.roles.get(process.env.STAFF_ROLE_ID).guild.roleAdmin.user.tag;
         let emojiSize = guild.emojis.size;
 
         let embedStats = new Discord.RichEmbed();
