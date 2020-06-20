@@ -371,17 +371,20 @@ bot.on('message', async (message) => {
         let serverName = message.guild.name;
         let serverIcon = message.guild.iconURL;
         let owner = message.guild.member(guild.owner) ? guild.owner.toString() : guild.owner.user.tag;
+
         let members = guild.members.filter(member => !member.user.bot).size; 
         let onlineMembers = guild.members.filter(m => m.presence.status === 'online').size;
         let bots = guild.members.filter(member => member.user.bot).size;
+        
         let roleSize = guild.roles.size;
         let roleAdmin = message.guild.roles.get(process.env.STAFF_ROLE_ID);
         let emojiSize = guild.emojis.size;
+
         let embedStats = new Discord.RichEmbed();
         embedStats.setAuthor(serverName , serverIcon);
         embedStats.addField('👑 Owner', owner);
         embedStats.addField(`👥 Members (${members})` , `**Bots:** ${bots}\n**Online:** ${onlineMembers}`);
-        embedStats.addField(`Roles (${roleSize})`,roleAdmin.name); //askaka make it look better 
+        embedStats.addField(`Roles (${roleSize})`, '<@&' + roleAdmin.name + '>'); //askaka make it look better 
         message.channel.send(embedStats);
     }
 });
