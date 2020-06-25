@@ -384,7 +384,7 @@ bot.on('message', async (message) => {
         embedStats.setAuthor(serverName , serverIcon);
         embedStats.addField('👑 Owner', owner);
         embedStats.addField(`👥 Members (${members})` , `**Bots:** ${bots}\n**Online:** ${onlineMembers}`);
-        embedStats.addField(`Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`)); //askaka make it look better 
+        embedStats.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`));
         message.channel.send(embedStats);
     }
 });
