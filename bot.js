@@ -383,7 +383,7 @@ bot.on('message', async (message) => {
         let embedStats = new Discord.RichEmbed();
         embedStats.setAuthor(serverName , serverIcon);
         embedStats.addField('👑 Owner', owner);
-        embedStats.addField(`👥 Members (${members})` , `**Bots:** ${bots}\n**Online:** ${onlineMembers}`);
+        embedStats.addField(`👥 Members (${members})` , `Bots: ${bots}\nOnline: ${onlineMembers}`);
         embedStats.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`)); //askaka make it look better 
         message.channel.send(embedStats);
     }
