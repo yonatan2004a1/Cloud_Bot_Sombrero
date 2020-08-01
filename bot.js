@@ -405,7 +405,7 @@ bot.on('message', async (message) => {
 
         message.channel.send('Restarting...').then(m => {
             client.destroy().then(() => {
-            client.login('token');
+            client.login(TOKEN);
             });
       });
       break;
