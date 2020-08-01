@@ -393,6 +393,7 @@ bot.on('message', async (message) => {
         return;
     }
     
+    let command = message.content.split(' ')[0].slice(1);
     let isBotProgrammer = message.author.id == '709750105380618240';
     args = message.content.replace('.' + command, '').trim();
     
