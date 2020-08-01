@@ -394,13 +394,9 @@ bot.on('message', async (message) => {
     }
     
     let command = message.content.split(' ')[0].slice(1);
-    let isBotProgrammer = message.author.id == '709750105380618240';
     args = message.content.replace('.' + command, '').trim();
     
     if (msg.startsWith(PREFIX + 'SHUTDOWN')){
-        if (!isBotProgrammer){
-            return;
-        }
         message.channel.send('Shutting down...').then(m => {
             client.destroy();
         });
