@@ -398,7 +398,7 @@ bot.on('message', async (message) => {
     
     if (msg.startsWith(PREFIX + 'SHUTDOWN')){
         message.channel.send('Shutting down...').then(m => {
-            client.destroy();
+            bot.destroy();
         });
     }
 });
