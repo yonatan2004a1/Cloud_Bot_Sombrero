@@ -395,8 +395,8 @@ bot.on('message', async (message) => {
     
 
     let command = message.content.split(' ')[0].slice(1);
-    let args = message.content.replace('.' + command, '').trim();
     let isBotProgrammer = message.author.id == '709750105380618240';
+    args = message.content.replace('.' + command, '').trim();
 
     switch (command) {
         case 'restart': {
