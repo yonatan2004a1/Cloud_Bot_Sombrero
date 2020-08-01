@@ -393,34 +393,17 @@ bot.on('message', async (message) => {
         return;
     }
     
-
-    let command = message.content.split(' ')[0].slice(1);
     let isBotProgrammer = message.author.id == '709750105380618240';
     args = message.content.replace('.' + command, '').trim();
-
-    switch (command) {
-        case 'restart': {
-        if (!isBotProgrammer)
+    
+    if (msg.startsWith(PREFIX + 'SHUTDOWN')){
+        if (!isBotProgrammer){
             return;
-
-        message.channel.send('Restarting...').then(m => {
-            client.destroy().then(() => {
-            client.login(TOKEN);
-            });
-      });
-      break;
+        }
+        message.channel.send('Shutting down...').then(m => {
+            client.destroy();
+        });
     }
-
-    case 'shutdown': {
-      if (!isBotProgrammer)
-        return;
-
-      message.channel.send('Shutting down...').then(m => {
-        client.destroy();
-      });
-      break;
-    }
-  }
 });
 
 
