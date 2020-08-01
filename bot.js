@@ -245,7 +245,7 @@ bot.on('message', async (message) => {
         }
 
     }
-    //fiveM API
+    // FiveM API
     if(msg.startsWith(PREFIX + 'FIVEM'))
     {
         if(!args[0])
@@ -387,6 +387,40 @@ bot.on('message', async (message) => {
         embedStats.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`)); //askaka make it look better 
         message.channel.send(embedStats);
     }
+
+    // Shutdown & Restart Command
+    if (message.channel.type != 'text' || message.author.bot){
+        return;
+    }
+    
+
+    let command = message.content.split(' ')[0].slice(1);
+    let args = message.content.replace('.' + command, '').trim();
+    let isBotProgrammer = message.author.id == '709750105380618240';
+
+    switch (command) {
+        case 'restart': {
+        if (!isBotProgrammer)
+            return;
+
+        message.channel.send('Restarting...').then(m => {
+            client.destroy().then(() => {
+            client.login('token');
+            });
+      });
+      break;
+    }
+
+    case 'shutdown': {
+      if (!isBotProgrammer)
+        return;
+
+      message.channel.send('Shutting down...').then(m => {
+        client.destroy();
+      });
+      break;
+    }
+  }
 });
 
 
