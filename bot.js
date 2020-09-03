@@ -70,6 +70,7 @@ bot.on('message', async (message) => {
             if (isNaN(args[0])) // Checks if the argument is a number
             {
                 message.channel.send('Please enter the amount of messages that you want to delete.\nUsage: \`' + PREFIX + 'clear <amount> <reason>\`'); //\n means new line.
+                console.log(args[0]);
                 return;
             }
 
