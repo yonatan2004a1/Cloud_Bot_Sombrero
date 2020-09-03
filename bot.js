@@ -11,8 +11,6 @@ const love = common.love;
 const nasa = common.nasa;
 const fivem = common.fivem;
 // ==== Event registeration ================================================
-
-
 bot.on('message', async (message) => {
     var sender = message.author; // The user who sent the message.
     var msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
@@ -20,7 +18,7 @@ bot.on('message', async (message) => {
     var cont = message.content.slice(PREFIX.length).split(" ");
     var args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
     
-
+        /*
         if (msg.includes('LAYLA') || msg.includes('לילה'))
         {
             message.channel.send('Layli lay.');
@@ -35,12 +33,13 @@ bot.on('message', async (message) => {
         {
             message.channel.send('FoX1E is my lord.');
         }
+        */
 
-        if (msg == (PREFIX + "counter").toUpperCase()) 
-        {
-            const currentCounter = await db.getCounter();
-            message.channel.send("Current counter is: " + currentCounter);
-        }
+    if (msg == (PREFIX + "counter").toUpperCase()) 
+    {
+        const currentCounter = await db.getCounter();
+        message.channel.send("Current counter is: " + currentCounter);
+    }
 
     if(msg.startsWith(PREFIX + 'NAENAE'))
     {
@@ -56,10 +55,10 @@ bot.on('message', async (message) => {
         {
             const embedClear = new Discord.RichEmbed();
             await message.delete();
-            // Checks if the user has the `Poco Loco's Staff 🤠` role
-            if (!message.member.roles.find("name", "Poco Loco's Staff 🤠")) 
+            // Checks if user has the staff role
+            if (!message.member.roles.has(process.env.STAFF_ROLE_ID))
             {
-                message.channel.send('You need to be in the \`Poco Loco\'s Staff 🤠\` to use this command.');
+                message.channel.send('You must be staff to clear messages.');
                 return;
             }
             if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)
@@ -112,6 +111,29 @@ bot.on('message', async (message) => {
         }
         clear();   
     }
+
+    // Shutdown command
+    if (message.channel.type != 'text' || message.author.bot){
+        return;
+    }
+    
+    let command = message.content.split(' ')[0].slice(1);
+    args = message.content.replace('.' + command, '').trim();
+    
+    if (msg.startsWith(PREFIX + 'SHUTDOWN')){
+        if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
+        {
+            message.channel.send('You must be bot programmer to shutdown me :)');
+            return;
+        }
+        else
+        {
+            message.channel.send('Shutting down...').then(m => {
+            bot.destroy();
+        })
+    }   
+};
+
     // Corona API
     if(msg.startsWith(PREFIX + 'CORONA'))
     {
@@ -219,7 +241,7 @@ bot.on('message', async (message) => {
             })
         }
     }
-    // Love API (no, its not what you think it is for. its 3:30am and i have insomnia or something so im keeping myself from losing it)
+    // Love API
     if(msg.startsWith(PREFIX + 'LOVE'))
     {
         if(args.length == 2)
@@ -244,7 +266,7 @@ bot.on('message', async (message) => {
         }
 
     }
-    //fiveM API
+    // FiveM API
     if(msg.startsWith(PREFIX + 'FIVEM'))
     {
         if(!args[0])
@@ -362,6 +384,30 @@ bot.on('message', async (message) => {
             }
         }
     }
+
+     // Server Information Command
+     if(msg.startsWith(PREFIX + 'SERVERINFO'))
+     {
+         let guild = bot.guilds.get(process.env.SERVER_ID);
+         let serverName = message.guild.name;
+         let serverIcon = message.guild.iconURL;
+         let owner = message.guild.member(guild.owner) ? guild.owner.toString() : guild.owner.user.tag;
+ 
+         let members = guild.members.filter(member => !member.user.bot).size; 
+         let onlineMembers = guild.members.filter(m => m.presence.status === 'online').size;
+         let bots = guild.members.filter(member => member.user.bot).size;
+ 
+         let roleSize = guild.roles.size;
+         //let roleAdmin = message.guild.roles.get(process.env.STAFF_ROLE_ID);
+         let emojiSize = guild.emojis.size;
+ 
+         let embedStats = new Discord.RichEmbed();
+         embedStats.setAuthor(serverName , serverIcon);
+         embedStats.addField('👑 Owner', owner);
+         embedStats.addField(`👥 Members (${members})` , `Bots: ${bots}\nOnline: ${onlineMembers}`);
+         embedStats.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`)); //askaka make it look better 
+         message.channel.send(embedStats);
+     }
 });
 
 //================================================================================================================================================================================================
