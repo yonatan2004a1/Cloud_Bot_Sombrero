@@ -56,8 +56,9 @@ bot.on('message', async (message) => {
         {
             const embedClear = new Discord.RichEmbed();
             await message.delete();
+            layala()
             // Checks if the user is part of the staff
-            if (!message.member.roles.find("name", process.env.STAFF_ROLE_ID)) 
+            if(!message.member.roles.has(process.env.STAFF_ROLE_ID))
             {
                 message.channel.send('You need to be in the \`Poco Loco\'s Staff 🤠\` to use this command.');
                 return;
