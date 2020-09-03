@@ -56,8 +56,8 @@ bot.on('message', async (message) => {
         {
             const embedClear = new Discord.RichEmbed();
             await message.delete();
-            // Checks if the user is part of the staff
-            if(!message.member.roles.has(process.env.STAFF_ROLE_ID))
+            // Checks if the user has the `Poco Loco's Staff 🤠` role
+            if (!message.member.roles.has(process.env.STAFF_ROLE_ID))
             {
                 message.channel.send('You need to be in the \`Poco Loco\'s Staff 🤠\` to use this command.');
                 return;
@@ -185,7 +185,6 @@ bot.on('message', async (message) => {
                 embed.setFooter("Check out " + data[0] + "'s stats!" , user.avatarURL);
                 leagueAPI.GetProfileIconURL(data[0], region)
                .then(url => {
-                console.log(url);
                 embed.setThumbnail(url); //- will be the profile icon of the summoner
                 message.channel.send(embed);
             })
@@ -245,7 +244,7 @@ bot.on('message', async (message) => {
         }
 
     }
-    // FiveM API
+    //fiveM API
     if(msg.startsWith(PREFIX + 'FIVEM'))
     {
         if(!args[0])
@@ -363,46 +362,7 @@ bot.on('message', async (message) => {
             }
         }
     }
-
-    // Server Information Command
-    if(msg.startsWith(PREFIX + 'SERVERINFO'))
-    {
-        let guild = bot.guilds.get(process.env.SERVER_ID);
-        let serverName = message.guild.name;
-        let serverIcon = message.guild.iconURL;
-        let owner = message.guild.member(guild.owner) ? guild.owner.toString() : guild.owner.user.tag;
-
-        let members = guild.members.filter(member => !member.user.bot).size; 
-        let onlineMembers = guild.members.filter(m => m.presence.status === 'online').size;
-        let bots = guild.members.filter(member => member.user.bot).size;
-        
-        let roleSize = guild.roles.size;
-        //let roleAdmin = message.guild.roles.get(process.env.STAFF_ROLE_ID);
-        let emojiSize = guild.emojis.size;
-
-        let embedStats = new Discord.RichEmbed();
-        embedStats.setAuthor(serverName , serverIcon);
-        embedStats.addField('👑 Owner', owner);
-        embedStats.addField(`👥 Members (${members})` , `Bots: ${bots}\nOnline: ${onlineMembers}`);
-        embedStats.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`)); //askaka make it look better 
-        message.channel.send(embedStats);
-    }
-
-    // Shutdown & Restart Command
-    if (message.channel.type != 'text' || message.author.bot){
-        return;
-    }
-    
-    let command = message.content.split(' ')[0].slice(1);
-    args = message.content.replace('.' + command, '').trim();
-    
-    if (msg.startsWith(PREFIX + 'SHUTDOWN')){
-        message.channel.send('Shutting down...').then(m => {
-            bot.destroy();
-        });
-    }
 });
-
 
 //================================================================================================================================================================================================
 
@@ -416,10 +376,9 @@ bot.on('ready', () => {
 
 // Welcome message & Role to the new users
 bot.on('guildMemberAdd', member => {
-   
     // Add role for the new member
     let guild = member.guild;
-    let role = member.guild.roles.find('name', 'DJ');
+    var role = member.guild.roles.find('name', 'DJ');
     member.addRole(role);
 
     // Send welcome message privately.
