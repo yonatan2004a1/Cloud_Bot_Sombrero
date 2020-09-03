@@ -56,7 +56,6 @@ bot.on('message', async (message) => {
         {
             const embedClear = new Discord.RichEmbed();
             await message.delete();
-            layala()
             // Checks if the user is part of the staff
             if(!message.member.roles.has(process.env.STAFF_ROLE_ID))
             {
