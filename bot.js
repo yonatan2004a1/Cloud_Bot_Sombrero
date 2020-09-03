@@ -12,11 +12,11 @@ const nasa = common.nasa;
 const fivem = common.fivem;
 // ==== Event registeration ================================================
 bot.on('message', async (message) => {
-    const sender = message.author; // The user who sent the message.
-    const msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
-    const number = message.content; // Numbers that sent at counting to 10k.
-    const cont = message.content.slice(PREFIX.length).split(" ");
-    const args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
+    var sender = message.author; // The user who sent the message.
+    var msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
+    var number = message.content; // Numbers that sent at counting to 10k.
+    var cont = message.content.slice(PREFIX.length).split(" ");
+    var args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
     
         /*
         if (msg.includes('LAYLA') || msg.includes('לילה'))
@@ -53,7 +53,8 @@ bot.on('message', async (message) => {
     {
         async function clear() 
         {
-            
+            let cont = message.content.slice(PREFIX.length).split(" ");
+            let args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
             const embedClear = new Discord.RichEmbed();
             await message.delete();
             // Checks if user has the staff role
