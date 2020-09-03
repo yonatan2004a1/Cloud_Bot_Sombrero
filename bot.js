@@ -61,17 +61,16 @@ bot.on('message', async (message) => {
                 message.channel.send('You must be staff to clear messages.');
                 return;
             }
+            
             if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)
             {
                 return; // I dont want someone to delete this channel.
             }
-            else
+            
+            if (isNaN(args[0])) // Checks if the argument is a number
             {
-                if (isNaN(args[0])) // Checks if the argument is a number
-                {
-                    message.channel.send('Please enter a reason and amount of messages that you want to delete.\nUsage: \`' + PREFIX + 'clear <amount> <reason>\`'); //\n means new line.
-                    return;
-                }
+                message.channel.send('Please enter a reason and amount of messages that you want to delete.\nUsage: \`' + PREFIX + 'clear <amount> <reason>\`'); //\n means new line.
+                return;
             }
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
