@@ -56,8 +56,7 @@ bot.on('message', async (message) => {
             const embedClear = new Discord.RichEmbed();
             await message.delete();
             // Checks if user has the staff role
-            //if (!message.member.roles.has(process.env.STAFF_ROLE_ID))
-            if (!message.member.roles.find("name", "Falafel²'s Staff 🧹")) 
+            if (!message.member.roles.has(process.env.STAFF_ROLE_ID))
             {
                 message.channel.send('You must be staff to clear messages.');
                 return;
