@@ -41,8 +41,7 @@ bot.on('message', async (message) => {
     verifyEmbed.setDescription(`Hello! Welcome to ${message.guild.name}! Please react to this message to receive your role.`)
     verifyEmbed.setColor("c43354");
  
-    bot.channels.cache.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('✅')).catch(console.error);
-
+    bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('✅')).catch(console.error);
 
     if (msg == (PREFIX + "counter").toUpperCase()) 
     {
