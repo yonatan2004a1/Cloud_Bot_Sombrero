@@ -65,8 +65,7 @@ bot.on('message', async (message) => {
             let args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
             const embedClear = new Discord.RichEmbed();
             await message.delete();
-            // Checks if user has the staff role
-            if (!message.member.roles.has(process.env.STAFF_ROLE_ID))
+            if (!message.member.roles.has(process.env.STAFF_ROLE_ID)) // Checks if user has the staff role
             {
                 message.channel.send('You must be staff to clear messages.');
                 return;
