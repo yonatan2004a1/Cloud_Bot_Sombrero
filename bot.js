@@ -37,14 +37,14 @@ bot.on('message', async (message) => {
 
     // Verify bot message
     // See https://www.youtube.com/watch?v=uoaDyDhvXDo
-    if(msg == 'verify')
+    if(msg == 'VERIFY')
     {
         const verifyEmbed = new Discord.RichEmbed();
         verifyEmbed.setDescription(`Hello! Welcome to ${message.guild.name}! Please react to this message to receive your role.`)
         verifyEmbed.setColor("c43354");
         bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('✅')).catch(console.error);
     }
-    
+
     if (msg == (PREFIX + "counter").toUpperCase()) 
     {
         const currentCounter = await db.getCounter();
