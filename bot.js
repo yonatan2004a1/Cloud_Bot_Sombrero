@@ -18,22 +18,31 @@ bot.on('message', async (message) => {
     var cont = message.content.slice(PREFIX.length).split(" ");
     var args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
     
-        /*
-        if (msg.includes('LAYLA') || msg.includes('לילה'))
-        {
+    /*
+    if (msg.includes('LAYLA') || msg.includes('לילה'))
+    {
             message.channel.send('Layli lay.');
-        }
+    }
 
-        if (msg.includes('YAEL') || msg.includes('יעל'))
-        {
-            message.reply('לא מכבד אחי.');
-        }
+    if (msg.includes('YAEL') || msg.includes('יעל'))
+    {
+        message.reply('לא מכבד אחי.');
+    }
 
-        if (msg.includes('FOXIE') || msg.includes('פוקסי'))
-        {
-            message.channel.send('FoX1E is my lord.');
-        }
-        */
+    if (msg.includes('FOXIE') || msg.includes('פוקסי'))
+    {
+        message.channel.send('FoX1E is my lord.');
+    }
+    */
+
+    // Verify bot message
+    // See https://www.youtube.com/watch?v=uoaDyDhvXDo
+    const verifyEmbed = new Discord.RichEmbed();
+    verifyEmbed.setDescription(`Hello! Welcome to ${message.guild.name}! Please react to this message to receive your role.`)
+    verifyEmbed.setColor("c43354");
+ 
+    bot.channels.cache.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('✅')).catch(console.error);
+
 
     if (msg == (PREFIX + "counter").toUpperCase()) 
     {
@@ -98,7 +107,7 @@ bot.on('message', async (message) => {
                         user = message.author;
                     }
                     var clearChannel = message.channel.name;
-                    embedClear.setTitle("Clear Logs");
+                    embedClear.setTitle("Clear Log");
                     embedClear.addField("Messages cleaner" , message.author);
                     embedClear.addField("Cleared" , fetched.size) ;
                     embedClear.addField("From" , clearChannel);
