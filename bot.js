@@ -40,19 +40,18 @@ bot.on('message', async (message) => {
     const verifyEmbed = new Discord.RichEmbed();
     if (msg.startsWith(PREFIX + 'VERIFY'))
     {
+        if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
         {
-            if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
-            {
-                message.channel.send('You must be bot programmer to send a verify message :)');
-                return;
-            }
-            else
-            {
+            message.channel.send('You must be bot programmer to send a verify message :)');
+            return;
+        }
+        else
+        {
             verifyEmbed.setDescription(`Hello! Welcome to ${message.guild.name}! Please react to this message to receive your role.`)
             verifyEmbed.setColor("c43354");
             bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('✅')).catch(console.error);
-            }
         }
+        
     }
     if (msg == (PREFIX + "counter").toUpperCase()) 
     {
