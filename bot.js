@@ -35,16 +35,25 @@ bot.on('message', async (message) => {
     }
     */
 
-    // Verify bot message
+    // Verify bot message command
     // See https://www.youtube.com/watch?v=uoaDyDhvXDo
-    if(msg == 'VERIFY')
+    const verifyEmbed = new Discord.RichEmbed();
+    if (msg.startsWith(PREFIX + 'VERIFY'))
     {
-        const verifyEmbed = new Discord.RichEmbed();
-        verifyEmbed.setDescription(`Hello! Welcome to ${message.guild.name}! Please react to this message to receive your role.`)
-        verifyEmbed.setColor("c43354");
-        bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('✅')).catch(console.error);
+        {
+            if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
+            {
+                message.channel.send('You must be bot programmer to send a verify message :)');
+                return;
+            }
+            else
+            {
+            verifyEmbed.setDescription(`Hello! Welcome to ${message.guild.name}! Please react to this message to receive your role.`)
+            verifyEmbed.setColor("c43354");
+            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('✅')).catch(console.error);
+            }
+        }
     }
-
     if (msg == (PREFIX + "counter").toUpperCase()) 
     {
         const currentCounter = await db.getCounter();
