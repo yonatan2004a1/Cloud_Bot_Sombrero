@@ -526,7 +526,7 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
         {
             for (const reaction of userReactions.values()) 
             {
-		        await reaction.remove(member);
+		        reaction.remove(member);
 	        }
         } 
         catch (error) 
