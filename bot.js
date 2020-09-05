@@ -18,22 +18,75 @@ bot.on('message', async (message) => {
     var cont = message.content.slice(PREFIX.length).split(" ");
     var args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
     
-        /*
-        if (msg.includes('LAYLA') || msg.includes('לילה'))
-        {
+    /*
+    if (msg.includes('LAYLA') || msg.includes('לילה'))
+    {
             message.channel.send('Layli lay.');
-        }
+    }
 
-        if (msg.includes('YAEL') || msg.includes('יעל'))
-        {
-            message.reply('לא מכבד אחי.');
-        }
+    if (msg.includes('YAEL') || msg.includes('יעל'))
+    {
+        message.reply('לא מכבד אחי.');
+    }
 
-        if (msg.includes('FOXIE') || msg.includes('פוקסי'))
+    if (msg.includes('FOXIE') || msg.includes('פוקסי'))
+    {
+        message.channel.send('FoX1E is my lord.');
+    }
+    */
+
+    /*
+    // Verify bot message command
+    // See https://www.youtube.com/watch?v=uoaDyDhvXDo
+
+    const verifyEmbed = new Discord.RichEmbed();
+    if (msg.startsWith(PREFIX + 'VERIFY'))
+    {
+        if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
         {
-            message.channel.send('FoX1E is my lord.');
+            message.channel.send('You must be bot programmer to send a verify message :)');
+            return;
         }
-        */
+        else
+        {
+            verifyEmbed.setTitle(`Welcome to ${message.guild.name}!`);
+            verifyEmbed.setDescription("Please **react** to this message to receive a pickle role.");
+            verifyEmbed.setColor("fcb040");
+            verifyEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
+
+            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react(`${process.env.PICKLE_EMOJI_ID}`));
+        }
+    }
+    */
+
+    // Game selection message command
+    
+    const gameSelectionEmbed = new Discord.RichEmbed();
+    if (msg.startsWith(PREFIX + 'GAMESELECTION'))
+    {
+        if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
+        {
+            message.channel.send('You must be bot programmer to send a verify message :)');
+            return;
+        }
+        else
+        {
+            gameSelectionEmbed.setTitle("You've reached the game selection channel!");
+            gameSelectionEmbed.setDescription("Here you can associate yourself with the gaming communities you play in!\nPlease click on the emojis below the message that corresponding for the games you play.");
+            gameSelectionEmbed.addField("Games selection:" , `:${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}: **:** League of Legends\n:${process.env.VALORANT_EMOJI_ID}: **:** VALORANT\n:${process.env.AMONG_US_EMOJI_ID}: **:** Among Us\n:${process.env.MINECRAFT_EMOJI_ID}: **:** Minecraft`);
+            gameSelectionEmbed.setColor("fcb040");
+            gameSelectionEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
+
+            bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).send(gameSelectionEmbed).then(m => {
+                m.react(`${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}`)
+                m.react(`${process.env.VALORANT_EMOJI_ID}`)
+                m.react(`${process.env.AMONG_US_EMOJI_ID}`)
+                m.react(`${process.env.MINECRAFT_EMOJI_ID}`)
+
+            });
+
+        }
+    }
 
     if (msg == (PREFIX + "counter").toUpperCase()) 
     {
@@ -57,8 +110,7 @@ bot.on('message', async (message) => {
             let args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
             const embedClear = new Discord.RichEmbed();
             await message.delete();
-            // Checks if user has the staff role
-            if (!message.member.roles.has(process.env.STAFF_ROLE_ID))
+            if (!message.member.roles.has(process.env.STAFF_ROLE_ID)) // Checks if user has the staff role
             {
                 message.channel.send('You must be staff to clear messages.');
                 return;
@@ -98,7 +150,7 @@ bot.on('message', async (message) => {
                         user = message.author;
                     }
                     var clearChannel = message.channel.name;
-                    embedClear.setTitle("Clear Logs");
+                    embedClear.setTitle("Clear Log");
                     embedClear.addField("Messages cleaner" , message.author);
                     embedClear.addField("Cleared" , fetched.size) ;
                     embedClear.addField("From" , clearChannel);
@@ -420,7 +472,7 @@ bot.on('ready', () => {
     console.log("[BOT] Logged in as " + bot.user.tag);
     
     // Bot activity
-    bot.user.setActivity('Un Poco Loco', { type: "LISTENING"}).catch(console.error);
+    bot.user.setActivity(`${PREFIX}commands`, { type: "PLAYING"}).catch(console.error);
 })
 
 // Welcome message & Role to the new users
@@ -431,7 +483,7 @@ bot.on('guildMemberAdd', member => {
     member.addRole(role);
 
     // Send welcome message privately.
-    member.send('>>> Hey ' + member.user.username + ', Welcome to **POCO_LOCO\'s Lounge**:exclamation: \nPlease **mark** the emoji below the first message at the ' + member.guild.channels.get('673873657843548170') + ' channel. \nBelow the first message **mark** the games that you usually play as a gamer, THX :cowboy:');
+    member.send(`>>> Hey ${member.user.username}, Welcome to **Falafel²**:exclamation:\nPlease **react** the pickle emoji on <#${process.env.VERIFY_ACTIVE_CHAT_ID}> channel to receive your role.`);
 });
 
 //================================================================================================================================================================================================
@@ -443,7 +495,7 @@ bot.on('raw', event => {
     const eventName = event.t;
     if (eventName === 'MESSAGE_REACTION_ADD') //Checks the correct event.
     {
-        if (event.d.message_id === '673910833411260426' || event.d.message_id === '674304357218385939') //Checks the correct channel.
+        if (event.d.message_id === process.env.VERIFY_ACTIVE_MESSAGE_ID || event.d.message_id === '674304357218385939') //Checks the correct channel.
         {
             var reactionChannel = bot.channels.get(event.d.channel_id)
             if (reactionChannel.messages.has(event.d.message_id)) // Checks if he has message.
@@ -464,7 +516,7 @@ bot.on('raw', event => {
     }
     else if (eventName === 'MESSAGE_REACTION_REMOVE') // Checks the correct event.
     {
-        if (event.d.message_id === '673910833411260426' || event.d.message_id === '674304357218385939') // Checks the correct message.
+        if (event.d.message_id === process.env.VERIFY_ACTIVE_MESSAGE_ID || event.d.message_id === '674304357218385939') // Checks the correct message.
         {
             var reactionChannel = bot.channels.get(event.d.channel_id) // Checks the correct channel.
             if (reactionChannel.messages.has(event.d.message_id)) // Checks if he has message.
@@ -502,7 +554,7 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
             member.addRole(role.id);
         }
     }
-    
+   
 });
 
 bot.on('messageReactionRemove', (messageReaction, user) => {
