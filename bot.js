@@ -64,7 +64,7 @@ bot.on('message', async (message) => {
     const gameSelectionEmbed = new Discord.RichEmbed();
     if (msg.startsWith(PREFIX + 'GAMESELECTION'))
     {
-        if (!message.member.roles.has(proccess.env.BOT_PROGRAMMER_ROLE_ID))
+        if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
         {
             message.channel.send('You must be bot programmer to send a verify message :)');
             return;
@@ -73,12 +73,11 @@ bot.on('message', async (message) => {
         {
             gameSelectionEmbed.setTitle("You've reached the game selection channel!");
             gameSelectionEmbed.setDescription("Here you can associate yourself with the gaming communities you play in!\nPlease click on the emojis below the message that corresponding for the games you play.");
-            gameSelectionEmbed.addField("Games selection:" , `:${proccess.env.LEAGUE_OF_LEGENDS_EMOJI_ID}: **:** League of Legends\n:${proccess.env.VALORANT_EMOJI_ID}: **:** VALORANT\n:${proccess.env.AMONG_US_EMOJI_ID}: **:** Among Us\n:${proccess.env.MINECRAFT_EMOJI_ID}: **:** Minecraft`);
+            gameSelectionEmbed.addField("Games selection:" , `:${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}: **:** League of Legends\n:${process.env.VALORANT_EMOJI_ID}: **:** VALORANT\n:${process.env.AMONG_US_EMOJI_ID}: **:** Among Us\n:${process.env.MINECRAFT_EMOJI_ID}: **:** Minecraft`);
             gameSelectionEmbed.setColor("fcb040");
             gameSelectionEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
 
             bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).send(gameSelectionEmbed).then(m => m.react(`${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}`)).then(m => m.react(`${process.env.VALORANT_EMOJI_ID}`)).then(m => m.react(`${process.env.AMONG_US_EMOJI_ID}`)).then(m => m.react(`${process.env.MINECRAFT_EMOJI_ID}`));
-
         }
     }
 
