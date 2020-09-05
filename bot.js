@@ -520,20 +520,25 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
     }
 
     const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
-    if(messageReaction == process.env.VERIFY_ACTIVE_CHAT_ID)
+    async function removeRaction()
     {
-        try 
+        if(messageReaction == process.env.VERIFY_ACTIVE_CHAT_ID)
         {
-            for (const reaction of userReactions.values()) 
+            console.log("hey :)")
+            try 
             {
-		        reaction.remove(member);
-	        }
-        } 
-        catch (error) 
-        {
-	        console.error('Failed to remove reactions.');
+                for (const reaction of userReactions.values()) 
+                {
+                    await reaction.remove(member);
+                }
+            } 
+            catch (error) 
+            {
+                console.error('Failed to remove reactions.');
+            }
         }
     }
+    removeRaction();
     
 });
 
