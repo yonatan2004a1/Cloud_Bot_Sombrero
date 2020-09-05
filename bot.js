@@ -49,11 +49,10 @@ bot.on('message', async (message) => {
         {
             verifyEmbed.setDescription(`Hello! Welcome to ${message.guild.name}! Please react to this message to receive your role.`)
             verifyEmbed.setColor("c43354");
-            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('751741432686968843')).catch(console.error);
+            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('751743828716814366')).catch(console.error);
         }
-        
     }
-
+    
     if (msg == (PREFIX + "counter").toUpperCase()) 
     {
         const currentCounter = await db.getCounter();
@@ -511,28 +510,13 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
     
     var roleName = messageReaction.emoji.name;
     var role = messageReaction.message.guild.roles.find(role => role.name.toLowerCase() === roleName.toLowerCase());
-    var member = messageReaction.message.guild.members.find(member => member.id === user.id);
+
     if (role)
     {
+        var member = messageReaction.message.guild.members.find(member => member.id === user.id);
         if (member)
         {
             member.addRole(role.id);
-        }
-    }
-
-    const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
-    if(messageReaction == process.env.VERIFY_ACTIVE_CHAT_ID)
-    {
-        try 
-        {
-            for (const reaction of userReactions.values()) 
-            {
-		        reaction.remove(member);
-	        }
-        } 
-        catch (error) 
-        {
-	        console.error('Failed to remove reactions.');
         }
     }
     
