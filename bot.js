@@ -61,8 +61,7 @@ bot.on('message', async (message) => {
 
     // Game selection message command
     
-    var gameSelectionEmbed = new Discord.RichEmbed();
-    
+    const gameSelectionEmbed = new Discord.RichEmbed();
     if (msg.startsWith(PREFIX + 'GAMESELECTION'))
     {
         if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
