@@ -35,7 +35,7 @@ bot.on('message', async (message) => {
     }
     */
 
-    /*
+    
     // Verify bot message command
     // See https://www.youtube.com/watch?v=uoaDyDhvXDo
 
@@ -57,7 +57,7 @@ bot.on('message', async (message) => {
             bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react(`${process.env.PICKLE_EMOJI_ID}`));
         }
     }
-    */
+    
 
     // Game selection message command
     
@@ -494,7 +494,7 @@ bot.on('raw', event => {
     const eventName = event.t;
     if (eventName === 'MESSAGE_REACTION_ADD') //Checks the correct event.
     {
-        if (event.d.message_id === process.env.VERIFY_ACTIVE_MESSAGE_ID || event.d.message_id === '674304357218385939') //Checks the correct channel.
+        if (event.d.message_id === process.env.VERIFY_ACTIVE_MESSAGE_ID || event.d.message_id === process.env.GAME_SELECTION_ACTIVE_MESSAGE_ID) //Checks the correct channel.
         {
             var reactionChannel = bot.channels.get(event.d.channel_id)
             if (reactionChannel.messages.has(event.d.message_id)) // Checks if he has message.
