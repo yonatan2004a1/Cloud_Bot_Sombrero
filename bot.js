@@ -71,9 +71,13 @@ bot.on('message', async (message) => {
         }
         else
         {
+            const lolEmoji = client.emojis.get(process.env.LEAGUE_OF_LEGENDS_EMOJI_ID);
+            const valorantEmoji = client.emojis.get(process.env.VALORANT_EMOJI_ID);
+            const amongusEmoji = client.emojis.get(process.env.AMONG_US_EMOJI_ID);
+            const minecraftEmoji = client.emojis.get(process.env.MINECRAFT_EMOJI_ID);
             gameSelectionEmbed.setTitle("You've reached the game selection channel!");
             gameSelectionEmbed.setDescription("Here you can associate yourself with the gaming communities you play in!\nPlease click on the emojis below the message that corresponding for the games you play.");
-            gameSelectionEmbed.addField("Games selection:" , `:${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}: **:** League of Legends\n:${process.env.VALORANT_EMOJI_ID}: **:** VALORANT\n:${process.env.AMONG_US_EMOJI_ID}: **:** Among Us\n:${process.env.MINECRAFT_EMOJI_ID}: **:** Minecraft`);
+            gameSelectionEmbed.addField("Games selection:" , `:${lolEmoji}: **:** League of Legends\n:${valorantEmoji}: **:** VALORANT\n:${amongusEmoji}: **:** Among Us\n:${minecraftEmoji}: **:** Minecraft`);
             gameSelectionEmbed.setColor("fcb040");
             gameSelectionEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
 
