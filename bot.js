@@ -481,7 +481,7 @@ bot.on('raw', event => {
     }
     else if (eventName === 'MESSAGE_REACTION_REMOVE') // Checks the correct event.
     {
-        if (event.d.message_id === '673910833411260426' || event.d.message_id === '674304357218385939') // Checks the correct message.
+        if (event.d.message_id === process.env.VERIFY_ACTIVE_MESSAGE_ID || event.d.message_id === '674304357218385939') // Checks the correct message.
         {
             var reactionChannel = bot.channels.get(event.d.channel_id) // Checks the correct channel.
             if (reactionChannel.messages.has(event.d.message_id)) // Checks if he has message.
