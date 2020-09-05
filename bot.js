@@ -460,7 +460,7 @@ bot.on('raw', event => {
     const eventName = event.t;
     if (eventName === 'MESSAGE_REACTION_ADD') //Checks the correct event.
     {
-        if (event.d.message_id === '673910833411260426' || event.d.message_id === '674304357218385939') //Checks the correct channel.
+        if (event.d.message_id === process.env.VERIFY_ACTIVE_MESSAGE_ID || event.d.message_id === '674304357218385939') //Checks the correct channel.
         {
             var reactionChannel = bot.channels.get(event.d.channel_id)
             if (reactionChannel.messages.has(event.d.message_id)) // Checks if he has message.
@@ -516,35 +516,10 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
         var member = messageReaction.message.guild.members.find(member => member.id === user.id);
         if (member)
         {
-            //member.addRole(role.id);
-            member.addRole(role);
+            member.addRole(role.id);
         }
     }
-
-    const reaction = messageReaction.reactions.get('751741432686968843');
-    //console.log(messageReaction.channel.id + 'id channel')
-
-    if(messageReaction.channel.id == process.env.VERIFY_ACTIVE_CHAT_ID)
-    {
-        removeRaction();
-        console.log(messageReaction.channel.id + 'id channel')
-    }
-    async function removeRaction()
-    {
-        console.log("hey :)")
-        try 
-        {
-            for (const user of reaction.users.values()) 
-            {
-                await reaction.remove(user);
-            }
-        } 
-        catch (error) 
-        {
-            console.error('Failed to remove reactions.');
-        }
-    }
-    
+   
 });
 
 bot.on('messageReactionRemove', (messageReaction, user) => {
@@ -561,8 +536,7 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
         var member = messageReaction.message.guild.members.find(member => member.id === user.id);
         if (member)
         {
-            //member.removeRole(role.id);
-            member.removeRole(role);
+            member.removeRole(role.id);
         }
     }
 
