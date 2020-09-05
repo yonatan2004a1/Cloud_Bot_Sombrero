@@ -49,7 +49,7 @@ bot.on('message', async (message) => {
         {
             verifyEmbed.setDescription(`Hello! Welcome to ${message.guild.name}! Please react to this message to receive your role.`)
             verifyEmbed.setColor("c43354");
-            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('751743828716814366')).catch(console.error);
+            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('751741432686968843')).catch(console.error);
         }
     }
 
