@@ -52,7 +52,7 @@ bot.on('message', async (message) => {
             bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('751743828716814366')).catch(console.error);
         }
     }
-    
+
     if (msg == (PREFIX + "counter").toUpperCase()) 
     {
         const currentCounter = await db.getCounter();
@@ -517,6 +517,29 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
         if (member)
         {
             member.addRole(role.id);
+        }
+    }
+
+    const reaction = message.reactions.get('751741432686968843');
+    console.log(messageReaction.channel.id + 'id channel')
+
+    if(messageReaction.channel.id == process.env.VERIFY_ACTIVE_CHAT_ID)
+    {
+        removeRaction();
+    }
+    async function removeRaction()
+    {
+        console.log("hey :)")
+        try 
+        {
+            for (const user of reaction.users.values()) 
+            {
+                await reaction.remove(user);
+            }
+        } 
+        catch (error) 
+        {
+            console.error('Failed to remove reactions.');
         }
     }
     
