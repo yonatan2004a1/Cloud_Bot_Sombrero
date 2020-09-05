@@ -50,7 +50,7 @@ bot.on('message', async (message) => {
             verifyEmbed.setDescription(`Hello! Welcome to **${message.guild.name}**! Please **react** to this message to receive a pickle role.`)
             verifyEmbed.setColor("fcb040");
             verifyEmbed.setImage('https://i.imgur.com/llGYCht_d.webp?maxwidth=728&fidelity=grand');
-            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('751741432686968843')).catch(console.error);
+            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react(`${process.env.PICKLE_EMOJI_ID}`)).catch(console.error);
         }
     }
 
