@@ -51,7 +51,6 @@ bot.on('message', async (message) => {
             verifyEmbed.setColor("c43354");
             bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react('751741432686968843')).catch(console.error);
         }
-        
     }
 
     if (msg == (PREFIX + "counter").toUpperCase()) 
@@ -511,9 +510,10 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
     
     var roleName = messageReaction.emoji.name;
     var role = messageReaction.message.guild.roles.find(role => role.name.toLowerCase() === roleName.toLowerCase());
-    var member = messageReaction.message.guild.members.find(member => member.id === user.id);
+
     if (role)
     {
+        var member = messageReaction.message.guild.members.find(member => member.id === user.id);
         if (member)
         {
             member.addRole(role.id);
