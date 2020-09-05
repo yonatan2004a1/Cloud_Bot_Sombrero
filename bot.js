@@ -35,8 +35,10 @@ bot.on('message', async (message) => {
     }
     */
 
+    /*
     // Verify bot message command
     // See https://www.youtube.com/watch?v=uoaDyDhvXDo
+
     const verifyEmbed = new Discord.RichEmbed();
     if (msg.startsWith(PREFIX + 'VERIFY'))
     {
@@ -51,7 +53,32 @@ bot.on('message', async (message) => {
             verifyEmbed.setDescription("Please **react** to this message to receive a pickle role.");
             verifyEmbed.setColor("fcb040");
             verifyEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
-            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react(`${process.env.PICKLE_EMOJI_ID}`)).catch(console.error);
+
+            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react(`${process.env.PICKLE_EMOJI_ID}`));
+        }
+    }
+    */
+
+    // Game selection message command
+    
+    const gameSelectionEmbed = new Discord.RichEmbed();
+    if (msg.startsWith(PREFIX + 'GAMESELECTION'))
+    {
+        if (!message.member.roles.has(proccess.env.BOT_PROGRAMMER_ROLE_ID))
+        {
+            message.channel.send('You must be bot programmer to send a verify message :)');
+            return;
+        }
+        else
+        {
+            gameSelectionEmbed.setTitle("You've reached the game selection channel!");
+            gameSelectionEmbed.setDescription("Here you can associate yourself with the gaming communities you play in!\nPlease click on the emojis below the message that corresponding for the games you play.");
+            gameSelectionEmbed.addField("Games selection:" , `:${proccess.env.LEAGUE_OF_LEGENDS_EMOJI_ID}: **:** League of Legends\n:${proccess.env.VALORANT_EMOJI_ID}: **:** VALORANT\n:${proccess.env.AMONG_US_EMOJI_ID}: **:** Among Us\n:${proccess.env.MINECRAFT_EMOJI_ID}: **:** Minecraft`);
+            gameSelectionEmbed.setColor("fcb040");
+            gameSelectionEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
+
+            bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).send(gameSelectionEmbed).then(m => m.react(`${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}`)).then(m => m.react(`${process.env.VALORANT_EMOJI_ID}`)).then(m => m.react(`${process.env.AMONG_US_EMOJI_ID}`)).then(m => m.react(`${process.env.MINECRAFT_EMOJI_ID}`));
+
         }
     }
 
