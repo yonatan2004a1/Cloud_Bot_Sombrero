@@ -49,7 +49,7 @@ bot.on('message', async (message) => {
         {
             verifyEmbed.setDescription(`Hello! Welcome to **${message.guild.name}**! Please **react** to this message to receive a pickle role.`)
             verifyEmbed.setColor("fcb040");
-            verifyEmbed.setImage('https://media.discordapp.net/attachments/420122298805125120/751763234708652082/Falafel_Baribua_Embed.png');
+            verifyEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
             bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react(`${process.env.PICKLE_EMOJI_ID}`)).catch(console.error);
         }
     }
