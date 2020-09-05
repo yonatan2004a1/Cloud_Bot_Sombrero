@@ -520,7 +520,7 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
         }
     }
 
-    const reaction = message.reactions.get('751741432686968843');
+    const reaction = messageReaction.reactions.get('751741432686968843');
     console.log(messageReaction.channel.id + 'id channel')
 
     if(messageReaction.channel.id == process.env.VERIFY_ACTIVE_CHAT_ID)
