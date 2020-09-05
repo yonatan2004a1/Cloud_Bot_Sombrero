@@ -437,7 +437,7 @@ bot.on('ready', () => {
     console.log("[BOT] Logged in as " + bot.user.tag);
     
     // Bot activity
-    bot.user.setActivity('Un Poco Loco', { type: "LISTENING"}).catch(console.error);
+    bot.user.setActivity(`${PREFIX}commands`, { type: "PLAYING"}).catch(console.error);
 })
 
 // Welcome message & Role to the new users
