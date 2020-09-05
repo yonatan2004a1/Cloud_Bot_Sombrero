@@ -448,7 +448,7 @@ bot.on('guildMemberAdd', member => {
     member.addRole(role);
 
     // Send welcome message privately.
-    member.send('>>> Hey ' + member.user.username + ', Welcome to **POCO_LOCO\'s Lounge**:exclamation: \nPlease **mark** the emoji below the first message at the ' + member.guild.channels.get('673873657843548170') + ' channel. \nBelow the first message **mark** the games that you usually play as a gamer, THX :cowboy:');
+    member.send(`>>> Hey ${member.user.username}, Welcome to ${message.guild.name}:exclamation: \nPlease react the pickle emoji on ${process.env.VERIFY_ACTIVE_CHAT_ID} channel to receive your role.`);
 });
 
 //================================================================================================================================================================================================
