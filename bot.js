@@ -520,26 +520,28 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
         }
     }
 
-    const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
+    const reaction = message.reactions.get('751741432686968843');
+    console.log(messageReaction.channel.id + 'id channel')
+
+    if(messageReaction.channel.id == process.env.VERIFY_ACTIVE_CHAT_ID)
+    {
+        removeRaction();
+    }
     async function removeRaction()
     {
-        if(messageReaction.channel.id == process.env.VERIFY_ACTIVE_CHAT_ID)
+        console.log("hey :)")
+        try 
         {
-            console.log("hey :)")
-            try 
+            for (const user of reaction.users.values()) 
             {
-                for (const reaction of userReactions.values()) 
-                {
-                    await reaction.remove(member);
-                }
-            } 
-            catch (error) 
-            {
-                console.error('Failed to remove reactions.');
+                await reaction.remove(user);
             }
+        } 
+        catch (error) 
+        {
+            console.error('Failed to remove reactions.');
         }
     }
-    removeRaction();
     
 });
 
