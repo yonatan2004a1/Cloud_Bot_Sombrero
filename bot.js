@@ -516,16 +516,18 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
         var member = messageReaction.message.guild.members.find(member => member.id === user.id);
         if (member)
         {
-            member.addRole(role.id);
+            //member.addRole(role.id);
+            member.addRole(role);
         }
     }
 
-    const reaction = message.reactions.get('751741432686968843');
-    console.log(messageReaction.channel.id + 'id channel')
+    const reaction = messageReaction.reactions.get('751741432686968843');
+    //console.log(messageReaction.channel.id + 'id channel')
 
     if(messageReaction.channel.id == process.env.VERIFY_ACTIVE_CHAT_ID)
     {
         removeRaction();
+        console.log(messageReaction.channel.id + 'id channel')
     }
     async function removeRaction()
     {
@@ -559,7 +561,8 @@ bot.on('messageReactionRemove', (messageReaction, user) => {
         var member = messageReaction.message.guild.members.find(member => member.id === user.id);
         if (member)
         {
-            member.removeRole(role.id);
+            //member.removeRole(role.id);
+            member.removeRole(role);
         }
     }
 
