@@ -523,7 +523,7 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
     const userReactions = message.reactions.filter(reaction => reaction.users.has(userId));
     async function removeRaction()
     {
-        if(messageReaction == process.env.VERIFY_ACTIVE_CHAT_ID)
+        if(messageReaction.channel.id == process.env.VERIFY_ACTIVE_CHAT_ID)
         {
             console.log("hey :)")
             try 
