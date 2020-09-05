@@ -35,7 +35,7 @@ bot.on('message', async (message) => {
     }
     */
 
-    /*
+    
     // Verify bot message command
     // See https://www.youtube.com/watch?v=uoaDyDhvXDo
 
@@ -57,7 +57,7 @@ bot.on('message', async (message) => {
             bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react(`${process.env.PICKLE_EMOJI_ID}`));
         }
     }
-    */
+    
 
     // Game selection message command
     
