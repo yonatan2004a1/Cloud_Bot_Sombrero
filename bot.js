@@ -61,7 +61,12 @@ bot.on('message', async (message) => {
 
     // Game selection message command
     
-    const gameSelectionEmbed = new Discord.RichEmbed();
+    var gameSelectionEmbed = new Discord.RichEmbed();
+    var lolEmoji = bot.emojis.get(process.env.LEAGUE_OF_LEGENDS_EMOJI_ID);
+    var valorantEmoji = bot.emojis.get(process.env.VALORANT_EMOJI_ID);
+    var amongusEmoji = bot.emojis.get(process.env.AMONG_US_EMOJI_ID);
+    var minecraftEmoji = bot.emojis.get(process.env.MINECRAFT_EMOJI_ID);
+
     if (msg.startsWith(PREFIX + 'GAMESELECTION'))
     {
         if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
@@ -71,10 +76,6 @@ bot.on('message', async (message) => {
         }
         else
         {
-            const lolEmoji = bot.emojis.get(process.env.LEAGUE_OF_LEGENDS_EMOJI_ID);
-            const valorantEmoji = bot.emojis.get(process.env.VALORANT_EMOJI_ID);
-            const amongusEmoji = bot.emojis.get(process.env.AMONG_US_EMOJI_ID);
-            const minecraftEmoji = bot.emojis.get(process.env.MINECRAFT_EMOJI_ID);
             gameSelectionEmbed.setTitle("You've reached the game selection channel!");
             gameSelectionEmbed.setDescription("Here you can associate yourself with the gaming communities you play in!\nPlease click on the emojis below the message that corresponding for the games you play.");
             gameSelectionEmbed.addField("Games selection:" , `:${lolEmoji}: **:** League of Legends\n:${valorantEmoji}: **:** VALORANT\n:${amongusEmoji}: **:** Among Us\n:${minecraftEmoji}: **:** Minecraft`);
