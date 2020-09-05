@@ -62,11 +62,7 @@ bot.on('message', async (message) => {
     // Game selection message command
     
     var gameSelectionEmbed = new Discord.RichEmbed();
-    var lolEmoji = bot.emojis.get(`${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}`);
-    var valorantEmoji = bot.emojis.get(`${process.env.VALORANT_EMOJI_ID}`);
-    var amongusEmoji = bot.emojis.get(`${process.env.AMONG_US_EMOJI_ID}`);
-    var minecraftEmoji = bot.emojis.get(`${process.env.MINECRAFT_EMOJI_ID}`);
-
+    
     if (msg.startsWith(PREFIX + 'GAMESELECTION'))
     {
         if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
@@ -78,7 +74,7 @@ bot.on('message', async (message) => {
         {
             gameSelectionEmbed.setTitle("You've reached the game selection channel!");
             gameSelectionEmbed.setDescription("Here you can associate yourself with the gaming communities you play in!\nPlease click on the emojis below the message that corresponding for the games you play.");
-            gameSelectionEmbed.addField("Games selection:" , `${lolEmoji} **:** League of Legends\n:${valorantEmoji}: **:** VALORANT\n:${amongusEmoji}: **:** Among Us\n:${minecraftEmoji}: **:** Minecraft`);
+            gameSelectionEmbed.addField("Games selection:" , `<:League_of_Legends:${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}> **:** League of Legends\n:<:VALORANT:${process.env.VALORANT_EMOJI_ID}> **:** VALORANT\n:<:Among_Us:${process.env.AMONG_US_EMOJI_ID}> **:** Among Us\n:<:Minecraft:${process.env.MINECRAFT_EMOJI_ID}> **:** Minecraft`);
             gameSelectionEmbed.setColor("fcb040");
             gameSelectionEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
 
@@ -87,7 +83,6 @@ bot.on('message', async (message) => {
                 m.react(`${process.env.VALORANT_EMOJI_ID}`)
                 m.react(`${process.env.AMONG_US_EMOJI_ID}`)
                 m.react(`${process.env.MINECRAFT_EMOJI_ID}`)
-
             });
 
         }
