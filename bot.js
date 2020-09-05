@@ -78,9 +78,9 @@ bot.on('message', async (message) => {
             gameSelectionEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
 
             bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).send(gameSelectionEmbed).then(m => m.react(`${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}`));
-            bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).then(m => m.react(`${process.env.VALORANT_EMOJI_ID}`));
-            bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).then(m => m.react(`${process.env.AMONG_US_EMOJI_ID}`));
-            bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).then(m => m.react(`${process.env.MINECRAFT_EMOJI_ID}`));
+            bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).send("..").then(m => m.react(`${process.env.VALORANT_EMOJI_ID}`));
+            bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).send("....").then(m => m.react(`${process.env.AMONG_US_EMOJI_ID}`));
+            bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).send(".....").then(m => m.react(`${process.env.MINECRAFT_EMOJI_ID}`));
 
             
 
