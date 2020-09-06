@@ -401,7 +401,7 @@ bot.on('message', async (message) => {
         let embedCommandList = new Discord.RichEmbed();
         embedCommandList.setTitle("Sombrero Guy's Command List");
         embedCommandList.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
-        embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
+        embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable only by the staff**");
         embedCommandList.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" );
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
