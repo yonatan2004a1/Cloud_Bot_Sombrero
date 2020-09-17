@@ -58,11 +58,6 @@ bot.on('message', async (message) => {
         }
     }
     
-    if(true)
-    {
-        message.author.send("אמא שלך עלי ואבא שלך מצלם gang gang fang fang");
-        message.channel.send("layla cusit");
-    }
     // Game selection message command
     
     const gameSelectionEmbed = new Discord.RichEmbed();
