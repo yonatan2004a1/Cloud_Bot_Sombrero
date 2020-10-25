@@ -12,9 +12,10 @@ admin.initializeApp({
 console.log("[DATABASE] Connected.");
 
 const db = admin.database();
+const fs = admin.firestore();
 
+const linkRef = db.ref('links');
 const stateRef = db.ref('state');
-
 initializeState();
 
 async function getState() {
