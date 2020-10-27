@@ -298,7 +298,7 @@ bot.on('message', async (message) => {
             })
         }
     }
-
+//test
     // Command list command
     if (msg.startsWith(PREFIX + 'COMMANDS'))
     {
