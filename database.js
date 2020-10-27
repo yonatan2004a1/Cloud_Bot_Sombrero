@@ -27,7 +27,6 @@ async function getState() {
  */
 async function getCounter() {
     const state = await getState();
-
     return state.counter;
 }
 
@@ -35,7 +34,8 @@ async function getCounter() {
  * Increment state counter by value.
  * @param {number} value to increment
  */
-async function incrementCounter(value) {
+async function incrementCounter(value) 
+{
     var currentCounter = await getCounter();
     var newCounter = currentCounter + value;
 
@@ -56,7 +56,6 @@ async function initializeState() {
         console.log("[DATABASE] Initialized state:", defaultState);
     }
 }
-
 const defaultState = {
     counter: 0
 }

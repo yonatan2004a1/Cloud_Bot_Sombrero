@@ -9,9 +9,8 @@ const PREFIX = common.PREFIX;
 const weather = common.weather;
 const love = common.love;
 const nasa = common.nasa;
+const fivem = common.fivem;
 // ==== Event registeration ================================================
-
-
 bot.on('message', async (message) => {
     var sender = message.author; // The user who sent the message.
     var msg = message.content.toUpperCase(); // Take the messsage and make it uppercase.
@@ -19,27 +18,80 @@ bot.on('message', async (message) => {
     var cont = message.content.slice(PREFIX.length).split(" ");
     var args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
     
-
-        if (msg.includes('LAYLA') || msg.includes('לילה'))
-        {
+    /*
+    if (msg.includes('LAYLA') || msg.includes('לילה'))
+    {
             message.channel.send('Layli lay.');
-        }
+    }
 
-        if (msg.includes('YAEL') || msg.includes('יעל'))
-        {
-            message.reply('לא מכבד אחי.');
-        }
+    if (msg.includes('YAEL') || msg.includes('יעל'))
+    {
+        message.reply('לא מכבד אחי.');
+    }
 
-        if (msg.includes('FOXIE') || msg.includes('פוקסי'))
-        {
-            message.channel.send('FoX1E is my lord.');
-        }
+    if (msg.includes('FOXIE') || msg.includes('פוקסי'))
+    {
+        message.channel.send('FoX1E is my lord.');
+    }
+    */
 
-        if (msg == (PREFIX + "counter").toUpperCase()) 
+    
+    // Verify bot message command
+    // See https://www.youtube.com/watch?v=uoaDyDhvXDo
+
+    const verifyEmbed = new Discord.RichEmbed();
+    if (msg.startsWith(PREFIX + 'VERIFY'))
+    {
+        if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
         {
-            const currentCounter = await db.getCounter();
-            message.channel.send("Current counter is: " + currentCounter);
+            message.channel.send('You must be bot programmer to send a verify message :)');
+            return;
         }
+        else
+        {
+            verifyEmbed.setTitle(`Welcome to ${message.guild.name}!`);
+            verifyEmbed.setDescription("Please **react** to this message to receive a pickle role.");
+            verifyEmbed.setColor("fcb040");
+            verifyEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
+
+            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react(`${process.env.PICKLE_EMOJI_ID}`));
+        }
+    }
+    
+
+    // Game selection message command
+    
+    const gameSelectionEmbed = new Discord.RichEmbed();
+    if (msg.startsWith(PREFIX + 'GAMESELECTION'))
+    {
+        if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
+        {
+            message.channel.send('You must be bot programmer to send a verify message :)');
+            return;
+        }
+        else
+        {
+            gameSelectionEmbed.setTitle("You've reached the game selection channel!");
+            gameSelectionEmbed.setDescription("Here you can associate yourself with the gaming communities you play in!\nPlease click on the emojis below the message that corresponding for the games you play.");
+            gameSelectionEmbed.addField("Games selection:" , `<:League_of_Legends:${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}> **:** League of Legends\n<:VALORANT:${process.env.VALORANT_EMOJI_ID}> **:** VALORANT\n<:Among_Us:${process.env.AMONG_US_EMOJI_ID}> **:** Among Us\n<:Minecraft:${process.env.MINECRAFT_EMOJI_ID}> **:** Minecraft`);
+            gameSelectionEmbed.setColor("fcb040");
+            gameSelectionEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
+
+            bot.channels.get(process.env.GAME_SELECTION_ACTIVE_CHAT_ID).send(gameSelectionEmbed).then(m => {
+                m.react(`${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}`)
+                m.react(`${process.env.VALORANT_EMOJI_ID}`)
+                m.react(`${process.env.AMONG_US_EMOJI_ID}`)
+                m.react(`${process.env.MINECRAFT_EMOJI_ID}`)
+            });
+
+        }
+    }
+
+    if (msg == (PREFIX + "counter").toUpperCase()) 
+    {
+        const currentCounter = await db.getCounter();
+        message.channel.send("Current counter is: " + currentCounter);
+    }
 
     if(msg.startsWith(PREFIX + 'NAENAE'))
     {
@@ -53,25 +105,26 @@ bot.on('message', async (message) => {
     {
         async function clear() 
         {
+            let cont = message.content.slice(PREFIX.length).split(" ");
+            let args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
             const embedClear = new Discord.RichEmbed();
             await message.delete();
-            // Checks if the user has the `Poco Loco's Staff 🤠` role
-            if (!message.member.roles.find("name", "Poco Loco's Staff 🤠")) 
+            if (!message.member.roles.has(process.env.STAFF_ROLE_ID)) // Checks if user has the staff role
             {
-                message.channel.send('You need to be in the \`Poco Loco\'s Staff 🤠\` to use this command.');
+                message.channel.send('You must be staff to clear messages.');
                 return;
             }
+            
             if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)
             {
                 return; // I dont want someone to delete this channel.
             }
-            else
+            
+            if (isNaN(args[0])) // Checks if the argument is a number
             {
-                if (isNaN(args[0])) // Checks if the argument is a number
-                {
-                    message.channel.send('Please enter a reason and amount of messages that you want to delete.\nUsage: \`' + PREFIX + 'clear <amount> <reason>\`'); //\n means new line.
-                    return;
-                }
+                message.channel.send('Please enter the amount of messages that you want to delete.\nUsage: \`' + PREFIX + 'clear <amount> <reason>\`'); //\n means new line.
+                console.log(args[0]);
+                return;
             }
 
             const fetched = await message.channel.fetchMessages({limit: args[0]}); // This grabs the last number(args) of messages in the channel.
@@ -96,7 +149,7 @@ bot.on('message', async (message) => {
                         user = message.author;
                     }
                     var clearChannel = message.channel.name;
-                    embedClear.setTitle("Clear Logs");
+                    embedClear.setTitle("Clear Log");
                     embedClear.addField("Messages cleaner" , message.author);
                     embedClear.addField("Cleared" , fetched.size) ;
                     embedClear.addField("From" , clearChannel);
@@ -111,6 +164,30 @@ bot.on('message', async (message) => {
         }
         clear();   
     }
+
+    // Shutdown command
+    if (message.channel.type != 'text' || message.author.bot)
+    {
+        return;
+    }
+    
+    //let command = message.content.split(' ')[0].slice(1);
+    //argsShut = message.content.replace('.' + command, '').trim();
+    
+    if (msg.startsWith(PREFIX + 'SHUTDOWN')){
+        if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
+        {
+            message.channel.send('You must be bot programmer to shutdown me :)');
+            return;
+        }
+        else
+        {
+            message.channel.send('Shutting down...').then(m => {
+            bot.destroy();
+        })
+    }   
+};
+
     // Corona API
     if(msg.startsWith(PREFIX + 'CORONA'))
     {
@@ -218,7 +295,7 @@ bot.on('message', async (message) => {
             })
         }
     }
-    // Love API (no, its not what you think it is for. its 3:30am and i have insomnia or something so im keeping myself from losing it)
+    // Love API
     if(msg.startsWith(PREFIX + 'LOVE'))
     {
         if(args.length == 2)
@@ -242,6 +319,25 @@ bot.on('message', async (message) => {
             message.channel.send("enter your name and a 2nd name dum dum");
         }
 
+    }
+    // FiveM API
+    if(msg.startsWith(PREFIX + 'FIVEM'))
+    {
+        if(!args[0])
+        {
+            message.channel.send("what? cunt send me the server's IP");
+        }
+        else
+        {
+            serverIP = args[0]
+            fivem.GetServer(serverIP)
+            .then(data => {
+                message.channel.send(`This server has ${data} players.`)
+            })
+            .catch(err => {
+                message.channel.send("Error: "+err);
+            })
+        }
     }
     // Weather API
     if(msg.startsWith(PREFIX + 'WEATHER'))
@@ -298,14 +394,18 @@ bot.on('message', async (message) => {
             })
         }
     }
+<<<<<<< HEAD
 //test
+=======
+    
+>>>>>>> f4e981d9daaa6f3e2f76c626f6f309c1a96be106
     // Command list command
     if (msg.startsWith(PREFIX + 'COMMANDS'))
     {
         let embedCommandList = new Discord.RichEmbed();
         embedCommandList.setTitle("Sombrero Guy's Command List");
         embedCommandList.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
-        embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable by the Poco Loco's staff**");
+        embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable only by the staff**");
         embedCommandList.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" );
         embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
@@ -342,6 +442,30 @@ bot.on('message', async (message) => {
             }
         }
     }
+
+     // Server Information Command
+     if(msg.startsWith(PREFIX + 'SERVERINFO'))
+     {
+         let guild = bot.guilds.get(process.env.SERVER_ID);
+         let serverName = message.guild.name;
+         let serverIcon = message.guild.iconURL;
+         let owner = message.guild.member(guild.owner) ? guild.owner.toString() : guild.owner.user.tag;
+ 
+         let members = guild.members.filter(member => !member.user.bot).size; 
+         let onlineMembers = guild.members.filter(m => m.presence.status === 'online').size;
+         let bots = guild.members.filter(member => member.user.bot).size;
+ 
+         let roleSize = guild.roles.size;
+         //let roleAdmin = message.guild.roles.get(process.env.STAFF_ROLE_ID);
+         let emojiSize = guild.emojis.size;
+ 
+         let embedStats = new Discord.RichEmbed();
+         embedStats.setAuthor(serverName , serverIcon);
+         embedStats.addField('👑 Owner', owner);
+         embedStats.addField(`👥 Members (${members})` , `Bots: ${bots}\nOnline: ${onlineMembers}`);
+         embedStats.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`)); //askaka make it look better 
+         message.channel.send(embedStats);
+     }
 });
 
 //================================================================================================================================================================================================
@@ -351,7 +475,7 @@ bot.on('ready', () => {
     console.log("[BOT] Logged in as " + bot.user.tag);
     
     // Bot activity
-    bot.user.setActivity('Un Poco Loco', { type: "LISTENING"}).catch(console.error);
+    bot.user.setActivity(`${PREFIX}commands`, { type: "PLAYING"}).catch(console.error);
 })
 
 // Welcome message & Role to the new users
@@ -362,7 +486,7 @@ bot.on('guildMemberAdd', member => {
     member.addRole(role);
 
     // Send welcome message privately.
-    member.send('>>> Hey ' + member.user.username + ', Welcome to **POCO_LOCO\'s Lounge**:exclamation: \nPlease **mark** the emoji below the first message at the ' + member.guild.channels.get('673873657843548170') + ' channel. \nBelow the first message **mark** the games that you usually play as a gamer, THX :cowboy:');
+    member.send(`>>> Hey ${member.user.username}, Welcome to **Falafel²**:exclamation:\nPlease **react** the pickle emoji on <#${process.env.VERIFY_ACTIVE_CHAT_ID}> channel to receive your role.`);
 });
 
 //================================================================================================================================================================================================
@@ -374,7 +498,7 @@ bot.on('raw', event => {
     const eventName = event.t;
     if (eventName === 'MESSAGE_REACTION_ADD') //Checks the correct event.
     {
-        if (event.d.message_id === '673910833411260426' || event.d.message_id === '674304357218385939') //Checks the correct channel.
+        if (event.d.message_id === process.env.VERIFY_ACTIVE_MESSAGE_ID || event.d.message_id === process.env.GAME_SELECTION_ACTIVE_MESSAGE_ID) //Checks the correct channel.
         {
             var reactionChannel = bot.channels.get(event.d.channel_id)
             if (reactionChannel.messages.has(event.d.message_id)) // Checks if he has message.
@@ -395,7 +519,7 @@ bot.on('raw', event => {
     }
     else if (eventName === 'MESSAGE_REACTION_REMOVE') // Checks the correct event.
     {
-        if (event.d.message_id === '673910833411260426' || event.d.message_id === '674304357218385939') // Checks the correct message.
+        if (event.d.message_id === process.env.VERIFY_ACTIVE_MESSAGE_ID || event.d.message_id === '674304357218385939') // Checks the correct message.
         {
             var reactionChannel = bot.channels.get(event.d.channel_id) // Checks the correct channel.
             if (reactionChannel.messages.has(event.d.message_id)) // Checks if he has message.
@@ -433,7 +557,7 @@ bot.on('messageReactionAdd', (messageReaction, user) => {
             member.addRole(role.id);
         }
     }
-    
+   
 });
 
 bot.on('messageReactionRemove', (messageReaction, user) => {
