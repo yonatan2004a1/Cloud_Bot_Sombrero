@@ -403,7 +403,7 @@ bot.on('message', async (message) => {
         embedCommandList.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
         embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable only by the staff**");
         embedCommandList.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" );
-        embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
+        //embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
         embedCommandList.addField("🚀 Nasa", "`*nasa pic(ture) <date(yyyy-mm-dd)>`\n**Shows a daily astronomy picture (not putting a date will give the latest picture)**");
