@@ -72,7 +72,7 @@ bot.on('message', async (message) => {
         {
             gameSelectionEmbed.setTitle("You've reached the game selection channel!");
             gameSelectionEmbed.setDescription("Here you can associate yourself with the gaming communities you play in!\nPlease click on the emojis below the message that corresponding for the games you play.");
-            gameSelectionEmbed.addField("Games selection:" , `<:League_of_Legends:${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}> **:** League of Legends\n:<:VALORANT:${process.env.VALORANT_EMOJI_ID}> **:** VALORANT\n:<:Among_Us:${process.env.AMONG_US_EMOJI_ID}> **:** Among Us\n:<:Minecraft:${process.env.MINECRAFT_EMOJI_ID}> **:** Minecraft`);
+            gameSelectionEmbed.addField("Games selection:" , `<:League_of_Legends:${process.env.LEAGUE_OF_LEGENDS_EMOJI_ID}> **:** League of Legends\n<:VALORANT:${process.env.VALORANT_EMOJI_ID}> **:** VALORANT\n<:Among_Us:${process.env.AMONG_US_EMOJI_ID}> **:** Among Us\n<:Minecraft:${process.env.MINECRAFT_EMOJI_ID}> **:** Minecraft`);
             gameSelectionEmbed.setColor("fcb040");
             gameSelectionEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
 
@@ -402,7 +402,7 @@ bot.on('message', async (message) => {
         embedCommandList.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
         embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable only by the staff**");
         embedCommandList.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" );
-        embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
+        //embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
         embedCommandList.addField("🚀 Nasa", "`*nasa pic(ture) <date(yyyy-mm-dd)>`\n**Shows a daily astronomy picture (not putting a date will give the latest picture)**");
