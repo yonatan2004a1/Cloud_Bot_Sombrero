@@ -170,9 +170,6 @@ bot.on('message', async (message) => {
         return;
     }
     
-    //let command = message.content.split(' ')[0].slice(1);
-    //argsShut = message.content.replace('.' + command, '').trim();
-    
     if (msg.startsWith(PREFIX + 'SHUTDOWN')){
         if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
         {
@@ -182,7 +179,7 @@ bot.on('message', async (message) => {
         else
         {
             message.channel.send('Shutting down...').then(m => {
-            bot.destroy();
+            bot.exit();
         })
     }   
 };
