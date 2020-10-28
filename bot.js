@@ -394,11 +394,7 @@ bot.on('message', async (message) => {
             })
         }
     }
-<<<<<<< HEAD
-//test
-=======
     
->>>>>>> f4e981d9daaa6f3e2f76c626f6f309c1a96be106
     // Command list command
     if (msg.startsWith(PREFIX + 'COMMANDS'))
     {
