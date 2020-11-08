@@ -86,19 +86,13 @@ bot.on('message', async (message) => {
         }
     }
 
-    if (msg.startsWith(PREFIX + "COUNTER"))
+    if (msg.startsWith(PREFIX + 'COUNTER'))
     {
         const currentCounter = await db.getCounter();
-        let lastCounter;
-        if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)
-        {
-            message.channel.send("Hola!")
-            lastCounter = message.member.user.tag
-            message.channel.send(`Current counter: ${currentCounter}\n Last counter: ${lastCounter}`);
-        }
+        message.channel.send(`Current counter: ${currentCounter}`);
     }
 
-    if(msg.startsWith(PREFIX + 'NAENAE'))
+    if (msg.startsWith(PREFIX + 'NAENAE'))
     {
         message.channel.send("" , {files: ["https://i.imgur.com/iYpW0HP.gif"]});
 
