@@ -86,7 +86,7 @@ bot.on('message', async (message) => {
         }
     }
 
-    if (msg.startsWith(PREFIX + "counter"))
+    if (msg.startsWith(PREFIX + "COUNTER"))
     {
         const currentCounter = await db.getCounter();
         let lastCounter;
