@@ -35,7 +35,6 @@ bot.on('message', async (message) => {
     }
     */
 
-    
     // Verify bot message command
     // See https://www.youtube.com/watch?v=uoaDyDhvXDo
 
@@ -58,6 +57,7 @@ bot.on('message', async (message) => {
         }
     }
     
+
     // Game selection message command
     
     const gameSelectionEmbed = new Discord.RichEmbed();
@@ -89,7 +89,12 @@ bot.on('message', async (message) => {
     if (msg == (PREFIX + "counter").toUpperCase()) 
     {
         const currentCounter = await db.getCounter();
-        message.channel.send("Current counter is: " + currentCounter);
+        let lastCounter;
+        if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)
+        {
+            lastCounter = message.member.user.tag
+            message.channel.send(`Current counter: ${currentCounter}\n Last counter: ${lastCounter}`);
+        }
     }
 
     if(msg.startsWith(PREFIX + 'NAENAE'))
@@ -179,7 +184,7 @@ bot.on('message', async (message) => {
         else
         {
             message.channel.send('Shutting down...').then(m => {
-            bot.exit();
+            bot.destroy();
         })
     }   
 };
