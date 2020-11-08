@@ -27,7 +27,6 @@ async function GetServer(serverIP)
         });
     })
 }
-GetServer().then(console.log)
 module.exports = {
     GetServer
 }

@@ -35,7 +35,6 @@ bot.on('message', async (message) => {
     }
     */
 
-    
     // Verify bot message command
     // See https://www.youtube.com/watch?v=uoaDyDhvXDo
 
@@ -87,13 +86,23 @@ bot.on('message', async (message) => {
         }
     }
 
-    if (msg == (PREFIX + "counter").toUpperCase()) 
+    if (msg.startsWith(PREFIX + 'COUNTER'))
     {
         const currentCounter = await db.getCounter();
-        message.channel.send("Current counter is: " + currentCounter);
+        var id = currentCounter.lastCounterUserID;
+
+        if (id != null)
+        {
+            var user = bot.users.get(id);
+            message.channel.send(`Current counter: ${currentCounter.counter}\nLast counter: ${user.tag}`);
+        }
+        else
+        {
+            message.channel.send(`Current counter: ${currentCounter.counter}`);
+        }
     }
 
-    if(msg.startsWith(PREFIX + 'NAENAE'))
+    if (msg.startsWith(PREFIX + 'NAENAE'))
     {
         message.channel.send("" , {files: ["https://i.imgur.com/iYpW0HP.gif"]});
 
@@ -170,9 +179,6 @@ bot.on('message', async (message) => {
     {
         return;
     }
-    
-    //let command = message.content.split(' ')[0].slice(1);
-    //argsShut = message.content.replace('.' + command, '').trim();
     
     if (msg.startsWith(PREFIX + 'SHUTDOWN')){
         if (!message.member.roles.has(process.env.BOT_PROGRAMMER_ROLE_ID))
@@ -427,14 +433,14 @@ bot.on('message', async (message) => {
             const currentCounter = await db.getCounter();
 
             // Checks if the number is incorrect or duplicate.
-            if (number - 1 !== currentCounter)
+            if (number - 1 !== currentCounter.counter)
             {
                 message.delete();
                 message.author.send(">>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel");
             }
             else
             {
-                db.incrementCounter(1);
+                db.incrementCounter(1, message.author.id);
             }
         }
     }

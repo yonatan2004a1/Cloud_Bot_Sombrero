@@ -12,9 +12,10 @@ admin.initializeApp({
 console.log("[DATABASE] Connected.");
 
 const db = admin.database();
+const fs = admin.firestore();
 
+const linkRef = db.ref('links');
 const stateRef = db.ref('state');
-
 initializeState();
 
 async function getState() {
@@ -27,19 +28,20 @@ async function getState() {
  */
 async function getCounter() {
     const state = await getState();
-    return state.counter;
+    return { counter: state.counter, lastCounterUserID: state.lastCounterUserID };
 }
 
 /**
  * Increment state counter by value.
  * @param {number} value to increment
  */
-async function incrementCounter(value) 
+async function incrementCounter(value, lastCounterUserID) 
 {
     var currentCounter = await getCounter();
-    var newCounter = currentCounter + value;
+    var newCounter = currentCounter.counter + value;
+    var newLastCounterUserID = lastCounterUserID;
 
-    stateRef.update({ counter: newCounter });
+    stateRef.update({ counter: newCounter, lastCounterUserID: newLastCounterUserID });
 }
 
 /**
@@ -56,8 +58,11 @@ async function initializeState() {
         console.log("[DATABASE] Initialized state:", defaultState);
     }
 }
+
+
 const defaultState = {
-    counter: 0
+    counter: 0,
+    lastCounterUserID: null
 }
 
 module.exports = {
