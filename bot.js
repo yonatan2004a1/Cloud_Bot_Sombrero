@@ -86,7 +86,7 @@ bot.on('message', async (message) => {
         }
     }
 
-    if (msg == (PREFIX + "counter").toUpperCase()) 
+    if (msg.startsWith(PREFIX + "counter"))
     {
         const currentCounter = await db.getCounter();
         let lastCounter;
