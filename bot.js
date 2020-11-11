@@ -481,7 +481,7 @@ bot.on('ready', () => {
 })
 
 // Welcome message & DJ role for the new users
-client.on('guildMemberAdd', (guildMember) => {
+bot.on('guildMemberAdd', (guildMember) => {
     // Add DJ role for the new member
     guildMember.addRole(guildMember.guild.roles.find(role => role.name === "DJ"));
     console.log("I'm Here!")
