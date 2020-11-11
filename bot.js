@@ -483,10 +483,13 @@ bot.on('ready', () => {
 // Welcome message & Role to the new users
 bot.on('guildMemberAdd', member => {
     // Add role for the new member
-    let guild = member.guild;
+    guildMember.addRole(guildMember.guild.roles.find(role => role.name === "DJ"));
+    
+    /*let guild = member.guild;
     var role = member.guild.roles.find('name', 'DJ');
     member.addRole(role);
-
+    */
+    
     // Send welcome message privately.
     member.send(`>>> Hey ${member.user.username}, Welcome to **Falafel²**:exclamation:\nPlease **react** the pickle emoji on <#${process.env.VERIFY_ACTIVE_CHAT_ID}> channel to receive your role.`);
 });
