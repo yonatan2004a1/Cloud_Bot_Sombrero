@@ -480,7 +480,7 @@ bot.on('ready', () => {
     bot.user.setActivity(`${PREFIX}commands`, { type: "PLAYING"}).catch(console.error);
 
     // Bot voice channel join
-    const channel = bot.channel.get(process.env.SOMBRERO_GUY_CHANNEL_ID)
+    const channel = bot.channels.get(process.env.SOMBRERO_GUY_CHANNEL_ID)
     if (!channel)
     {
         channel.join().then(connection => {
