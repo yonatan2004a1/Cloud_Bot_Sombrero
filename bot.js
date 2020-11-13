@@ -485,9 +485,8 @@ bot.on('ready', () => {
     {
         return console.error("Channel not exist");
     }
-
     channel.join().then(connection => {
-    console.log("Successfully connected.");
+    console.log("[BOT] Joined successfully channel.");
     }).catch(e => {
     console.error(e);
   });
