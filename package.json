@@ -21,6 +21,7 @@
     "discord.js": "^11.6.4",
     "dotenv": "^8.2.0",
     "fetch": "^1.1.0",
+    "ffmpeg-binaries": "^3.2.2-3",
     "firebase-admin": "^8.10.0",
     "fivem-api": "^1.5.0",
     "node-fetch": "^2.6.0",
