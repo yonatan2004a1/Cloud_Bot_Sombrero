@@ -480,15 +480,17 @@ bot.on('ready', () => {
     bot.user.setActivity(`${PREFIX}commands`, { type: "PLAYING"}).catch(console.error);
 
     // Bot voice channel join
-    const channel = bot.channels.cache.get(process.env.SOMBRERO_GUY_CHANNEL_ID)
+    const channel = bot.channels.get(`${process.env.SOMBRERO_GUY_CHANNEL_ID}`);
     if (!channel)
     {
-        channel.join().then(connection => {
-            console.log("[BOT] Joined channel")
-        }).catch(err => {
-            console.log(err)
-        })
+        return console.error("Channel not exist");
     }
+
+    channel.join().then(connection => {
+    console.log("Successfully connected.");
+    }).catch(e => {
+    console.error(e);
+  });
 })
 
 // Welcome message & DJ role for the new users
