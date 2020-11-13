@@ -478,6 +478,18 @@ bot.on('ready', () => {
     
     // Bot activity
     bot.user.setActivity(`${PREFIX}commands`, { type: "PLAYING"}).catch(console.error);
+
+    // Bot voice channel join
+    const channel = bot.channels.get(`${process.env.SOMBRERO_GUY_CHANNEL_ID}`);
+    if (!channel)
+    {
+        return console.error("Channel not exist");
+    }
+    channel.join().then(connection => {
+    console.log("[BOT] Joined successfully channel.");
+    }).catch(e => {
+    console.error(e);
+  });
 })
 
 // Welcome message & DJ role for the new users
@@ -487,7 +499,7 @@ bot.on('guildMemberAdd', (member) => {
 
     // Send welcome message privately.
     member.send(`>>> Hey ${member.user.username}, Welcome to **Falafel²**:exclamation:\nPlease **react** the pickle emoji on <#${process.env.VERIFY_ACTIVE_CHAT_ID}> channel to receive your role.`);
- });
+});
 
 //================================================================================================================================================================================================
 /*
