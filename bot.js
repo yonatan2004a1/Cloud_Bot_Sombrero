@@ -481,13 +481,12 @@ bot.on('ready', () => {
 })
 
 // Welcome message & DJ role for the new users
-client.on('guildMemberAdd', (guildMember) => {
+bot.on('guildMemberAdd', (member) => {
     // Add DJ role for the new member
-    guildMember.addRole(guildMember.guild.roles.find(role => role.name === "DJ"));
-    console.log("I'm Here!")
+    member.addRole(member.guild.roles.find(role => role.name === "DJ"));
 
     // Send welcome message privately.
-    member.send(`>>> Hey ${guildMember.user.username}, Welcome to **Falafel²**:exclamation:\nPlease **react** the pickle emoji on <#${process.env.VERIFY_ACTIVE_CHAT_ID}> channel to receive your role.`);
+    member.send(`>>> Hey ${member.user.username}, Welcome to **Falafel²**:exclamation:\nPlease **react** the pickle emoji on <#${process.env.VERIFY_ACTIVE_CHAT_ID}> channel to receive your role.`);
  });
 
 //================================================================================================================================================================================================
