@@ -59,7 +59,6 @@ bot.on('message', async (message) => {
     
 
     // Game selection message command
-    
     const gameSelectionEmbed = new Discord.RichEmbed();
     if (msg.startsWith(PREFIX + 'GAMESELECTION'))
     {
@@ -275,7 +274,6 @@ bot.on('message', async (message) => {
                 message.channel.send("Error: "+err);
             })
         }
-
     }
     // Nasa API
     if(msg.startsWith(PREFIX + 'NASA'))
