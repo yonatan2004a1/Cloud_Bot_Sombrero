@@ -434,7 +434,7 @@ bot.on('message', async (message) => {
             if (number - 1 !== currentCounter.counter)
             {
                 message.delete();
-                message.author.send(">>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel");
+                message.author.send(`>>> You have entered an **incorrect** or **duplicate** number, \nThe next correct number is **${number - 1}**\nPlease re-enter the **correct** number at <#${process.env.COUNTING_ACTIVE_CHAT_ID}> text channel`);
             }
             else
             {
