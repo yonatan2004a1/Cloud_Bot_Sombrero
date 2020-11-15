@@ -411,7 +411,7 @@ bot.on('message', async (message) => {
         embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
         embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
         embedCommandList.addField("🚀 Nasa", "`*nasa pic(ture) <date(yyyy-mm-dd)>`\n**Shows a daily astronomy picture (not putting a date will give the latest picture)**");
-        embedCommandList.addField("❤️ Love", "`*love <your name> <2nd name>` \n**Shows a love percentage and gives a status**");
+        embedCommandList.addField("❤️ Love", "`*love <1st name> <2nd name>` \n**Shows a love percentage and gives a status**");
         embedCommandList.setColor("#7289da");
         message.channel.send(embedCommandList);
     }
@@ -434,7 +434,7 @@ bot.on('message', async (message) => {
             if (number - 1 !== currentCounter.counter)
             {
                 message.delete();
-                message.author.send(">>> You have entered an **incorrect** or **duplicate** number, \nPlease re-enter a **correct** number at <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel");
+                message.author.send(`>>> You have entered an **incorrect** or **duplicate** number, \nThe next correct number is **${currentCounter.counter + 1}**.\nPlease re-enter the **correct** number at <#${process.env.COUNTING_ACTIVE_CHAT_ID}> text channel.`);
             }
             else
             {
