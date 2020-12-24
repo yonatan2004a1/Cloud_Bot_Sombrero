@@ -475,7 +475,7 @@ bot.on('ready', () => {
     console.log("[BOT] Logged in as " + bot.user.tag);
     
     // Bot activity
-    bot.user.setActivity(`${PREFIX}commands`, { type: "PLAYING"}).catch(console.error);
+    bot.user.setActivity(`${PREFIX}commands | ${guild.members.cache.filter(member => !member.user.bot).size} Members`, { type: "STREAMING"}).catch(console.error);
 
     // Bot voice channel join
     const channel = bot.channels.get(`${process.env.SOMBRERO_GUY_CHANNEL_ID}`);
