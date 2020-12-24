@@ -476,7 +476,8 @@ bot.on('ready', () => {
     
     // Bot activity
     const guild = bot.guilds.cache.get(`${process.env.SERVER_ID}`);
-    bot.user.setActivity(`${PREFIX}commands | ${guild.members.cache.filter(member => !member.user.bot).size} Members`, { type: "STREAMING"}).catch(console.error);
+    const memberCount = guild.members.cache.filter(member => !member.user.bot).size;
+    bot.user.setActivity(`${PREFIX}commands | ${memberCount} Members`, { type: "STREAMING"}).catch(console.error);
 
     // Bot voice channel join
     const channel = bot.channels.get(`${process.env.SOMBRERO_GUY_CHANNEL_ID}`);
