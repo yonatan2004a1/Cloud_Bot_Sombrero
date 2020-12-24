@@ -471,8 +471,8 @@ bot.on('message', async (message) => {
 //================================================================================================================================================================================================
 
 bot.on('ready', () => {
-    console.log("[BOT] Started - ONLINE (" + getStatus(bot.status) + ")");
-    console.log("[BOT] Logged in as " + bot.user.tag);
+    console.log(`[BOT] Started - ONLINE (${getStatus(bot.status)})`);
+    console.log(`[BOT] Logged in as ${bot.user.tag}`);
     
     // Bot activity
     const guild = bot.guilds.get(`${process.env.SERVER_ID}`);
@@ -486,7 +486,7 @@ bot.on('ready', () => {
         return console.error("Channel not exist");
     }
     channel.join().then(connection => {
-    console.log("[BOT] Joined channel successfully");
+    console.log(`[BOT] Connected to ${channel.name}`);
     }).catch(e => {
     console.error(e);
   });
