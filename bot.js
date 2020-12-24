@@ -471,8 +471,8 @@ bot.on('message', async (message) => {
 //================================================================================================================================================================================================
 
 bot.on('ready', () => {
-    console.log("[BOT] Started - ONLINE (" + getStatus(bot.status) + ")");
-    console.log("[BOT] Logged in as " + bot.user.tag);
+    console.log(`[BOT] Started - ONLINE (${getStatus(bot.status)})`);
+    console.log(`[BOT] Logged in as ${bot.user.tag}`);
     
     // Bot activity
     const guild = bot.guilds.get(`${process.env.SERVER_ID}`);
