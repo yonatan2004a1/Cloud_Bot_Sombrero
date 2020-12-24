@@ -475,6 +475,7 @@ bot.on('ready', () => {
     console.log("[BOT] Logged in as " + bot.user.tag);
     
     // Bot activity
+    const guild = client.guilds.cache.get(`${process.env.SERVER_ID}`);
     bot.user.setActivity(`${PREFIX}commands | ${guild.members.cache.filter(member => !member.user.bot).size} Members`, { type: "STREAMING"}).catch(console.error);
 
     // Bot voice channel join
