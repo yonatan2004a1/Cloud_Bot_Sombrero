@@ -475,7 +475,7 @@ bot.on('ready', () => {
     console.log(`[BOT] Logged in as ${bot.user.tag}`);
     
     // Bot activity
-    const guild = bot.guilds.cache.get(`${process.env.SERVER_ID}`);
+    const guild = bot.guilds.get(`${process.env.SERVER_ID}`);
     const updateMembers = (guild) => {
         const memberCount = guild.members.filter(member => !member.user.bot).size;
         bot.user.setActivity(`${memberCount} Members`, { type: "WATCHING"}).catch(console.error);
