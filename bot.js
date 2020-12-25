@@ -475,12 +475,12 @@ bot.on('ready', () => {
     console.log(`[BOT] Logged in as ${bot.user.tag}`);
     
     // Bot activity
-    const guild = bot.guilds.get(`${process.env.SERVER_ID}`);
-    const updateMembers = (guild) => {
+    setInterval(() => {
+        const guild = bot.guilds.get(`${process.env.SERVER_ID}`);
         const memberCount = guild.members.filter(member => !member.user.bot).size;
         bot.user.setActivity(`${memberCount} Members`, { type: "WATCHING"}).catch(console.error);
-    }
-    updateMembers(guild);
+        console.log("Updating member count")
+    }, 5000);
     
     // Bot voice channel join
     const channel = bot.channels.get(`${process.env.SOMBRERO_GUY_CHANNEL_ID}`);
