@@ -475,11 +475,11 @@ bot.on('ready', () => {
     console.log(`[BOT] Logged in as ${bot.user.tag}`);
     
     // Bot activity
+    const guild = bot.guilds.cache.get(`${process.env.SERVER_ID}`);
     const updateMembers = (guild) => {
         const memberCount = guild.members.filter(member => !member.user.bot).size;
         bot.user.setActivity(`${memberCount} Members`, { type: "WATCHING"}).catch(console.error);
     }
-    const guild = bot.guilds.cache.get(`${process.env.SERVER_ID}`);
     updateMembers(guild);
     
     // Bot voice channel join
@@ -495,7 +495,6 @@ bot.on('ready', () => {
   });
 })
 
-// Welcome message & DJ role for the new users
 bot.on('guildMemberAdd', (member) => {
     // Add DJ role for the new member
     member.addRole(member.guild.roles.find(role => role.name === "DJ"));
