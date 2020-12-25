@@ -479,7 +479,6 @@ bot.on('ready', () => {
         const guild = bot.guilds.get(`${process.env.SERVER_ID}`);
         const memberCount = guild.members.filter(member => !member.user.bot).size;
         bot.user.setActivity(`${memberCount} Members`, { type: "WATCHING"}).catch(console.error);
-        console.log("Updating member count")
     }, 5000);
     
     // Bot voice channel join
