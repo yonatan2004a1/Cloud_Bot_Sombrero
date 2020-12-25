@@ -501,15 +501,7 @@ bot.on('guildMemberAdd', (member) => {
 
     // Send welcome message privately.
     member.send(`>>> Hey ${member.user.username}, Welcome to **Falafel²**:exclamation:\nPlease **react** the pickle emoji on <#${process.env.VERIFY_ACTIVE_CHAT_ID}> channel to receive your role.`);
-
-    // Update member count when a new member join
-    updateMembers(member.guild);
 });
-
-bot.on('guildMemberRemove', (member) => {
-    // Update member count when a new member leave
-    updateMembers(member.guild);
-})
 
 //================================================================================================================================================================================================
 /*
