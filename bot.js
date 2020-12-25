@@ -475,10 +475,13 @@ bot.on('ready', () => {
     console.log(`[BOT] Logged in as ${bot.user.tag}`);
     
     // Bot activity
-    const guild = bot.guilds.get(`${process.env.SERVER_ID}`);
-    const memberCount = guild.members.filter(member => !member.user.bot).size;
-    bot.user.setActivity(`${memberCount} Members`, { type: "WATCHING"}).catch(console.error);
-
+    const updateMembers = (guild) => {
+        const memberCount = guild.members.filter(member => !member.user.bot).size;
+        bot.user.setActivity(`${memberCount} Members`, { type: "WATCHING"}).catch(console.error);
+    }
+    const guild = bot.guilds.cache.get(`${process.env.SERVER_ID}`);
+    updateMembers(guild);
+    
     // Bot voice channel join
     const channel = bot.channels.get(`${process.env.SOMBRERO_GUY_CHANNEL_ID}`);
     if (!channel)
@@ -499,7 +502,15 @@ bot.on('guildMemberAdd', (member) => {
 
     // Send welcome message privately.
     member.send(`>>> Hey ${member.user.username}, Welcome to **Falafel²**:exclamation:\nPlease **react** the pickle emoji on <#${process.env.VERIFY_ACTIVE_CHAT_ID}> channel to receive your role.`);
+
+    // Update member count when a new member join
+    updateMembers(member.guild);
 });
+
+bot.on('guildMemberRemove', (member) => {
+    // Update member count when a new member leave
+    updateMembers(member.guild);
+})
 
 //================================================================================================================================================================================================
 /*
