@@ -474,13 +474,10 @@ bot.on('ready', () => {
     console.log(`[BOT] Started - ONLINE (${getStatus(bot.status)})`);
     console.log(`[BOT] Logged in as ${bot.user.tag}`);
     
-    // Bot activity
-    setInterval(() => {
-        const guild = bot.guilds.get(`${process.env.SERVER_ID}`);
-        const memberCount = guild.members.filter(member => !member.user.bot).size;
-        bot.user.setActivity(`${memberCount} Members`, { type: "WATCHING"}).catch(console.error);
-    }, 5000);
-    
+    // Update member count on start-up
+    const guild = bot.guilds.get(`${process.env.SERVER_ID}`);
+    updateMembers(guild);
+
     // Bot voice channel join
     const channel = bot.channels.get(`${process.env.SOMBRERO_GUY_CHANNEL_ID}`);
     if (!channel)
@@ -500,7 +497,20 @@ bot.on('guildMemberAdd', (member) => {
 
     // Send welcome message privately.
     member.send(`>>> Hey ${member.user.username}, Welcome to **Falafel²**:exclamation:\nPlease **react** the pickle emoji on <#${process.env.VERIFY_ACTIVE_CHAT_ID}> channel to receive your role.`);
+
+    // Update member count when user joins the server
+    updateMembers(member.guild);
 });
+
+bot.on('guildMemberRemove', (member) => {
+    // Update member count when user leaves the server
+    updateMembers(member.guild);
+});
+
+function updateMembers(guild) {
+    const membersCount = guild.members.filter((member) => !member.user.bot).size;
+    bot.user.setActivity(`${membersCount} Members`, { type: "WATCHING"}).catch(console.error);
+}
 
 //================================================================================================================================================================================================
 /*
