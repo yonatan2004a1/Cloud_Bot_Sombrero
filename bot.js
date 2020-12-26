@@ -498,12 +498,12 @@ bot.on('guildMemberAdd', (member) => {
     // Send welcome message privately.
     member.send(`>>> Hey ${member.user.username}, Welcome to **Falafel²**:exclamation:\nPlease **react** the pickle emoji on <#${process.env.VERIFY_ACTIVE_CHAT_ID}> channel to receive your role.`);
 
-    // Update member count when user joins the server
+    // Update bot activity and member count when user joins the server
     updateMembers(member.guild);
 });
 
 bot.on('guildMemberRemove', (member) => {
-    // Update member count when user leaves the server
+    // Update bot activity and member count when user leaves the server
     updateMembers(member.guild);
 });
 
