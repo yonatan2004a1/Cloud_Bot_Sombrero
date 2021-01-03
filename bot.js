@@ -446,25 +446,25 @@ bot.on('message', async (message) => {
      // Server Information Command
      if(msg.startsWith(PREFIX + 'SERVERINFO'))
      {
-         let guild = bot.guilds.get(process.env.SERVER_ID);
-         let serverName = message.guild.name;
-         let serverIcon = message.guild.iconURL;
-         let owner = message.guild.member(guild.owner) ? guild.owner.toString() : guild.owner.user.tag;
+        let guild = bot.guilds.get(process.env.SERVER_ID);
+        let serverName = message.guild.name;
+        let serverIcon = message.guild.iconURL;
+        let owner = message.guild.member(guild.owner) ? guild.owner.toString() : guild.owner.user.tag;
  
-         let members = guild.members.filter(member => !member.user.bot).size; 
-         let onlineMembers = guild.members.filter(m => m.presence.status === 'online').size;
-         let bots = guild.members.filter(member => member.user.bot).size;
+        let members = guild.members.filter(member => !member.user.bot).size; 
+        let onlineMembers = guild.members.filter(m => m.presence.status === 'online').size;
+        let bots = guild.members.filter(member => member.user.bot).size;
  
-         let roleSize = guild.roles.size;
-         //let roleAdmin = message.guild.roles.get(process.env.STAFF_ROLE_ID);
-         let emojiSize = guild.emojis.size;
+        let roleSize = guild.roles.size;
+        let emojiSize = guild.emojis.size;
  
-         let embedStats = new Discord.RichEmbed();
-         embedStats.setAuthor(serverName , serverIcon);
-         embedStats.addField('👑 Owner', owner);
-         embedStats.addField(`👥 Members (${members})` , `Bots: ${bots}\nOnline: ${onlineMembers}`);
-         embedStats.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`)); //askaka make it look better 
-         message.channel.send(embedStats);
+        let embedStats = new Discord.RichEmbed();
+        embedStats.setAuthor(serverName , serverIcon);
+        embedStats.addField('👑 Owner', owner);
+        embedStats.addField(`👥 Members (${members})` , `Bots: ${bots}\nOnline: ${onlineMembers}`);
+        embedStats.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`));
+        embedStats.setFooter(`Layla Cusit` , `https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/259/stuffed-flatbread_1f959.png`)
+        message.channel.send(embedStats);
      }
 });
 
