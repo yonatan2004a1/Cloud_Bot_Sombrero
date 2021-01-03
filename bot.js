@@ -458,13 +458,12 @@ bot.on('message', async (message) => {
         let roleSize = guild.roles.size;
         let emojiSize = guild.emojis.size;
  
-        let embedStats = new Discord.RichEmbed();
-        embedStats.setAuthor(serverName , serverIcon);
-        embedStats.addField('👑 Owner', owner);
-        embedStats.addField(`👥 Members (${members})` , `Bots: ${bots}\nOnline: ${onlineMembers}`);
-        embedStats.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`));
-        embedStats.setFooter(`Layla Cusit` , `https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/259/stuffed-flatbread_1f959.png`)
-        message.channel.send(embedStats);
+        let serverInfoEmbed = new Discord.RichEmbed();
+        serverInfoEmbed.setAuthor(serverName , serverIcon);
+        serverInfoEmbed.addField('👑 Owner', owner);
+        serverInfoEmbed.addField(`👥 Members (${members})` , `Bots: ${bots}\nOnline: ${onlineMembers}`);
+        serverInfoEmbed.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`));
+        message.channel.send(serverInfoEmbed);
      }
 });
 
