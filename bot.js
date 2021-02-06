@@ -455,17 +455,19 @@ bot.on('message', async (message) => {
         let onlineMembers = guild.members.filter(m => m.presence.status === 'online').size;
         let bots = guild.members.filter(member => member.user.bot).size;
  
-        let roleSize = guild.roles.size;
         let emojiSize = guild.emojis.size;
         let normalEmojis = guild.emojis.filter(emoji => !emoji.animated).size;
         let animatedEmojis = guild.emojis.filter(emoji => emoji.animated).size;
+
+        let roleSize = guild.roles.size;
  
         let serverInfoEmbed = new Discord.RichEmbed();
         serverInfoEmbed.setAuthor(serverName , serverIcon);
         serverInfoEmbed.addField(`👑 Owner`, owner);
+        serverInfoEmbed.addField(`🏴󠁧󠁮󠁬󠁿 Region`, message.guild.region)
         serverInfoEmbed.addField(`👥 Members (${members})`, `Bots: ${bots}\nOnline: ${onlineMembers}`);
-        serverInfoEmbed.addField(`🔱 Roles (${roleSize})`, message.guild.roles.map(role => role.name).join(`\n`));
         serverInfoEmbed.addField(`😃 Emojis (${emojiSize})`, `Normal: ${normalEmojis}\nAnimated: ${animatedEmojis}`);
+        serverInfoEmbed.addField(`🔱 Roles (${roleSize})`, message.guild.roles.map(role => role.name).join(`\n`));
         message.channel.send(serverInfoEmbed);
      }
 });
