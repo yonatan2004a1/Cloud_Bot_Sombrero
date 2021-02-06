@@ -468,6 +468,7 @@ bot.on('message', async (message) => {
         serverInfoEmbed.addField(`👥 Members (${members})`, `Bots: ${bots}\nOnline: ${onlineMembers}`);
         serverInfoEmbed.addField(`😃 Emojis (${emojiSize})`, `Normal: ${normalEmojis}\nAnimated: ${animatedEmojis}`);
         serverInfoEmbed.addField(`🔱 Roles (${roleSize})`, message.guild.roles.map(role => role.name).join(`\n`));
+        serverInfoEmbed.setColor("RANDOM");
         message.channel.send(serverInfoEmbed);
      }
 });
