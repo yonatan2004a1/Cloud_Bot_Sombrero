@@ -462,7 +462,7 @@ bot.on('message', async (message) => {
         serverInfoEmbed.setAuthor(serverName , serverIcon);
         serverInfoEmbed.addField(`👑 Owner`, owner);
         serverInfoEmbed.addField(`👥 Members (${members})` , `Bots: ${bots}\nOnline: ${onlineMembers}`);
-        serverInfoEmbed.addField(`🔱 Roles (${roleSize})`, message.member.roles.map(role => role.name).join(`\n`));
+        serverInfoEmbed.addField(`🔱 Roles (${roleSize})`, message.guild.roles.map(role => role.name).join(`\n`));
         serverInfoEmbed.addField(`😃 Emojis (${emojiSize})`)
         message.channel.send(serverInfoEmbed);
      }
