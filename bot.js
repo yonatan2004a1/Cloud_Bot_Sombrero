@@ -402,18 +402,18 @@ bot.on('message', async (message) => {
     // Command list command
     if (msg.startsWith(PREFIX + 'COMMANDS'))
     {
-        let embedCommandList = new Discord.RichEmbed();
-        embedCommandList.setTitle("Sombrero Guy's Command List");
-        embedCommandList.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
-        embedCommandList.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable only by the staff**");
-        embedCommandList.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" );
-        //embedCommandList.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
-        embedCommandList.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
-        embedCommandList.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
-        embedCommandList.addField("🚀 Nasa", "`*nasa pic(ture) <date(yyyy-mm-dd)>`\n**Shows a daily astronomy picture (not putting a date will give the latest picture)**");
-        embedCommandList.addField("❤️ Love", "`*love <1st name> <2nd name>` \n**Shows a love percentage and gives a status**");
-        embedCommandList.setColor("#7289da");
-        message.channel.send(embedCommandList);
+        let commandListEmbed = new Discord.RichEmbed();
+        commandListEmbed.setTitle("Sombrero Guy's Command List");
+        commandListEmbed.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
+        commandListEmbed.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable only by the staff**");
+        commandListEmbed.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" );
+        //commandListEmbed.addField("🌴 Survival" , "`*survival`\n**Usable in <#" + process.env.SURVIVAL_ACTIVE_CHAT_ID + "> text channel**");
+        commandListEmbed.addField("🔢 Counting" , "`*counter`\n**Shows the current number in <#" + process.env.COUNTING_ACTIVE_CHAT_ID + "> text channel**");
+        commandListEmbed.addField("📊 Stats" , "`*stats <name> <region>`\n**Usable in <#" + process.env.BOT_COMMANDS_ACTIVE_CHAT_ID + "> & <#" + process.env.LEAGUE_ACTIVE_CHAT_ID + "> text channels**");
+        commandListEmbed.addField("🚀 Nasa", "`*nasa pic(ture) <date(yyyy-mm-dd)>`\n**Shows a daily astronomy picture (not putting a date will give the latest picture)**");
+        commandListEmbed.addField("❤️ Love", "`*love <1st name> <2nd name>` \n**Shows a love percentage and gives a status**");
+        commandListEmbed.setColor("#7289da");
+        message.channel.send(commandListEmbed);
     }
 
     //counter_count chat
