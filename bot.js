@@ -460,6 +460,13 @@ bot.on('message', async (message) => {
         let animatedEmojis = guild.emojis.filter(emoji => emoji.animated).size;
 
         let roleSize = guild.roles.size;
+
+        function checkDays(date) {
+            let now = new Date();
+            let diff = now.getTime() - date.getTime();
+            let days = Math.floor(diff / 86400000);
+            return days + (days == 1 ? " day" : " days") + " ago";
+        };
  
         let serverInfoEmbed = new Discord.RichEmbed();
         serverInfoEmbed.setAuthor(serverName , serverIcon);
@@ -468,6 +475,7 @@ bot.on('message', async (message) => {
         serverInfoEmbed.addField(`👥 Members (${members})`, `Bots: ${bots}\nOnline: ${onlineMembers}`);
         serverInfoEmbed.addField(`😃 Emojis (${emojiSize})`, `Normal: ${normalEmojis}\nAnimated: ${animatedEmojis}`);
         serverInfoEmbed.addField(`🔱 Roles (${roleSize})`, message.guild.roles.map(role => role.name).join(`\n`));
+        serverInfoEmbed.addField(`📅 Creation Date`, `${message.channel.guild.createdAt.toUTCString().substr(0, 16)} (${checkDays(message.channel.guild.createdAt)})`);
         serverInfoEmbed.setColor("RANDOM");
         message.channel.send(serverInfoEmbed);
      }
