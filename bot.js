@@ -210,15 +210,15 @@ bot.on('message', async (message) => {
         country += args[args.length - 1];
         corona.GetCoronaStats(country)
         .then(data => {
-            let embedCorona = new Discord.RichEmbed();
-            embedCorona.setTitle("Coronavirus status in " + data[3]);
-            embedCorona.addField("Confirmed cases" , data[0] , true);
-            embedCorona.addField("Recovered" , data[1] , true);
-            embedCorona.addField("Deaths" , data[2] , true);
-            embedCorona.setColor("#3f711e");
-            embedCorona.setTimestamp();
-            embedCorona.setFooter("Checkout the Coronavirus status in " + data[3] + "!" , "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/microbe_1f9a0.png");
-            message.channel.send(embedCorona);
+            let coronaEmbed = new Discord.RichEmbed();
+            coronaEmbed.setTitle("Coronavirus status in " + data[3]);
+            coronaEmbed.addField("Confirmed cases" , data[0] , true);
+            coronaEmbed.addField("Recovered" , data[1] , true);
+            coronaEmbed.addField("Deaths" , data[2] , true);
+            coronaEmbed.setColor("#3f711e");
+            coronaEmbed.setTimestamp();
+            coronaEmbed.setFooter("Checkout the Coronavirus status in " + data[3] + "!" , "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/248/microbe_1f9a0.png");
+            message.channel.send(coronaEmbed);
 
         })
         .catch(err => {
