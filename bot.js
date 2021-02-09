@@ -449,7 +449,10 @@ bot.on('message', async (message) => {
         let guild = bot.guilds.get(process.env.SERVER_ID);
         let serverName = message.guild.name;
         let serverIcon = message.guild.iconURL;
+
         //let owner = message.guild.member(guild.owner) ? guild.owner.toString() : guild.owner.user.tag;
+
+        let region = message.guild.region;
  
         let members = guild.members.filter(member => !member.user.bot).size; 
         let onlineMembers = guild.members.filter(m => m.presence.status === 'online').size;
@@ -472,7 +475,7 @@ bot.on('message', async (message) => {
         serverInfoEmbed.setTitle('**' + `${message.guild.name} Server Information ℹ️` + '**');
         serverInfoEmbed.setThumbnail(serverIcon);
         serverInfoEmbed.addField(`👑 Owner`, '```' + guild.owner.user.tag + '```', true);
-        serverInfoEmbed.addField(`🏴 Region`, '```' + message.guild.region + '```', true);
+        serverInfoEmbed.addField(`🏴 Region`, '```' + region[0].toUpperCase() + region.substring(1) + '```', true);
         serverInfoEmbed.addField(`👥 Members (${members})`, '```' + `Bots: ${bots} | Online: ${onlineMembers}` + '```');
         serverInfoEmbed.addField(`😃 Emojis (${emojiSize})`, '```' + `Normal: ${normalEmojis} | Animated: ${animatedEmojis}` + '```', true);
         serverInfoEmbed.addField(`🔱 Roles (${roleSize})`, '```' + message.guild.roles.map(role => role.name).join(`, `) + '```');
