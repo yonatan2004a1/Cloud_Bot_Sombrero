@@ -403,7 +403,7 @@ bot.on('message', async (message) => {
     if (msg.startsWith(PREFIX + 'COMMANDS'))
     {
         let commandListEmbed = new Discord.RichEmbed();
-        commandListEmbed.setTitle("Sombrero Guy's Command List");
+        commandListEmbed.setTitle(`${bot.user.username}'s Command List`);
         commandListEmbed.addField("🌦️ Weather" , "`*weather <city>`\n**Shows the current weather in a city**");
         commandListEmbed.addField("🧹 Clear" , "`*clear <amount> <reason>`\n**Usable only by the staff**");
         commandListEmbed.addField("🦠 Corona" , "`*corona <country>`\n**Shows the current Coronavirus status in a country**" );
