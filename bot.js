@@ -416,6 +416,7 @@ bot.on('message', async (message) => {
         message.channel.send(commandListEmbed);
     }
 
+    
     //counter_count chat
     if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID) // counting to 10k chat.
     {
