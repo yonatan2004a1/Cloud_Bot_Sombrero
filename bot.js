@@ -526,7 +526,7 @@ bot.on('guildMemberRemove', (member) => {
     botActivity(member.guild);
 });
 
-function botActivity(guild) {
+async function botActivity(guild) {
     const membersCount = guild.members.filter((member) => !member.user.bot).size;
     const currentCounter = await db.getCounter();
     bot.user.setActivity(`👨‍👩‍👦‍👦 ${membersCount} || 🔢 ${currentCounter.counter}`, { type: "WATCHING"}).catch(console.error);
