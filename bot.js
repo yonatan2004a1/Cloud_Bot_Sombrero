@@ -36,7 +36,6 @@ bot.on('message', async (message) => {
     */
 
     // Verify bot message command
-    // See https://www.youtube.com/watch?v=uoaDyDhvXDo
 
     const verifyEmbed = new Discord.RichEmbed();
     if (msg.startsWith(PREFIX + 'VERIFY'))
@@ -48,12 +47,13 @@ bot.on('message', async (message) => {
         }
         else
         {
+            //message design
             verifyEmbed.setTitle(`Welcome to ${message.guild.name}!`);
             verifyEmbed.setDescription("Please **react** to this message to receive a pickle role.");
             verifyEmbed.setColor("fcb040");
             verifyEmbed.setImage('https://cdn.discordapp.com/attachments/420122298805125120/751770348025806864/Falafel_Baribua_Embed.png');
 
-            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react(`${process.env.PICKLE_EMOJI_ID}`));
+            bot.channels.get(process.env.VERIFY_ACTIVE_CHAT_ID).send(verifyEmbed).then(m => m.react(`${process.env.PICKLE_EMOJI_ID}`));//send the message to  verify channel and add a reaction.
         }
     }
     
@@ -87,8 +87,8 @@ bot.on('message', async (message) => {
 
     if (msg.startsWith(PREFIX + 'COUNTER'))
     {
-        const currentCounter = await db.getCounter();
-        var id = currentCounter.lastCounterUserID;
+        const currentCounter = await db.getCounter();//last message
+        var id = currentCounter.lastCounterUserID;//the user who send the last message
 
         if (id != null)
         {
@@ -108,7 +108,6 @@ bot.on('message', async (message) => {
     }
 
     // Clear messages command
-    // See https://www.youtube.com/watch?v=Zpxyio10Kj0
     if (msg.startsWith(PREFIX + 'CLEAR')) 
     {
         async function clear() 
@@ -123,7 +122,7 @@ bot.on('message', async (message) => {
                 return;
             }
             
-            if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)
+            if (message.channel.id === process.env.COUNTING_ACTIVE_CHAT_ID)//checks if is the counting chat
             {
                 return; // I dont want someone to delete this channel.
             }
@@ -149,7 +148,7 @@ bot.on('message', async (message) => {
             }
 
             // Deleting the messages
-            message.channel.bulkDelete(fetched)
+            message.channel.bulkDelete(fetched)//send message to clear logs
                 .then(() => {
                     let user = message.mentions.users.first();
                     if (!user)
@@ -331,7 +330,7 @@ bot.on('message', async (message) => {
         {
             message.channel.send("what? cunt send me the server's IP");
         }
-        else
+        else//asd
         {
             serverIP = args[0]
             fivem.GetServer(serverIP)
@@ -361,7 +360,7 @@ bot.on('message', async (message) => {
             location +=args[args.length - 1];
             weather.GetWeather(location)
             .then(data => {
-                embed.setTitle(location.toUpperCase());
+                embed.setTitle(location[0].toUpperCase() + location.substring(1));
                 embed.addField("Precipitation" , data[6]);
                 embed.addField("Temperature" , `${data[0]}°C`);
                 embed.addField("Humidity" , data[1] + "%"); 
@@ -533,7 +532,6 @@ function updateMembers(guild) {
 //================================================================================================================================================================================================
 /*
  * Adds/Removes roles by reaction/unreacting to a message.
- * See https://www.youtube.com/watch?v=98Wi_MJ1wOI
  */
 bot.on('raw', event => {
     const eventName = event.t;
@@ -632,7 +630,6 @@ bot.login(TOKEN);
 
 /*
  * Returns Discord bot client status by status number.
- * See https://discord.js.org/#/docs/main/v11/typedef/Status
  */
 function getStatus(statusNumber) {
     switch (statusNumber) {
